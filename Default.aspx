@@ -65,7 +65,7 @@ controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                        
                     </button>
-                    <a class="navbar-brand" href="#"><span style="margin-top:-20px;">Vertex Solution Pvt Ltd</span></a>
+                    <a class="navbar-brand" href="#">Dream Garments<span style="margin-top:-20px;"> Pvt Ltd</span></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
