@@ -24,6 +24,18 @@
 
 
         <!-- Bootstrap -->
+         <script type="text/javascript" language="javascript">
+             function controlEnter(obj, event) {
+                 var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+                 if (keyCode == 13) {
+                     document.getElementById(obj).focus();
+                     return false;
+                 }
+                 else {
+                     return true;
+                 }
+             }
+</script>
           <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 
           <script src="bootstrap/js/bootstrap-select.js"></script>
@@ -222,22 +234,33 @@
                         <ul class="nav metismenu" id="side-menu">
 
                             <li class="active">
-                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
+                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa 
+
+arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
                              <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa 
+
+arrow"></span></a>
  <ul class="nav nav-second-level collapse">
                                     <li><a href="Main.aspx">Category</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Sub Category</a></li>
+                                    <li><a href="Sub_category.aspx">Sub Category</a></li>
                            </ul>
                                
                             </li>
-                            
+                             <li>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Product Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
@@ -304,7 +327,8 @@
    <div class="col-md-2"><h3>Category:</h3>
 
     
-   <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" ></asp:DropDownList>
+   <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" 
+           data-style="btn-primary1" data-width="100%" AutoPostBack="true" Height="10px" ></asp:DropDownList>
    
    
    </div>
@@ -351,7 +375,8 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel4" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"  
+                                        ontextchanged="TextBox3_TextChanged" ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />

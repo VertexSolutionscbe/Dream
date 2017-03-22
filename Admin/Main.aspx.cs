@@ -22,7 +22,9 @@ public partial class Admin_Main : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            TextBox3.Focus();
+            this.Form.DefaultButton = Button1.UniqueID;
+          
             getinvoiceno();
             show_category();
             showrating();
@@ -140,7 +142,7 @@ public partial class Admin_Main : System.Web.UI.Page
     {
        
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from category ORDER BY category_id asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from category ORDER BY categoryname asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -189,6 +191,10 @@ public partial class Admin_Main : System.Web.UI.Page
         }
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+       
+    }
+    protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
        
     }

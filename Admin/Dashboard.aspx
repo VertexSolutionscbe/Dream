@@ -195,18 +195,14 @@ expanded="false">
                         <ul class="nav metismenu" id="side-menu">
 
                             <li class="active">
-                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa 
-
-arrow"></span></a>
+                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
                              <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa 
-
-arrow"></span></a>
- <ul class="nav nav-second-level collapse">
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
+                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Main.aspx">Category</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
@@ -214,7 +210,14 @@ arrow"></span></a>
                            </ul>
                                
                             </li>
-                            
+                            <li>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Product Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
