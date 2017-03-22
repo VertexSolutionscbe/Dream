@@ -1,16 +1,35 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="RabbitDashboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Main.aspx.cs" Inherits="Admin_Main" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
+    <head runat="server">
+         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Piple - Admin</title>
+      
+
+              <script type="text/javascript">
+
+                  $(document).ready(function () {
+
+                      $(".selectpicker").selectpicker();
+
+                  });
+
+                 </script>
+
 
         <!-- Bootstrap -->
+          <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
+
+          <script src="bootstrap/js/bootstrap-select.js"></script>
+           <link href="bootstrap/css/bootstrap-select.css" rel="stylesheet" />
+           <link rel="stylesheet" type="text/css" media="screen" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/waves.min.css" type="text/css" rel="stylesheet">
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
@@ -25,83 +44,93 @@
         <![endif]-->
 
         <style>
+            .red
+            {
+                text-align:center;
+            }
+            .goo
+            {
+               color:#13c4a5;
+            }
+            .goo:hover
+            {
+                color:#3a5a7a;
+            }
+            .color
+            {
+                color:#555555;
+                height:30px;
+            }
         .dropbox
         {
             width:100%;
             height:30px;
         display: block;
+        font-size:16px;
+        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
    
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555555;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-   
-   
-    
-  
-  
+ }
+        .gvwCasesPager
+        {
            
+          color:black;
+          margin-right:20px;
+          text-align:right;
+          padding:20px;
         }
+        .gvwCasesPager a
+            {
+               
+                margin-left:10px;
+                margin-right:10px;
+                font-size:20px;
+                
+                 padding:10px;
+                
+              
+              
+            }
+
          .dropbox1
         {
-            width:30%;
+            width:10%;
             height:30px;
+           
+           
+            
         }
+        
         .see
         {
-           height:500px; 
-           margin-top:-60px;"
+           height:400px; 
+           margin-top:-60px;
         }
         .see1
         {
             margin-top:-20px;
         }
-        .top
+         .see2
         {
-            float:left; width:8%;
-        }
-            @media (max-width: 907px)
-        {
-             .top
-        {
-            float:left; width:10%;
-        }
-          .see
-        {
-           height:400px; 
-           margin-top:-30px;
-        }
+          
+            margin-left:-15px;
+            margin-bottom:30px;
         }
         
           @media (max-width: 767px)
         {
-             .top
-        {
-         
-            float:left; width:20%;
-        }
              .see
         {
            height:400px; 
-           margin-top:10px;
+           margin-top:-10px;
         }
          .see1
         {
-            margin-top:-30px;
-           
-           
+            margin-top:-40px;
         }
          .see2
         {
-            margin-top:40px;
+            margin-top:50px;
+            
         }
       
         }
@@ -125,7 +154,7 @@
                         <span class="search-close"><i class="fa fa-times"></i></span>
                     </form>
                 </div>
-                 <div class="navbar-header">
+                  <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -139,9 +168,7 @@
                         <li class="dropdown">
                            
                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
-
-expanded="false">
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
@@ -195,22 +222,18 @@ expanded="false">
                         <ul class="nav metismenu" id="side-menu">
 
                             <li class="active">
-                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa 
-
-arrow"></span></a>
+                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
                              <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa 
-
-arrow"></span></a>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
  <ul class="nav nav-second-level collapse">
                                     <li><a href="Main.aspx">Category</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Sub_category.aspx">Sub Category</a></li>
+                                    <li><a href="Main.aspx">Sub Category</a></li>
                            </ul>
                                
                             </li>
@@ -241,13 +264,14 @@ arrow"></span></a>
                     </div>
                 </div>
             </nav>
-
             <div id="wrapper">
                 <div class="content-wrapper container">
                     <div class="row">
                         <div class="col-sm-12">
-                           <div class="page-title">
-                                <h2>Dashboard  <small></small></h2>
+                            <div class="page-title see2">
+                                <h2>Category 
+                                 </h2>
+                             
                              
   
 
@@ -258,53 +282,241 @@ arrow"></span></a>
                             
                         </div>
                     </div><!-- end .page title-->
-                     <div class="row see">
-   <div style="float:left; width:100%";>
+                     <div class="row">
+                    <div class="col-md-12">
+                  
 
+
+
+
+                    <div class="row see"  >
+
+
+                    <div class="container">
  
-   <div class="top">
-<a href="product.aspx"><button type="button" class="btn btn-default2 btn-circle btn-xl"><i class="fa fa-product-hunt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Products</a></div>
-  <div class="top">
-<a href="Account.aspx"><button type="button" class="btn btn-default1 btn-circle btn-xl"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Accounts</a></div>
+  <div class="panel panel-default">
+  <div class="panel-body">
+  <div class="col-md-12">
+   <div class="row">
+    <div class="col-md-1" ><h3>Filters</h3>
+ </div>
+  
+   <div class="col-md-2"><h3>Category:</h3>
 
-   <div class="top">
-<a href="leads.aspx"><button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Leads</a></div>
- <div class="top" >
-<a href="Opportunity.aspx"><button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button><br />Opportunities</a></div>
-<div class="top" >
-<a href="Task.aspx">
-<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check-square-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;Tasks</a></div>
-<div class="top" >
-<a href="Quotes.aspx">
-
-<button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square" aria-hidden="true"></i></button><br />&nbsp;&nbsp;Quotes</a></div>
-<div class="top">
-<a href="">
-
-<button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-briefcase" aria-hidden="true"></i></button><br />Sales Orders</a></div>
-<div class="top" >
-<a href="Ticket.aspx">
-
-<button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-ticket" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Tickets</a></div>
-<div class="top" >
-<a href="">
-
-<button type="button" class="btn btn-see btn-circle btn-xl"><i class="fa fa-plus" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</a></div>
-</div>            
+    
+   <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" ></asp:DropDownList>
+   
+   
+   </div>
+    
 
 
+
+   </div>
+</div>
+                                        <!-- End .form-group  -->
+                                        
+                                       
+                                       
+                                        
+                                   
+                                </div>
+                                 
+                            </div><!-- End .panel -->
+                            
+                            <div class="container">
+ 
+  <div class="panel panel-default">
+  <div class="panel-body">
+   <div class="col-md-6">
+                 <div class="panel-body">
+                           <div class="form-horizontal">
+                               <br />
+                               <div class="form-group"><label class="col-lg-3 control-label">Category Id</label>
+
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+   <ContentTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label> 
+                                      </ContentTemplate>
+                                <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Category Name</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
+
+                                 
+                                 
+                               
+                            </div>
+                      </div>
+                      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+   <ContentTemplate>
+
+                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" 
+                          ></asp:Button>&nbsp;
+ <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" 
+                          ></asp:Button>
+                          </ContentTemplate>
+                           </asp:UpdatePanel>
+
+    </div>
+                                        <!-- End .form-group  -->
+                                        
+                                       
+                                       
+                                        
+                                   
+                                </div>
+                                 
+                            </div><!-- End .panel -->  
+
+
+
+
+                       <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search"></asp:TextBoxWatermarkExtender>
+                         <br />
                         
+
+
+
+                        </div>
+                     
+                     <br />
+                   
+                         <div class="container">
+ 
+  <div class="panel panel-default">
+  <div class="panel-body">
+                        <div class="col-md-12" >
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Show &nbsp;<asp:DropDownList ID="DropDownList4" runat="server" class="dropbox1" style="margin-top:10px;">
+                                    <asp:ListItem>5</asp:ListItem>
+                                        <asp:ListItem>10</asp:ListItem>
+                                        <asp:ListItem>25</asp:ListItem>
+                                        <asp:ListItem>50</asp:ListItem>
+                                        <asp:ListItem>100</asp:ListItem>
+                                        <asp:ListItem>200</asp:ListItem>
+                                        <asp:ListItem>300</asp:ListItem>
+                                        <asp:ListItem>400</asp:ListItem>
+                                        <asp:ListItem>500</asp:ListItem>
+                                        <asp:ListItem>700</asp:ListItem>
+                                        <asp:ListItem>1000</asp:ListItem>
+                                        <asp:ListItem></asp:ListItem>
+                                    
+                                    
+                                    </asp:DropDownList>&nbsp; entries </h4>
+                                    <div class="panel-actions">
+                                        <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
+                                        <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                   
+                                       <div class="col-md-3">
+
+</div>
+<div class="col-md-12">
+   <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+   <ContentTemplate>
+   <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
+         Font-Size="16px" 
+           AutoGenerateColumns="False" AllowPaging="True" 
+        onpageindexchanging="GridView1_PageIndexChanging" 
+        onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
+        GridLines="None" PageSize="4">
+       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+       <Columns>
+       
+         
+           <asp:BoundField HeaderText="Category ID" DataField="category_id"  />
+           <asp:BoundField HeaderText="category Name" DataField="categoryname" />
+           <asp:TemplateField>
+          <ItemTemplate>
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+          
+          </ItemTemplate>
+          
+          </asp:TemplateField>
+       </Columns>
+       <EditRowStyle BackColor="#999999" />
+       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
+       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
+       <PagerSettings FirstPageText="First" LastPageText="Last" />
+       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
+           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
+           HorizontalAlign="Center" />
+       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
+       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+       <SortedAscendingCellStyle BackColor="#E9E7E2" />
+       <SortedAscendingHeaderStyle BackColor="#506C8C" />
+       <SortedDescendingCellStyle BackColor="#FFFDF8" />
+       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+       </asp:GridView>
+  </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                </Triggers>
+    </asp:UpdatePanel>
+  
+</div>
+                                        <!-- End .form-group  -->
+                                        
+                                       
+                                       
+                                        
+                                    
+                                </div>
+                            </div><!-- End .panel --> 
+                      
+                        
+
+
+
+                        </div>
                       
 
 
                         
                     </div><!--end .row-->
 
-                  </div>
-                  </div>
                   
-
+                  
+                        </div>
                    
+                   
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        
+
+                
+                   
+                  
                            
         </section>
 
@@ -385,3 +597,4 @@ arrow"></span></a>
         </form>
     </body>
 </html>
+

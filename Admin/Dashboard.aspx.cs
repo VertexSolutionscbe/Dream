@@ -19,7 +19,7 @@ public partial class RabbitDashboard : System.Web.UI.Page
     int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
-        company_id = Convert.ToInt32(Session["company_id"].ToString());
+       
        
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)

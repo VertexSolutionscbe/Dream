@@ -264,7 +264,7 @@ arrow"></span></a>
                                
                                 <div class="form-group"><label class="col-lg-3 control-label">Company Name</label>
 
-                                    <div class="col-lg-9">  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true">
+                                    <div class="col-lg-9">  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox">
         </asp:DropDownList></div>
                                 </div>
 
