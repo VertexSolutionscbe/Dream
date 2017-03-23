@@ -22,7 +22,18 @@
 
                  </script>
 
-
+                  <script type="text/javascript" language="javascript">
+                      function controlEnter(obj, event) {
+                          var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+                          if (keyCode == 13) {
+                              document.getElementById(obj).focus();
+                              return false;
+                          }
+                          else {
+                              return true;
+                          }
+                      }
+</script>
         <!-- Bootstrap -->
           <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 
@@ -216,7 +227,7 @@
         </nav>
         <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+                <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -227,17 +238,69 @@
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                             <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
- <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Category</a></li>
+                            <li>
+                                <a href=""><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
+                          
+                          <ul class="nav nav-second-level collapse">
+                                    <li><a href="Main.aspx">Main Category</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Sub Category</a></li>
+                                    <li><a href="Sub_category.aspx">Brand</a></li>
+                           </ul>
+                            <ul class="nav nav-second-level collapse">
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Tax_Entry.aspx">Tax entry</a></li>
                            </ul>
                                
                             </li>
+                           
+
+
+                           
+
+                             <li>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Purchase_entry.aspx">Purchase Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                              <li>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             
+                             <li>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Department-Entry.aspx">Department Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
@@ -512,13 +575,26 @@
            onselectedindexchanged="GridView1_SelectedIndexChanged">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
        <Columns>
-       
+        <asp:TemplateField>
+           
+           <ItemTemplate>
+               <asp:CheckBox ID="CheckBox3" runat="server" />
+            </ItemTemplate>
+           
+           </asp:TemplateField>
          
            <asp:BoundField HeaderText="Customer Code" DataField="Custom_Code"  />
            <asp:BoundField HeaderText="Customer Name" DataField="Custom_Name" />
            <asp:BoundField HeaderText="Address" DataField="Custom_Add"  />
            <asp:BoundField HeaderText="Profession" DataField="Profession" />
            <asp:BoundField HeaderText="Cutomer Type" DataField="Customer_Type" />
+           <asp:TemplateField>
+          <ItemTemplate>
+            
+          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"  ></asp:ImageButton>
+          </ItemTemplate>
+          
+          </asp:TemplateField>
            <asp:TemplateField>
           <ItemTemplate>
               <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
@@ -543,10 +619,106 @@
        </asp:GridView>
   </ContentTemplate>
     <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                  <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                 
+                   <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
+                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  /> 
+                   <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged" />   
                 </Triggers>
     </asp:UpdatePanel>
+
+
+
+     <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+   <ContentTemplate>
+    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+        <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
+  
+  
+    <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
+                         HorizontalAlign="Left" ScrollBars="Both" >
+    
+       
+        <div style="background-color:#4169E1; width:100%; height:30px;" >
+  
+            <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="20px" height="20px" style="float:right" />
+        </div>
+        <table>
+       
+        <tr>
+        <td>
+            <asp:Label ID="Label28" runat="server" Text="Customer Code"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label30" runat="server" Text="Customer Name"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+      <tr>
+        <td>
+            <asp:Label ID="Label2" runat="server" Text="Customer Address"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox6" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label3" runat="server" Text="Profession"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox7" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label4" runat="server" Text="Customer Type"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox8" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+        <td>
+            <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+            
+            <asp:Button ID="Button16" runat="server" Text="Update" onclick="Button16_Click" 
+                    style="height: 26px" />
+            </ContentTemplate>
+            </asp:UpdatePanel>
+            </td>
+        <td>
+         <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+      <ContentTemplate>
+            <asp:Button ID="Button17" runat="server" Text="Delete" 
+                onclick="Button17_Click" />&nbsp;&nbsp;&nbsp;
+                 </ContentTemplate>
+        
+          </asp:UpdatePanel>
+                <asp:Label ID="Label31" runat="server" Text=""></asp:Label></td>
+                
+                    
+       
+        </tr>
+        </table>
+       
+
+        </asp:Panel>
+       <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">
+        </asp:ModalPopupExtender>
+
+
+        </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
+                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
+                </Triggers>
+    </asp:UpdatePanel>
+
+
+   
   
 </div>
                                         <!-- End .form-group  -->

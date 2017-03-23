@@ -187,7 +187,7 @@
                 border: 1px solid #e6e6e6;
                  font-family: 'Roboto', sans-serif;
                  font-weight:600;
-            background-color:	#FFEFD5;padding-left:5px;padding-top:10px;padding-bottom:10px; background-color:#f5f6f7;width:100%;  margin-top:20px; text-align:center; font-size:16px;
+            background-color:#FFEFD5;padding-left:5px;padding-top:10px;padding-bottom:10px; background-color:#f5f6f7; width:100%;  margin-top:20px; text-align:center; font-size:16px;
         }
          .tablestyle2
         {

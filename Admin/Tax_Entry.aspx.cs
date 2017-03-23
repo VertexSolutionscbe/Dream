@@ -15,15 +15,16 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
-public partial class Admin_Customer_Entry : System.Web.UI.Page
+public partial class Admin_Tax_Entry : System.Web.UI.Page
 {
+    int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            TextBox3.Attributes.Add("onkeypress", "return controlEnter('" + TextBox2.ClientID + "', event)");
-            TextBox2.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
-            TextBox4.Attributes.Add("onkeypress", "return controlEnter('" + TextBox5.ClientID + "', event)");
+            TextBox3.Focus();
+            this.Form.DefaultButton = Button1.UniqueID;
+
             getinvoiceno();
             show_category();
             showrating();
@@ -38,104 +39,66 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         }
 
     }
-
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         ImageButton IMG = (ImageButton)sender;
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
-        Label29.Text = ROW.Cells[1].Text;
-        TextBox16.Text = ROW.Cells[2].Text;
-        TextBox6.Text = ROW.Cells[3].Text;
-        TextBox7.Text = ROW.Cells[4].Text;
-        TextBox8.Text = ROW.Cells[5].Text;
-        this.ModalPopupExtender3.Show();
+        Label16.Text = ROW.Cells[1].Text;
+        TextBox11.Text = ROW.Cells[2].Text;
+        this.ModalPopupExtender2.Show();
+
     }
-    protected void Button16_Click(object sender, EventArgs e)
+    protected void Button9_Click(object sender, EventArgs e)
     {
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "' where Custom_Code='" + Label29.Text + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Tax set tax_per='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
-        Label31.Text = "Updated successfuly";
-
-        this.ModalPopupExtender3.Hide();
-        BindData();
-        getinvoiceno();
-
-
-    }
-    protected void Button17_Click(object sender, EventArgs e)
-    {
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from Customer_Entry where Custom_Code='" + Label29.Text + "' ", con1);
-        con1.Open();
-        cmd1.ExecuteNonQuery();
-        con1.Close();
-
-
-        Label31.Text = "Deleted successfuly";
-
-        this.ModalPopupExtender3.Hide();
+        Label18.Text = "updated successfuly";
+        this.ModalPopupExtender2.Show();
+        showcustomertype();
+        show_category();
         BindData();
         getinvoiceno();
 
     }
-    protected void Button14_Click(object sender, EventArgs e)
+    protected void Button10_Click(object sender, EventArgs e)
     {
-        foreach (GridViewRow gvrow in GridView1.Rows)
-        {
-            //Finiding checkbox control in gridview for particular row
-            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
-            //Condition to check checkbox selected or not
-            if (chkdelete.Checked)
-            {
-                //Getting UserId of particular row using datakey value
-                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
-                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
-                con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code=" + usrid, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-            }
-        }
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + Label16.Text + "' ", con);
+        con.Open();
+        cmd.ExecuteNonQuery();
+        con.Close();
+        Label18.Text = "Deleted successfuly";
         BindData();
+
         getinvoiceno();
 
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Profession,@Customer_Type)", CON);
-        cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
-        cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
-        cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
-
+        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per)", CON);
+        cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
+        cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Entry created successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
         BindData();
         show_category();
         getinvoiceno();
         TextBox3.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox5.Text = "";
+
 
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
         TextBox3.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox5.Text = "";
         getinvoiceno();
         show_category();
     }
@@ -163,7 +126,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     protected void BindData()
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Customer_Entry ORDER BY Custom_Code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Tax ORDER BY tax_id asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -176,11 +139,11 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + row.Cells[1].Text + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Details deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax deleted successfully')", true);
 
         BindData();
         show_category();
@@ -194,7 +157,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(Custom_Code) from Customer_Entry";
+        string query = "Select Max(tax_id) from Tax";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -216,7 +179,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     {
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Customer_Entry ORDER BY Custom_Code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Tax ORDER BY tax_id asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -224,8 +187,8 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
 
 
         DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "Custom_Name";
-        DropDownList2.DataValueField = "Custom_Code";
+        DropDownList2.DataTextField = "tax_per";
+        DropDownList2.DataValueField = "tax_id";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
@@ -243,7 +206,30 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         Session["name1"] = "";
         Response.Redirect("~/Admin/Category_Add.aspx");
     }
+    protected void Button11_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox2");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from Tax where tax_id=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
     private void showcustomertype()
     {
 
@@ -268,11 +254,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     {
 
     }
-    protected void TextBox1_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
 
     }

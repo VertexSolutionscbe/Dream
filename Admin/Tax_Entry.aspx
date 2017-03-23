@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Task.aspx.cs" Inherits="Task" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Tax_Entry.aspx.cs" Inherits="Admin_Tax_Entry" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head id="Head1" runat="server">
          <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,18 @@
 
 
         <!-- Bootstrap -->
+         <script type="text/javascript" language="javascript">
+             function controlEnter(obj, event) {
+                 var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+                 if (keyCode == 13) {
+                     document.getElementById(obj).focus();
+                     return false;
+                 }
+                 else {
+                     return true;
+                 }
+             }
+</script>
           <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 
           <script src="bootstrap/js/bootstrap-select.js"></script>
@@ -44,6 +56,10 @@
         <![endif]-->
 
         <style>
+            .red
+            {
+                text-align:center;
+            }
             .goo
             {
                color:#13c4a5;
@@ -125,7 +141,7 @@
         }
          .see2
         {
-            margin-top:0px;
+            margin-top:50px;
             
         }
       
@@ -150,7 +166,7 @@
                         <span class="search-close"><i class="fa fa-times"></i></span>
                     </form>
                 </div>
-                 <div class="navbar-header">
+                  <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -164,9 +180,7 @@
                         <li class="dropdown">
                            
                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
-
-expanded="false">
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
@@ -214,82 +228,75 @@ expanded="false">
         </nav>
         <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
 
                             <li class="active">
-                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa 
-
-arrow"></span></a>
+                                <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-
-                            <li>
-                                <a href="product.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Products </span><span class="fa 
-
-arrow"></span></a>
- <ul class="nav nav-second-level collapse">
-                                    <li><a href="product.aspx">Products </a></li>
+                             <li>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Main.aspx">Category</a></li>
+                           </ul>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Sub_category.aspx">Sub Category</a></li>
                            </ul>
                                
                             </li>
-                             <li>
-                                <a href="Contact.aspx"><i class="fa fa-group fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp;Contact</span><span class="fa arrow"></span></a>
+                            <li>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Product Entry </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Contact.aspx">Contact </a></li>
-                           </ul>  
-                            </li>
-                            <li>
-                                <a href="Account.aspx"><i class="fa fa-building fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp;Accounts</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="Account.aspx">Accounts </a></li>
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
                            </ul>
-                            </li>
-                               <li>
-                                <a href="Task.aspx"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Tasks</span><span class="fa arrow"></span></a>
-                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Task.aspx">Tasks </a></li>
-                           </ul>
-                            </li>
-                            <li>
-                                <a href="leads.aspx"><i class="fa fa-edit fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Leads</span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">
-                                    <li><a href="leads.aspx">Leads </a></li>
-                           </ul>
-                            </li>
-                            <li>
-                                <a href="Quotes.aspx"><i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Quotes</span><span class="fa 
-
-arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Quotes.aspx">Quotes </a></li>
-                           </ul>   
-                            </li>
-                            <li>
-                                <a href="Opportunity.aspx"><i class="fa fa-thumbs-o-up fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Opportunities</span><span class="fa 
-
-arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                                    <li><a href="Opportunity.aspx">Opportunities </a></li>
-                           </ul>        
+                          
+                               
                             </li>
                               <li>
-                                <a href="Ticket.aspx"><i class="fa fa-ticket fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp;Tickets</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                   <li><a href="Ticket.aspx">Tickets </a></li>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
                            </ul>
+                          
+                               
+                            </li>
+                            
+                             <li>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Department-Entry.aspx">Department Entry</a></li>
+                           </ul>
+                          
+                               
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
-                                 <li><a href="Invoice_details.aspx">Invoice </a></li>
+                                    <li><a href="Invoice_details.aspx">Invoice </a></li>
                            </ul>
                             </li>
-                               <li>
+                                <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;SMS</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
                                     <li><a href="SMS.aspx">SMS </a></li>
@@ -303,20 +310,19 @@ arrow"></span></a>
                                      <li><a href="email_report.aspx">Email Report</a></li>
                                   
                            </ul>
-                           </li>                                
+                           </li>                            
                         </ul>
 
                     </div>
                 </div>
             </nav>
-
             <div id="wrapper">
                 <div class="content-wrapper container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Tasks List <Span style="float:right">  <asp:LinkButton ID="btnRandom" runat="server" CssClass="btn btn-primary" 
-                                        onclick="btnRandom_Click"    ><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> &nbsp;ADD</asp:LinkButton>   <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary"    ><span aria-hidden="true" class="glyphicon glyphicon-export"></span> &nbsp;Export</asp:LinkButton>   <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-primary"    ><span aria-hidden="true" class="glyphicon glyphicon-import"></span> &nbsp;Import</asp:LinkButton> </Span> <small></small></h2>
+                                <h2>Tax Entry 
+                                 </h2>
                              
                              
   
@@ -338,29 +344,27 @@ arrow"></span></a>
                     <div class="row see"  >
 
 
-                   <div class="container">
+                    <div class="container">
  
   <div class="panel panel-default">
   <div class="panel-body">
   <div class="col-md-12">
    <div class="row">
-   <div class="col-md-1" ><h2>Filters:</h2>
+    <div class="col-md-1" ><h3>Filters</h3>
  </div>
-   <div class="col-md-2" ><h3>User </h3>
-  <asp:DropDownList ID="DropDownList1" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true"  >
+  
+   <div class="col-md-2"><h3>Tax Percentage:</h3>
+
     
-       </asp:DropDownList></div>
-   <div class="col-md-2"><h3>Status:</h3>
-   <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" ></asp:DropDownList></div>
+   <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" 
+           data-style="btn-primary1" data-width="100%" AutoPostBack="true" Height="10px" ></asp:DropDownList>
    
-    <div class="col-md-2"><h3>Due Date:</h3>
-    <asp:DropDownList ID="DropDownList5" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" >
+   
+   </div>
     
-    </asp:DropDownList></div>
-      <div class="col-md-2"><h3>Priority:</h3>
-    <asp:DropDownList ID="DropDownList6" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" >
-      
-          </asp:DropDownList></div>
+
+
+
    </div>
 </div>
                                         <!-- End .form-group  -->
@@ -368,10 +372,84 @@ arrow"></span></a>
                                        
                                        
                                         
-                                  
+                                   
                                 </div>
                                  
-                            </div><!-- End .panel --> 
+                            </div><!-- End .panel -->
+                            
+                            <div class="container">
+ 
+  <div class="panel panel-default">
+  <div class="panel-body">
+   <div class="col-md-6">
+                 <div class="panel-body">
+                           <div class="form-horizontal">
+                               <br />
+                               <div class="form-group"><label class="col-lg-3 control-label">Tax Id</label>
+
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+   <ContentTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label> 
+                                      </ContentTemplate>
+                                <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Tax Name</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"  
+                                        ontextchanged="TextBox3_TextChanged" ></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
+
+                                 
+                                 
+                               
+                            </div>
+                      </div>
+                      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+   <ContentTemplate>
+
+                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" 
+                          ></asp:Button>&nbsp;
+ <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" 
+                          ></asp:Button>
+                          </ContentTemplate>
+                           </asp:UpdatePanel>
+
+    </div>
+                                        <!-- End .form-group  -->
+                                        
+                                       
+                                       
+                                        
+                                   
+                                </div>
+                                 
+                            </div><!-- End .panel -->  
+
+
+
+
                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                            <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search"></asp:TextBoxWatermarkExtender>
                          <br />
@@ -383,12 +461,11 @@ arrow"></span></a>
                      
                      <br />
                    
-                        <div class="container">
+                         <div class="container">
  
   <div class="panel panel-default">
   <div class="panel-body">
                         <div class="col-md-12" >
-                                <!-- Start .panel -->
                                 <div class="panel-heading">
                                     <h4 class="panel-title">Show &nbsp;<asp:DropDownList ID="DropDownList4" runat="server" class="dropbox1" style="margin-top:10px;">
                                     <asp:ListItem>5</asp:ListItem>
@@ -403,6 +480,8 @@ arrow"></span></a>
                                         <asp:ListItem>700</asp:ListItem>
                                         <asp:ListItem>1000</asp:ListItem>
                                         <asp:ListItem></asp:ListItem>
+                                    
+                                    
                                     </asp:DropDownList>&nbsp; entries </h4>
                                     <div class="panel-actions">
                                         <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
@@ -411,79 +490,135 @@ arrow"></span></a>
                                 </div>
 
                                 <div class="panel-body">
-                                    <form class="form-horizontal group-border stripped">
+                                   
                                        <div class="col-md-3">
 
 </div>
-<div class="col-md-12" style="margin-top:-20px;">
-<div style="font-size:14px; padding:10px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;">
- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<div class="col-md-12">
+   <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
-   <asp:GridView ID="GridView1"  runat="server" ShowHeaderWhenEmpty="True" ShowFooter="True" 
-        Width="100%"  AutoGenerateColumns="False" CellPadding="4" 
-        ForeColor="#333333" GridLines="None" AllowPaging="True" 
+   <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
+         Font-Size="16px" 
+           AutoGenerateColumns="False" AllowPaging="True" 
         onpageindexchanging="GridView1_PageIndexChanging" 
-        onrowdatabound="GridView1_RowDataBound" PageSize="5" 
-           onrowcommand="GridView1_RowCommand" >
+        onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
+        GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-       <Columns >
-        <asp:TemplateField HeaderText="Name">
-            <ItemTemplate>
-         
-               <asp:LinkButton ID="LinkButton3" runat="server"  CssClass="goo" OnClick="lnkView_Click" Text='<%# Eval("Task") %>'>LinkButton</asp:LinkButton>
+       <Columns>
+       <asp:TemplateField>
+           
+           <ItemTemplate>
+               <asp:CheckBox ID="CheckBox2" runat="server" />
             </ItemTemplate>
-        </asp:TemplateField>
+           
+           </asp:TemplateField>
          
-           <asp:BoundField HeaderText="Assigned To" DataField="assigned_to" />
-           <asp:BoundField HeaderText="User" DataField="assigned_to" />
-           <asp:BoundField HeaderText="Type" DataField="type" />
-           <asp:BoundField HeaderText="Status" DataField="status" 
-               DataFormatString="{0:d}" ShowHeader="False" />
-           <asp:BoundField DataField="due_date" HeaderText="Due date" />
-           <asp:BoundField DataField="Priority" HeaderText="Priority" />
+           <asp:BoundField HeaderText="Tax ID" DataField="tax_id"  />
+           <asp:BoundField HeaderText="Tax Name" DataField="tax_per" />
+             <asp:TemplateField>
+          <ItemTemplate>
+            
+          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"  ></asp:ImageButton>
+          </ItemTemplate>
+          
+          </asp:TemplateField>
+           <asp:TemplateField>
+          <ItemTemplate>
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+          
+          </ItemTemplate>
+          
+          </asp:TemplateField>
        </Columns>
        <EditRowStyle BackColor="#999999" />
-       <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" ForeColor="#656565"  
-           CssClass="dropbox2" />
-   
-      
-          
-     
-       <RowStyle Height="30px" BackColor="#F7F6F3" ForeColor="#333333" />
-      
+       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
+       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
+       <PagerSettings FirstPageText="First" LastPageText="Last" />
+       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
+           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
+           HorizontalAlign="Center" />
+       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
        <SortedAscendingCellStyle BackColor="#E9E7E2" />
        <SortedAscendingHeaderStyle BackColor="#506C8C" />
        <SortedDescendingCellStyle BackColor="#FFFDF8" />
        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-         <PagerSettings FirstPageText="First" LastPageText="Last" 
-           PageButtonCount="2" />
-         <PagerStyle   Wrap="true" BorderStyle="Solid" Width="100%" 
-           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
-           HorizontalAlign="Center"  />
-    </asp:GridView>
-    </ContentTemplate>
+       </asp:GridView>
+  </ContentTemplate>
     <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
                 </Triggers>
     </asp:UpdatePanel>
-    <div>
-    </div>
-    <br />
-      <PagerSettings FirstPageText="First" LastPageText="Last" PageButtonCount="4" 
-           Mode="NumericFirstLast" />
+  
+</div>
            
-    </div>
+           <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+   <ContentTemplate>    
+    <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  OnClientClick="return validate1()"  
+            onclick="Button11_Click" />
+                            <!-- End .form-group  -->
+      <asp:Button ID="Button8" runat="server" Text="Button" style="display:none" />
+        <asp:Panel ID="panelup" runat="server" class="panel0" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none" 
+                         HorizontalAlign="Left" ScrollBars="Both" Width="300px" Height="150px"  >
+        <div style="background-color:#4169E1; width:100%; height:30px;" >
+  
+            <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" />
+        </div>
+        <table>
+       
+        <tr>
+        <td>
+            <asp:Label ID="Label15" runat="server" CssClass="labelstyle" Text="Category Id"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label16" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label17" runat="server" CssClass="labelstyle" Text="Category Name"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox11" runat="server" CssClass="paneltext0"></asp:TextBox></td>
+        </tr>
+        <tr>
+        <td>
+          <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+      <ContentTemplate>
+            <asp:Button ID="Button9" runat="server"  Text="Update" onclick="Button9_Click" />
+              </ContentTemplate>
+         
+          </asp:UpdatePanel> 
+            
+            </td>
+        <td>
+         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+      <ContentTemplate>
 
-   
+            <asp:Button ID="Button10" runat="server" Text="Delete" 
+                onclick="Button10_Click" />&nbsp;&nbsp;&nbsp;<asp:Label ID="Label18" runat="server" Text=""></asp:Label></td>
+                
+                    </ContentTemplate>
+         
+          </asp:UpdatePanel> 
+       
+        </tr>
+        </table>
 
-</div>                              <!-- End .form-group  -->
-                                        
+
+        </asp:Panel>
+       <asp:ModalPopupExtender ID="ModalPopupExtender2" runat="server" TargetControlID="Button8" PopupControlID="panelup" CancelControlID="ImageButton4" BackgroundCssClass="modelbackground">
+        </asp:ModalPopupExtender>                                   
+              </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 
+                </Triggers>
+    </asp:UpdatePanel>                         
                                        
-                                       
                                         
-                                    </form>
+                                    
                                 </div>
                             </div><!-- End .panel --> 
                       
@@ -499,8 +634,20 @@ arrow"></span></a>
                     </div><!--end .row-->
 
                   
-
+                  
+                        </div>
                    
+                   
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        
+
+                
+                   
+                  
                            
         </section>
 
@@ -581,6 +728,4 @@ arrow"></span></a>
         </form>
     </body>
 </html>
-
-
 

@@ -52,6 +52,71 @@ public partial class Admin_Product_entry : System.Web.UI.Page
 
         }
     }
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label29.Text = ROW.Cells[1].Text;
+        TextBox16.Text = ROW.Cells[2].Text;
+
+        this.ModalPopupExtender3.Show();
+    }
+    protected void Button16_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update product_entry set product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "' ", CON);
+
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label31.Text = "updated successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+
+    }
+    protected void Button17_Click(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("delete from product_entry where code='" + Label29.Text + "' ", con1);
+        con1.Open();
+        cmd1.ExecuteNonQuery();
+        con1.Close();
+
+
+        Label31.Text = "Deleted successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+    }
+    protected void Button14_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from product_entry where code=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
     protected void Button1_Click(object sender, EventArgs e)
     {
 
@@ -129,7 +194,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + row.Cells[0].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + row.Cells[1].Text + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

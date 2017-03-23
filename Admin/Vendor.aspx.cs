@@ -28,7 +28,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
             show_category();
             showrating();
             BindData();
-
+            show_product();
             active();
             created();
 
@@ -39,7 +39,27 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
     }
 
+    private void show_product()
+    {
 
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("Select * from product_entry ORDER BY code asc", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
+
+
+        DropDownList1.DataSource = ds;
+        DropDownList1.DataTextField = "product_name";
+        DropDownList1.DataValueField = "code";
+        DropDownList1.DataBind();
+        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
+
+
+       
+        con.Close();
+    }
     protected void Button1_Click(object sender, EventArgs e)
     {
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -47,7 +67,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@Vendor_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Vendor_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Vendor_Address", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Product", HttpUtility.HtmlDecode(TextBox4.Text));
+        cmd.Parameters.AddWithValue("@Product", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -58,7 +78,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
         getinvoiceno();
         TextBox3.Text = "";
         TextBox2.Text = "";
-        TextBox4.Text = "";
+        show_product();
 
 
     }
@@ -67,7 +87,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     {
         TextBox3.Text = "";
         TextBox2.Text = "";
-        TextBox4.Text = "";
+        show_product();
         getinvoiceno();
         show_category();
     }
