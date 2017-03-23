@@ -231,41 +231,42 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                 {
 
                     SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1 = new SqlCommand("update product_stock set @Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty where Product_code='" + row.Cells[0].Text + "')", CON);
+                    SqlCommand cmd1 = new SqlCommand("update product_stock set @Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty where Product_code='" + row.Cells[0].Text + "')", CON1);
                  
                 
                     cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
                     cmd1.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
 
                     cmd1.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
-                    cmd.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
+                    cmd1.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
 
 
-                    cmd.Parameters.AddWithValue("@qty", row.Cells[6].Text);
+                    cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
 
-                    CON.Open();
-                    cmd.ExecuteNonQuery();
-                    CON.Close();
+                    CON1.Open();
+                    cmd1.ExecuteNonQuery();
+                    CON1.Close();
                 }
                 else
                 {
                     SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1 = new SqlCommand("insert into product_stock values(@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@qty)", CON);
+                    SqlCommand cmd1 = new SqlCommand("insert into product_stock values(@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@qty)", CON1);
                  
                     cmd1.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
                     cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
                     cmd1.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
 
                     cmd1.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
-                    cmd.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
+                    cmd1.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
 
 
-                    cmd.Parameters.AddWithValue("@qty", row.Cells[6].Text);
+                    cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
 
-                    CON.Open();
-                    cmd.ExecuteNonQuery();
-                    CON.Close();
+                    CON1.Open();
+                    cmd1.ExecuteNonQuery();
+                    CON1.Close();
                 }
+                con91.Close();
 
 
     }
