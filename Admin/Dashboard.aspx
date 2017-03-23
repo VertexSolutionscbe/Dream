@@ -226,6 +226,22 @@ expanded="false">
                           
                                
                             </li>
+                             <li>
+                                <a href="Branch_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Branch Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Branch_entry.aspx">Branch Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">

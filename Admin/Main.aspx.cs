@@ -39,8 +39,45 @@ public partial class Admin_Main : System.Web.UI.Page
         }
 
     }
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label16.Text = ROW.Cells[1].Text;
+        TextBox11.Text = ROW.Cells[2].Text;
+        this.ModalPopupExtender2.Show();
 
+    }
+    protected void Button9_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update category set categoryname='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where category_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' ", CON);
 
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label18.Text = "updated successfuly";
+        this.ModalPopupExtender2.Show();
+        showcustomertype();
+        show_category();
+        BindData();
+        getinvoiceno();
+       
+    }
+    protected void Button10_Click(object sender, EventArgs e)
+    {
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + Label16.Text + "' ", con);
+        con.Open();
+        cmd.ExecuteNonQuery();
+        con.Close();
+        Label18.Text = "Deleted successfuly";
+        BindData();
+
+        getinvoiceno();
+
+    }
     protected void Button1_Click(object sender, EventArgs e)
     {
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -102,7 +139,7 @@ public partial class Admin_Main : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + row.Cells[0].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + row.Cells[1].Text + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
@@ -169,7 +206,30 @@ public partial class Admin_Main : System.Web.UI.Page
         Session["name1"] = "";
         Response.Redirect("~/Admin/Category_Add.aspx");
     }
+    protected void Button11_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox2");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from category where category_id=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
     private void showcustomertype()
     {
        

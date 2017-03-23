@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sub_category.aspx.cs" Inherits="Admin_Sub_category" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Branch_entry.aspx.cs" Inherits="Admin_Branch_entry" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -266,6 +266,14 @@ arrow"></span></a>
                            </ul>
                                
                             </li>
+                             <li>
+                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Product Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                             
                             <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
@@ -280,14 +288,6 @@ arrow"></span></a>
                                      <li><a href="sms_report.aspx">SMS report </a></li>
                            </ul>
                            </li>
-                            <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Product Entry </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
                               <li>
                                 <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Email</span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
@@ -306,7 +306,7 @@ arrow"></span></a>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Sub Category 
+                                <h2>Branch Entry 
                                  </h2>
                              
                              
@@ -338,7 +338,7 @@ arrow"></span></a>
     <div class="col-md-1" ><h3>Filters</h3>
  </div>
   
-   <div class="col-md-2"><h3>Category:</h3>
+   <div class="col-md-2"><h3>Branch name:</h3>
 
     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
    <ContentTemplate>
@@ -348,18 +348,7 @@ arrow"></span></a>
      </asp:UpdatePanel>
    
    </div>
-     <div class="col-md-2"><h3>Sub Category:</h3>
-
-      <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-   <ContentTemplate>
-   <asp:DropDownList ID="DropDownList1" runat="server"  CssClass="form-control"  data-width="100%" AutoPostBack="true" ></asp:DropDownList>
     
-     </ContentTemplate>
-       <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  />   
-              </Triggers>                
-     </asp:UpdatePanel>
-   </div>
     
 
 
@@ -384,33 +373,28 @@ arrow"></span></a>
                  <div class="panel-body">
                            <div class="form-horizontal">
                                <br />
-                               <div class="form-group"><label class="col-lg-3 control-label">Sub Category Id</label>
+                               <div class="form-group"><label class="col-lg-3 control-label">Branch ID</label>
 
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel3" runat="server">
    <ContentTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label> 
+                                  <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                                       </ContentTemplate>
                                 <Triggers>
-                                
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
-                   <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
-                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
-                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
+                  
                 </Triggers>
                            </asp:UpdatePanel>
                                     </div>
                                 </div>
 
-                                <div class="form-group"><label class="col-lg-3 control-label">Category</label>
+                                <div class="form-group"><label class="col-lg-3 control-label">Branch Name</label>
 
                                     <div class="col-lg-9">
-                                   <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                   <asp:UpdatePanel ID="UpdatePanel7" runat="server" >
    <ContentTemplate>
-                                   <asp:DropDownList ID="DropDownList3" runat="server" CssClass="form-control" 
-                                        data-width="100%" AutoPostBack="true" 
-                                       onselectedindexchanged="DropDownList3_SelectedIndexChanged" ></asp:DropDownList>
+                                  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
                               </ContentTemplate>
                                
      </asp:UpdatePanel>       
@@ -418,14 +402,15 @@ arrow"></span></a>
                                 </div>
 
 
-                                <div class="form-group"><label class="col-lg-3 control-label">Sub Category Name</label>
+                                <div class="form-group"><label class="col-lg-3 control-label">Supervisor / Incharge</label>
                               
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel4" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                  <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
+                                       
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
                 </Triggers>
@@ -436,18 +421,33 @@ arrow"></span></a>
                                 
                                 </div>
 
-                                 
+                                
+
+                                
+                                
+                               
                                  
                                
                             </div>
                       </div>
+                     
+                     
+                       
+
+
+
+                      
+
+
+
+
+
+
                       <asp:UpdatePanel ID="UpdatePanel2" runat="server">
    <ContentTemplate>
 
-                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" 
-                          ></asp:Button>&nbsp;
- <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" 
-                          ></asp:Button>
+                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" ></asp:Button>&nbsp;
+ <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" ></asp:Button>
                           </ContentTemplate>
                            </asp:UpdatePanel>
 
@@ -469,7 +469,7 @@ arrow"></span></a>
                        <asp:TextBox ID="TextBox1" runat="server" width="100%" 
                                     ontextchanged="TextBox1_TextChanged" AutoPostBack="true"></asp:TextBox>
 
-                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search Sub category"></asp:TextBoxWatermarkExtender>
+                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search Product Name"></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -483,7 +483,7 @@ arrow"></span></a>
 
                         </div>
                      
-                  
+                  <br />
                    
                          <div class="container">
  
@@ -529,16 +529,17 @@ arrow"></span></a>
         GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
        <Columns>
-        <asp:TemplateField>
+       
+         <asp:TemplateField>
            
            <ItemTemplate>
                <asp:CheckBox ID="CheckBox3" runat="server" />
             </ItemTemplate>
            
            </asp:TemplateField>
-         
-           <asp:BoundField HeaderText="Sub Category Id" DataField="subcategory_id"  />
-           <asp:BoundField HeaderText="Sub Category Name" DataField="subcategoryname" />
+           <asp:BoundField HeaderText="Branch ID" DataField="branch_ID"  />
+           <asp:BoundField HeaderText="Branch Name" DataField="branch_name" />
+           <asp:BoundField HeaderText="Supervisor /Incharge" DataField="supervisor" />
             <asp:TemplateField>
           <ItemTemplate>
             
@@ -572,14 +573,11 @@ arrow"></span></a>
     <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                  <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
-                 
-                   <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
-                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
-                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
                  <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  /> 
                    <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged" />   
                 </Triggers>
     </asp:UpdatePanel>
+
 
 
 
@@ -601,17 +599,22 @@ arrow"></span></a>
        
         <tr>
         <td>
-            <asp:Label ID="Label28" runat="server" Text="SubCategory Id"></asp:Label></td>
+            <asp:Label ID="Label28" runat="server" Text="Branch Id"></asp:Label></td>
         <td>
             <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label30" runat="server" Text="SubCategory Name"></asp:Label></td>
+            <asp:Label ID="Label30" runat="server" Text="Branch Name"></asp:Label></td>
         <td>
             <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
         </tr>
-     
+     <tr>
+        <td>
+            <asp:Label ID="Label2" runat="server" Text="Incharge / Supervisor"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox4" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
         <td>
             <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -650,6 +653,8 @@ arrow"></span></a>
                        <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
                 </Triggers>
     </asp:UpdatePanel>
+
+
 
   
 </div>
@@ -768,4 +773,3 @@ arrow"></span></a>
         </form>
     </body>
 </html>
-

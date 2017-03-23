@@ -366,6 +366,9 @@ arrow"></span></a>
                                 <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
                 </Triggers>
                            </asp:UpdatePanel>
                                     </div>
@@ -473,10 +476,23 @@ arrow"></span></a>
         GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
        <Columns>
-       
+       <asp:TemplateField>
+           
+           <ItemTemplate>
+               <asp:CheckBox ID="CheckBox2" runat="server" />
+            </ItemTemplate>
+           
+           </asp:TemplateField>
          
            <asp:BoundField HeaderText="Category ID" DataField="category_id"  />
            <asp:BoundField HeaderText="category Name" DataField="categoryname" />
+             <asp:TemplateField>
+          <ItemTemplate>
+            
+          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"  ></asp:ImageButton>
+          </ItemTemplate>
+          
+          </asp:TemplateField>
            <asp:TemplateField>
           <ItemTemplate>
               <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
@@ -503,13 +519,74 @@ arrow"></span></a>
     <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                  <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
                 </Triggers>
     </asp:UpdatePanel>
   
 </div>
-                                        <!-- End .form-group  -->
-                                        
-                                       
+           
+           <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+   <ContentTemplate>    
+    <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  OnClientClick="return validate1()"  
+            onclick="Button11_Click" />
+                            <!-- End .form-group  -->
+      <asp:Button ID="Button8" runat="server" Text="Button" style="display:none" />
+        <asp:Panel ID="panelup" runat="server" class="panel0" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none" 
+                         HorizontalAlign="Left" ScrollBars="Both" Width="300px" Height="150px"  >
+        <div style="background-color:#4169E1; width:100%; height:30px;" >
+  
+            <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" />
+        </div>
+        <table>
+       
+        <tr>
+        <td>
+            <asp:Label ID="Label15" runat="server" CssClass="labelstyle" Text="Category Id"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label16" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label17" runat="server" CssClass="labelstyle" Text="Category Name"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox11" runat="server" CssClass="paneltext0"></asp:TextBox></td>
+        </tr>
+        <tr>
+        <td>
+          <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+      <ContentTemplate>
+            <asp:Button ID="Button9" runat="server"  Text="Update" onclick="Button9_Click" />
+              </ContentTemplate>
+         
+          </asp:UpdatePanel> 
+            
+            </td>
+        <td>
+         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+      <ContentTemplate>
+
+            <asp:Button ID="Button10" runat="server" Text="Delete" 
+                onclick="Button10_Click" />&nbsp;&nbsp;&nbsp;<asp:Label ID="Label18" runat="server" Text=""></asp:Label></td>
+                
+                    </ContentTemplate>
+         
+          </asp:UpdatePanel> 
+       
+        </tr>
+        </table>
+
+
+        </asp:Panel>
+       <asp:ModalPopupExtender ID="ModalPopupExtender2" runat="server" TargetControlID="Button8" PopupControlID="panelup" CancelControlID="ImageButton4" BackgroundCssClass="modelbackground">
+        </asp:ModalPopupExtender>                                   
+              </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 
+                </Triggers>
+    </asp:UpdatePanel>                         
                                        
                                         
                                     

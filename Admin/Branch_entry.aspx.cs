@@ -15,119 +15,79 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
-
-public partial class Admin_Sub_category : System.Web.UI.Page
+public partial class Admin_Branch_entry : System.Web.UI.Page
 {
+    DataTable dt = null;
     protected void Page_Load(object sender, EventArgs e)
     {
+        TextBox2.Text = "";
+        TextBox3.Text = "";
         if (!IsPostBack)
         {
-            this.Form.DefaultButton = Button1.UniqueID;
-            DropDownList3.Focus();
-            DropDownList3.Attributes.Add("onkeypress", "return controlEnter('" + TextBox3.ClientID + "', event)");
+
+
             getinvoiceno();
+
+
             show_category();
             showrating();
             BindData();
 
             active();
             created();
-
-          
-
-
-        }
-
-    }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        ImageButton IMG = (ImageButton)sender;
-        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
-        Label29.Text = ROW.Cells[1].Text;
-        TextBox16.Text = ROW.Cells[2].Text;
-       
-        this.ModalPopupExtender3.Show();
-    }
-    protected void Button16_Click(object sender, EventArgs e)
-    {
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update subcategory set subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "' ", CON);
-
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        Label31.Text = "updated successfuly";
-      
-        this.ModalPopupExtender3.Hide();
-        BindData();
-        getinvoiceno();
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox2.Text = "";
+            TextBox3.Text = "";
 
 
-    }
-    protected void Button17_Click(object sender, EventArgs e)
-    {
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from subcategory where subcategory_id='" + Label29.Text + "' ", con1);
-        con1.Open();
-        cmd1.ExecuteNonQuery();
-        con1.Close();
-
-       
-        Label31.Text = "deleted successfuly";
-     
-        this.ModalPopupExtender3.Hide();
-        BindData();
-        getinvoiceno();
-
-    }
-    protected void Button14_Click(object sender, EventArgs e)
-    {
-        foreach (GridViewRow gvrow in GridView1.Rows)
-        {
-            //Finiding checkbox control in gridview for particular row
-            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
-            //Condition to check checkbox selected or not
-            if (chkdelete.Checked)
+            if (!IsPostBack)
             {
-                //Getting UserId of particular row using datakey value
-                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
-                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                if (ViewState["Details"] == null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Columns.Add("Code");
+                    dataTable.Columns.Add("Category Id");
+                    dataTable.Columns.Add("Subcategory Id");
+                    dataTable.Columns.Add("Product Name");
 
-                con.Open();
-                SqlCommand cmd = new SqlCommand("delete from subcategory where subcategory_id=" + usrid, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
+                    ViewState["Details"] = dataTable;
+                }
             }
-        }
-        BindData();
-        getinvoiceno();
 
+        }
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id)", CON);
-        cmd.Parameters.AddWithValue("@subcategory_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@subcategoryname", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@category_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
+        SqlCommand cmd = new SqlCommand("insert into branch_entry values(@branch_ID,@branch_name,@supervisor)", CON);
+        cmd.Parameters.AddWithValue("@branch_ID", Label1.Text);
+        cmd.Parameters.AddWithValue("@branch_name", TextBox2.Text);
+        cmd.Parameters.AddWithValue("@supervisor", TextBox3.Text);
+
+
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category created successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Branch entry created successfully')", true);
         BindData();
         show_category();
         getinvoiceno();
+        TextBox2.Text = "";
         TextBox3.Text = "";
 
-
     }
+   
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox3.Text = "";
-        getinvoiceno();
+        BindData();
         show_category();
+        getinvoiceno();
+        TextBox2.Text = "";
+        TextBox3.Text = "";
     }
     private void active()
     {
@@ -150,10 +110,75 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     {
 
     }
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label29.Text = ROW.Cells[1].Text;
+        TextBox16.Text = ROW.Cells[2].Text;
+        TextBox4.Text = ROW.Cells[3].Text;
+        this.ModalPopupExtender3.Show();
+    }
+    protected void Button16_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update branch_entry set branch_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',supervisor='" + HttpUtility.HtmlDecode(TextBox4.Text) + "' where branch_ID='" + Label29.Text + "' ", CON);
+
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label31.Text = "updated successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+
+    }
+    protected void Button17_Click(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("delete from branch_entry where branch_ID='" + Label29.Text + "' ", con1);
+        con1.Open();
+        cmd1.ExecuteNonQuery();
+        con1.Close();
+
+
+        Label31.Text = "Deleted successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+    }
+    protected void Button14_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from branch_entry where branch_ID=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
     protected void BindData()
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from subcategory ORDER BY subcategory_id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from branch_entry ORDER BY branch_ID asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -166,11 +191,11 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from subcategory where subcategory_id='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from branch_entry where branch_ID='" + row.Cells[0].Text + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Branch entry deleted successfully')", true);
 
         BindData();
         show_category();
@@ -178,30 +203,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
 
 
     }
-    private void getinvoiceno()
-    {
-        int a;
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select Max(subcategory_id) from subcategory";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
-        {
-            string val = dr[0].ToString();
-            if (val == "")
-            {
-                Label1.Text = "1";
-            }
-            else
-            {
-                a = Convert.ToInt32(dr[0].ToString());
-                a = a + 1;
-                Label1.Text = a.ToString();
-            }
-        }
-    }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]
 
@@ -233,39 +235,22 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from subcategory where category_id='"+DropDownList2.SelectedItem.Value+"'", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-
-        DropDownList1.DataSource = ds;
-        DropDownList1.DataTextField = "subcategoryname";
-        DropDownList1.DataValueField = "subcategory_id";
-        DropDownList1.DataBind();
-        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
-
-
-       
-        con.Close();
-
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from subcategory where category_id='" + DropDownList2.SelectedItem.Value + "' ORDER BY subcategory_id asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from branch_entry where branch_ID='" + DropDownList2.SelectedItem.Value + "' ORDER BY branch_ID asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
+
+
     }
     private void show_category()
     {
-
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from category ORDER BY category_id asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from branch_entry ORDER BY branch_ID asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -273,18 +258,15 @@ public partial class Admin_Sub_category : System.Web.UI.Page
 
 
         DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "categoryname";
-        DropDownList2.DataValueField = "category_id";
+        DropDownList2.DataTextField = "branch_name";
+        DropDownList2.DataValueField = "branch_ID";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
 
-        DropDownList3.DataSource = ds;
-        DropDownList3.DataTextField = "categoryname";
-        DropDownList3.DataValueField = "category_id";
-        DropDownList3.DataBind();
-        DropDownList3.Items.Insert(0, new ListItem("All", "0"));
+      
         con.Close();
+        
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
@@ -325,7 +307,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
-        TextBox3.Focus();
+        
     }
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
@@ -337,5 +319,37 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
+    }
+    private void getinvoiceno()
+    {
+        int a;
+
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        con1.Open();
+        string query = "Select max(convert(int,SubString(branch_ID,PATINDEX('%[0-9]%',branch_ID),Len(branch_ID)))) from branch_entry";
+        SqlCommand cmd1 = new SqlCommand(query, con1);
+        SqlDataReader dr = cmd1.ExecuteReader();
+        if (dr.Read())
+        {
+            string val = dr[0].ToString();
+            if (val == "")
+            {
+                Label1.Text = "Dream1";
+            }
+            else
+            {
+                a = Convert.ToInt32(dr[0].ToString());
+                a = a + 1;
+                Label1.Text ="Dream"+ a.ToString();
+            }
+        }
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+       
+
+       
+
+
     }
 }
