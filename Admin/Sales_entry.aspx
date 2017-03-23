@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Product_entry.aspx.cs" Inherits="Admin_Product_entry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sales_entry.aspx.cs" Inherits="Admin_Sales_entry" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -306,7 +306,7 @@ arrow"></span></a>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Product Entry 
+                                <h2>Sales Entry 
                                  </h2>
                              
                              
@@ -389,12 +389,11 @@ arrow"></span></a>
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel3" runat="server">
    <ContentTemplate>
-                                  <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                   <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
                                       </ContentTemplate>
                                 <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
-                   <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
                 </Triggers>
                            </asp:UpdatePanel>
                                     </div>
@@ -453,9 +452,57 @@ arrow"></span></a>
                                 
                                 </div>
 
+                                <div class="form-group"><label class="col-lg-3 control-label">MRP</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox5" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
                                 
                                 
-                               
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Supplier</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox6" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Product Price</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox7" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
                                  
                                
                             </div>
@@ -593,7 +640,9 @@ arrow"></span></a>
          
            <asp:BoundField HeaderText="Code" DataField="code"  />
            <asp:BoundField HeaderText="Product Name" DataField="product_name" />
-           
+            <asp:BoundField HeaderText="MRP" DataField="mrp" />
+             <asp:BoundField HeaderText="Supplier" DataField="supplier" />
+              <asp:BoundField HeaderText="Product Price" DataField="product_price" />
            <asp:TemplateField>
           <ItemTemplate>
               <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
