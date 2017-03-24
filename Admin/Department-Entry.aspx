@@ -215,7 +215,7 @@
         </nav>
         <section class="page">
 
-               <nav class="navbar-aside navbar-static-side" role="navigation">
+              <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -256,6 +256,14 @@
                           
                                
                             </li>
+                             <li>
+                                <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Stock_Inventory.aspx">Inventory</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                               <li>
                                 <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
@@ -289,27 +297,7 @@
                           
                                
                             </li>
-                            <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="Invoice_details.aspx">Invoice </a></li>
-                           </ul>
-                            </li>
-                                <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;SMS</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="SMS.aspx">SMS </a></li>
-                                     <li><a href="sms_report.aspx">SMS report </a></li>
-                           </ul>
-                           </li>
-                              <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Email</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="Email_marketting.aspx">Email Maketting</a></li>
-                                     <li><a href="email_report.aspx">Email Report</a></li>
-                                  
-                           </ul>
-                           </li>                            
+                                            
                         </ul>
 
                     </div>

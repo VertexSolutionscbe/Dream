@@ -44,6 +44,20 @@
         <![endif]-->
 
         <style>
+            .completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
             .red
             {
                 text-align:center;
@@ -227,38 +241,78 @@
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                             <li>
-                                <a href="Main.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Main </span><span class="fa arrow"></span></a>
- <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Category</a></li>
+                            <li>
+                                <a href=""><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
+                          
+                          <ul class="nav nav-second-level collapse">
+                                    <li><a href="Main.aspx">Main Category</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Sub Category</a></li>
+                                    <li><a href="Sub_category.aspx">Brand</a></li>
+                           </ul>
+                            <ul class="nav nav-second-level collapse">
+                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Tax_Entry.aspx">Tax entry</a></li>
                            </ul>
                                
                             </li>
-                            
-                            <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Invoice</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="Invoice_details.aspx">Invoice </a></li>
+                           
+
+
+                           
+
+                             <li>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Purchase_entry.aspx">Purchase Entry</a></li>
                            </ul>
+                          
+                               
                             </li>
-                                <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;SMS</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="SMS.aspx">SMS </a></li>
-                                     <li><a href="sms_report.aspx">SMS report </a></li>
+                             <li>
+                                <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Stock_Inventory.aspx">Inventory</a></li>
                            </ul>
-                           </li>
+                          
+                               
+                            </li>
                               <li>
-                                <a href="#"><i class="fa fa-flask fa-2x"></i> <span class="nav-label">&nbsp;&nbsp;Email</span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <li><a href="Email_marketting.aspx">Email Maketting</a></li>
-                                     <li><a href="email_report.aspx">Email Report</a></li>
-                                  
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
                            </ul>
-                           </li>                            
+                          
+                               
+                            </li>
+                            
+                             <li>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department Entry </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Department-Entry.aspx">Department Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                                            
                         </ul>
 
                     </div>
@@ -345,11 +399,20 @@
 
                              <div class="form-group"><label class="col-lg-3 control-label">Product</label>
 
+                                 
+
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
    
-                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox" ontextchanged="TextBox1_TextChanged" AutoPostBack="true" 
+                                        ></asp:TextBox>
+                                     <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="TextBox1" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
+
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -359,12 +422,17 @@
    <div class="col-md-6">
 
                         <div class="form-group"><label class="col-lg-3 control-label">Supplier</label>
-
-                                    <div class="col-lg-9">
+                           <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel3" runat="server">
    <ContentTemplate>
-  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
-                                    
+  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox" 
+           ontextchanged="TextBox2_TextChanged"></asp:TextBox>
+             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox2"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
+                        
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -439,10 +507,49 @@
   <div class="panel panel-default">
   <div class="panel-body">
    <div class="col-md-12">
+     <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+   <ContentTemplate>
+   
+ <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
+         Font-Size="16px" 
+           AutoGenerateColumns="False" AllowPaging="True" 
+        onpageindexchanging="GridView1_PageIndexChanging" 
+        onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
+        GridLines="None" PageSize="4">
+       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+       <Columns>
+      
+         
+           <asp:BoundField HeaderText="Product Code" DataField="Product_code"  />
+           <asp:BoundField HeaderText="Product Name" DataField="product_name" />
+             <asp:BoundField HeaderText="Barcode" DataField="barcode" />
+              <asp:BoundField HeaderText="MRP" DataField="mrp" />
+               <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" />
+                <asp:BoundField HeaderText="Qty" DataField="qty" />
+                  <asp:BoundField HeaderText="Supplier" DataField="supplier" />
+       </Columns>
+       <EditRowStyle BackColor="#999999" />
+       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
+       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
+       <PagerSettings FirstPageText="First" LastPageText="Last" />
+       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
+           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
+           HorizontalAlign="Center" />
+       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
+       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+       <SortedAscendingCellStyle BackColor="#E9E7E2" />
+       <SortedAscendingHeaderStyle BackColor="#506C8C" />
+       <SortedDescendingCellStyle BackColor="#FFFDF8" />
+       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+       </asp:GridView>
 
-<asp:GridView ID="GridView1" runat="server" Width="653px"></asp:GridView>
-
-
+        </ContentTemplate>
+                                     <Triggers>
+              
+                  <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
+                </Triggers>
+              
+                           </asp:UpdatePanel>
 </div></div></div></div>
 
 

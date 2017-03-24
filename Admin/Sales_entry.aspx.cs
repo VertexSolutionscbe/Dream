@@ -17,43 +17,139 @@ using System.Drawing;
 
 public partial class Admin_Sales_entry : System.Web.UI.Page
 {
+    float tot = 0;
+    
     DataTable dt = null;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            TextBox2.Focus();
 
-            TextBox4.Attributes.Add("onkeypress", "return controlEnter('" + TextBox5.ClientID + "', event)");
             TextBox5.Attributes.Add("onkeypress", "return controlEnter('" + TextBox6.ClientID + "', event)");
-            TextBox6.Attributes.Add("onkeypress", "return controlEnter('" + TextBox7.ClientID + "', event)");
-            TextBox7.Attributes.Add("onkeypress", "return controlEnter('" + Button1.ClientID + "', event)");
+            TextBox6.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
 
+          
+            TextBox7.Attributes.Add("onkeypress", "return controlEnter('" + TextBox9.ClientID + "', event)");
+           
+            getinvoiceno();
             show_category();
             showrating();
             BindData();
-
+            show_tax();
             active();
             created();
-
+            TextBox6.Text = "";
 
             if (!IsPostBack)
             {
                 if (ViewState["Details"] == null)
                 {
                     DataTable dataTable = new DataTable();
-                    dataTable.Columns.Add("Code");
-                    dataTable.Columns.Add("Category Id");
-                    dataTable.Columns.Add("Subcategory Id");
+
+                    dataTable.Columns.Add("Product Code");
                     dataTable.Columns.Add("Product Name");
+                    dataTable.Columns.Add("Product code / Barcode");
                     dataTable.Columns.Add("MRP");
-                    dataTable.Columns.Add("Supplier");
-                    dataTable.Columns.Add("Product Price");
+                    dataTable.Columns.Add("Purchase Price");
+                    dataTable.Columns.Add("Supplier Name");
+                    dataTable.Columns.Add("Quantity");
+                    dataTable.Columns.Add("Tax Percentage");
+                    dataTable.Columns.Add("Tax Amount");
+                    dataTable.Columns.Add("Total Amount");
                     ViewState["Details"] = dataTable;
                 }
             }
 
         }
+    }
+    private void getinvoiceno()
+    {
+        int a;
+
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        con1.Open();
+        string query = "Select max(convert(int,SubString(purchase_invoice,PATINDEX('%[0-9]%',purchase_invoice),Len(purchase_invoice)))) from purchase_entry";
+        SqlCommand cmd1 = new SqlCommand(query, con1);
+        SqlDataReader dr = cmd1.ExecuteReader();
+        if (dr.Read())
+        {
+            string val = dr[0].ToString();
+            if (val == "")
+            {
+                Label1.Text = "1";
+            }
+            else
+            {
+                a = Convert.ToInt32(dr[0].ToString());
+                a = a + 1;
+                Label1.Text = a.ToString();
+            }
+        }
+    }
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label29.Text = ROW.Cells[1].Text;
+        TextBox16.Text = ROW.Cells[2].Text;
+
+        this.ModalPopupExtender3.Show();
+    }
+    protected void Button16_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update product_entry set product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "' ", CON);
+
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label31.Text = "updated successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+
+
+
+    }
+    protected void Button17_Click(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("delete from product_entry where code='" + Label29.Text + "' ", con1);
+        con1.Open();
+        cmd1.ExecuteNonQuery();
+        con1.Close();
+
+
+        Label31.Text = "Deleted successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+
+
+    }
+    protected void Button14_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from product_entry where code=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+
+
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -67,34 +163,122 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
         }
 
-    }
-    private void SaveDetail(GridViewRow row)
-    {
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into product_entry values(@code,@category_id,@subcategory_id,@product_name,@mrp,@supplier,@product_price)", CON);
-        cmd.Parameters.AddWithValue("@code", row.Cells[0].Text);
-        cmd.Parameters.AddWithValue("@category_id", row.Cells[1].Text);
-        cmd.Parameters.AddWithValue("@subcategory_id", row.Cells[2].Text);
-        cmd.Parameters.AddWithValue("@product_name", row.Cells[3].Text);
-        cmd.Parameters.AddWithValue("@mrp", row.Cells[4].Text);
-        cmd.Parameters.AddWithValue("@supplier", row.Cells[5].Text);
-        cmd.Parameters.AddWithValue("@product_price", row.Cells[6].Text);
+        SqlCommand cmd = new SqlCommand("insert into purchase_entry values(@purchase_invoice,@date,@Toal_qty,@total_amount,@Grand__total)", CON);
+        cmd.Parameters.AddWithValue("@purchase_invoice", Label1.Text);
+        cmd.Parameters.AddWithValue("@date", TextBox8.Text);
+        cmd.Parameters.AddWithValue("@Toal_qty", TextBox10.Text);
+        cmd.Parameters.AddWithValue("@total_amount", TextBox10.Text);
+        cmd.Parameters.AddWithValue("@Grand__total", TextBox11.Text);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category created successfully')", true);
+
+
+
+
+
+
+
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Purchase entry created successfully')", true);
         BindData();
         show_category();
+        GridView2.DataSource = null;
+        GridView2.DataBind();
+        TextBox10.Text = "";
+        TextBox11.Text = "";
+        DataTable dataTable = new DataTable();
+        dataTable = null;
+        GridView2.DataSource = dataTable;
+        GridView2.DataBind();
+        show_tax();
+       
 
-        TextBox1.Text = "";
+    }
+    private void SaveDetail(GridViewRow row)
+    {
+
+
+
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("insert into purchase_entry_details values(@purchase_invoice,@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@supplier_name,@qty,@tax,@tax_amount,@total_amount)", CON);
+        cmd.Parameters.AddWithValue("@purchase_invoice", Label1.Text);
+        cmd.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
+        cmd.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
+        cmd.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
+
+        cmd.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
+        cmd.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
+        cmd.Parameters.AddWithValue("@supplier_name", row.Cells[5].Text);
+
+        cmd.Parameters.AddWithValue("@qty", row.Cells[6].Text);
+        cmd.Parameters.AddWithValue("@tax", row.Cells[7].Text);
+        cmd.Parameters.AddWithValue("@tax_amount", row.Cells[8].Text);
+        cmd.Parameters.AddWithValue("@total_amount", row.Cells[9].Text);
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+
+        SqlConnection con91 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+        SqlCommand check_User_Name91 = new SqlCommand("SELECT * FROM product_stock WHERE Product_code = @Product_code and barcode=@barcode", con91);
+        check_User_Name91.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
+        check_User_Name91.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
+        con91.Open();
+        SqlDataReader reader91 = check_User_Name91.ExecuteReader();
+        if (reader91.HasRows)
+        {
+
+            SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1 = new SqlCommand("update product_stock set @Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty,supplier=@supplier where Product_code='" + row.Cells[0].Text + "')", CON1);
+
+
+            cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
+            cmd1.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
+
+            cmd1.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
+            cmd1.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
+
+
+            cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
+            cmd1.Parameters.AddWithValue("@supplier", row.Cells[5].Text);
+            CON1.Open();
+            cmd1.ExecuteNonQuery();
+            CON1.Close();
+        }
+        else
+        {
+            SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1 = new SqlCommand("insert into product_stock values(@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@qty,@supplier)", CON1);
+
+            cmd1.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
+            cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
+            cmd1.Parameters.AddWithValue("@barcode", row.Cells[2].Text);
+
+            cmd1.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
+            cmd1.Parameters.AddWithValue("@Purchase_price", row.Cells[4].Text);
+
+
+            cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
+            cmd1.Parameters.AddWithValue("@supplier", row.Cells[5].Text);
+            CON1.Open();
+            cmd1.ExecuteNonQuery();
+            CON1.Close();
+        }
+        con91.Close();
 
 
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox1.Text = "";
-
+        TextBox6.Text = "";
+        TextBox5.Text = "";
+        TextBox4.Text = "";
+       
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        Label2.Text = "";
         show_category();
     }
     private void active()
@@ -120,13 +304,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     }
     protected void BindData()
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_entry ORDER BY code asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
@@ -134,11 +312,11 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from subcategory where category_id='" + row.Cells[0].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + row.Cells[1].Text + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Product entry deleted successfully')", true);
 
         BindData();
         show_category();
@@ -158,9 +336,9 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select subcategoryname from subcategory where " +
-                "subcategoryname like @subcategoryname + '%'";
-                cmd.Parameters.AddWithValue("@subcategoryname", prefixText);
+                cmd.CommandText = "select barcode from product_stock where " +
+                "barcode like @barcode + '%'";
+                cmd.Parameters.AddWithValue("@barcode", prefixText);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -168,7 +346,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["subcategoryname"].ToString());
+                        customers.Add(sdr["barcode"].ToString());
                     }
                 }
                 conn.Close();
@@ -199,6 +377,10 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
 
     }
+    private void show_tax()
+    {
+        
+    }
     private void show_category()
     {
 
@@ -217,11 +399,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
 
-        DropDownList3.DataSource = ds;
-        DropDownList3.DataTextField = "categoryname";
-        DropDownList3.DataValueField = "category_id";
-        DropDownList3.DataBind();
-        DropDownList3.Items.Insert(0, new ListItem("All", "0"));
+
         con.Close();
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
@@ -261,26 +439,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     {
 
     }
-    protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from subcategory where category_id='" + DropDownList3.SelectedItem.Value + "'", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
 
-
-        DropDownList5.DataSource = ds;
-        DropDownList5.DataTextField = "subcategoryname";
-        DropDownList5.DataValueField = "subcategory_id";
-        DropDownList5.DataBind();
-        DropDownList5.Items.Insert(0, new ListItem("All", "0"));
-
-
-
-        con.Close();
-    }
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -292,37 +451,107 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         GridView1.DataSource = dt1;
         GridView1.DataBind();
     }
+
     protected void Button3_Click(object sender, EventArgs e)
     {
-        string str1 = TextBox2.Text.Trim();
-        string str2 = DropDownList3.SelectedItem.Value;
-        string str3 = DropDownList5.SelectedItem.Value;
-        string str4 = TextBox4.Text;
-        string str5 = TextBox5.Text;
-        string str6 = TextBox6.Text;
-        string str7 = TextBox7.Text;
+
+
+
+        string stro = Label2.Text;
+        string str1 = TextBox6.Text;
+        string str2 = TextBox5.Text;
+
+        string str3 = TextBox4.Text;
+      
+        string str6 = TextBox7.Text;
+       
+        string str7 = TextBox9.Text;
         dt = (DataTable)ViewState["Details"];
-        dt.Rows.Add(str1, str2, str3, str4, str5, str6, str7);
+        dt.Rows.Add(stro, str1, str2, str3, str6, str7);
         ViewState["Details"] = dt;
         GridView2.DataSource = dt;
-        GridView2.EmptyDataText = "Code";
-        GridView2.EmptyDataText = "Category Id";
-        GridView2.EmptyDataText = "Subcategory Id";
+
+        GridView2.EmptyDataText = "Product Code";
         GridView2.EmptyDataText = "Product Name";
+
+        GridView2.EmptyDataText = "Product code / Barcode";
+
         GridView2.EmptyDataText = "MRP";
-        GridView2.EmptyDataText = "Supplier";
-        GridView2.EmptyDataText = "Product Price";
+        GridView2.EmptyDataText = "Purchase price";
+        GridView2.EmptyDataText = "Supplier Name";
+        GridView2.EmptyDataText = "Quantity";
+        GridView2.EmptyDataText = "Tax Percentage";
+        GridView2.EmptyDataText = "Tax Amount";
+        GridView2.EmptyDataText = "Total Amount";
         GridView2.DataBind();
 
 
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox5.Text = "";
+
+
+
+
+
+
+
+
         TextBox6.Text = "";
+        TextBox5.Text = "";
+        TextBox4.Text = "";
+      
         TextBox7.Text = "";
+        TextBox9.Text = "";
+        Label2.Text = "";
 
 
 
+
+
+    }
+    protected void TextBox7_TextChanged(object sender, EventArgs e)
+    {
+        float a = float.Parse(TextBox4.Text);
+        float b = float.Parse(TextBox7.Text);
+        TextBox9.Text = (a * b).ToString();
+      
+    }
+    protected void TextBox6_TextChanged(object sender, EventArgs e)
+    {
+       
+
+
+       
+    }
+    protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            tot = tot + float.Parse(e.Row.Cells[9].Text);
+            TextBox10.Text = tot.ToString();
+            TextBox11.Text = tot.ToString();
+        }
+
+    }
+
+    protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+       
+    }
+    protected void TextBox5_TextChanged(object sender, EventArgs e)
+    {
+        SqlConnection con11 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+        con11.Open();
+        string query1 = "Select *  from Product_stock where barcode='" + TextBox5.Text + "' ";
+        SqlCommand cmd11 = new SqlCommand(query1, con11);
+        SqlDataReader dr1 = cmd11.ExecuteReader();
+        if (dr1.Read())
+        {
+
+            TextBox6.Text = dr1["product_name"].ToString();
+            TextBox4.Text = dr1["mrp"].ToString();
+        }
+        TextBox6.Focus();
 
     }
 }
