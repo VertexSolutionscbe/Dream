@@ -19,6 +19,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 {
     float tot = 0;
     DataTable dt = null;
+    int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -98,8 +99,13 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update product_entry set product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update product_entry set product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -114,8 +120,13 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from product_entry where code='" + Label29.Text + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from product_entry where code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -154,6 +165,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+       
 
         foreach (GridViewRow row in this.GridView2.Rows)
         {
@@ -164,13 +176,19 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
         }
 
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into purchase_entry values(@purchase_invoice,@date,@Toal_qty,@total_amount,@Grand__total)", CON);
+        SqlCommand cmd = new SqlCommand("insert into purchase_entry values(@purchase_invoice,@date,@Toal_qty,@total_amount,@Grand__total,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@purchase_invoice", Label1.Text);
         cmd.Parameters.AddWithValue("@date", TextBox8.Text);
         cmd.Parameters.AddWithValue("@Toal_qty", TextBox10.Text);
         cmd.Parameters.AddWithValue("@total_amount", TextBox10.Text);
         cmd.Parameters.AddWithValue("@Grand__total", TextBox11.Text);
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -199,11 +217,14 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     private void SaveDetail(GridViewRow row)
     {
-
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into purchase_entry_details values(@purchase_invoice,@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@supplier_name,@qty,@tax,@tax_amount,@total_amount)", CON);
+        SqlCommand cmd = new SqlCommand("insert into purchase_entry_details values(@purchase_invoice,@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@supplier_name,@qty,@tax,@tax_amount,@total_amount,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@purchase_invoice", Label1.Text);
         cmd.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
         cmd.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
@@ -217,9 +238,13 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@tax", row.Cells[7].Text);
         cmd.Parameters.AddWithValue("@tax_amount", row.Cells[8].Text);
         cmd.Parameters.AddWithValue("@total_amount", row.Cells[9].Text);
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
+
+
+
 
         SqlConnection con91 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
         SqlCommand check_User_Name91 = new SqlCommand("SELECT * FROM product_stock WHERE Product_code = @Product_code and barcode=@barcode", con91);
@@ -229,9 +254,13 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                 SqlDataReader reader91 = check_User_Name91.ExecuteReader();
                 if (reader91.HasRows)
                 {
+                    if (Session["company_id"] != "")
+                    {
+                        company_id = Convert.ToInt32(Session["company_id"].ToString());
+                    }
 
                     SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1 = new SqlCommand("update product_stock set @Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty,supplier=@supplier where Product_code='" + row.Cells[0].Text + "')", CON1);
+                    SqlCommand cmd1 = new SqlCommand("update product_stock set @Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty,supplier=@supplier where Product_code='" + row.Cells[0].Text + "' and Com_Id='" + company_id + "')", CON1);
                  
                 
                     cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
@@ -243,14 +272,20 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
                     cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
                     cmd1.Parameters.AddWithValue("@supplier", row.Cells[5].Text);
+                    cmd1.Parameters.AddWithValue("@Com_Id", company_id);
+                 
                     CON1.Open();
                     cmd1.ExecuteNonQuery();
                     CON1.Close();
                 }
                 else
                 {
+                    if (Session["company_id"] != "")
+                    {
+                        company_id = Convert.ToInt32(Session["company_id"].ToString());
+                    }
                     SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1 = new SqlCommand("insert into product_stock values(@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@qty,@supplier)", CON1);
+                    SqlCommand cmd1 = new SqlCommand("insert into product_stock values(@Product_code,@Product_name,@barcode,@mrp,@Purchase_price,@qty,@supplier,@Com_Id)", CON1);
                  
                     cmd1.Parameters.AddWithValue("@Product_code", row.Cells[0].Text);
                     cmd1.Parameters.AddWithValue("@Product_name", row.Cells[1].Text);
@@ -262,6 +297,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
                     cmd1.Parameters.AddWithValue("@qty", row.Cells[6].Text);
                     cmd1.Parameters.AddWithValue("@supplier", row.Cells[5].Text);
+                    cmd1.Parameters.AddWithValue("@Com_Id", company_id);
                     CON1.Open();
                     cmd1.ExecuteNonQuery();
                     CON1.Close();
@@ -311,10 +347,15 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

@@ -17,6 +17,7 @@ using System.Drawing;
 
 public partial class Admin_Customer_Entry : System.Web.UI.Page
 {
+    int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -52,8 +53,13 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "' where Custom_Code='" + Label29.Text + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "' where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "'", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -68,8 +74,13 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from Customer_Entry where Custom_Code='" + Label29.Text + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from Customer_Entry where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -108,14 +119,19 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Profession,@Customer_Type)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Profession,@Customer_Type,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
         cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
         cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
-
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -162,8 +178,13 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Customer_Entry ORDER BY Custom_Code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Customer_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -173,10 +194,15 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

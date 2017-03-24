@@ -122,8 +122,12 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock ORDER BY Product_code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where Com_Id='" + company_id + "' ORDER BY Product_code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);

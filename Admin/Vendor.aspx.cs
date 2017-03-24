@@ -62,12 +62,18 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Vendor values(@Vendor_Code,@Vendor_Name,@Vendor_Address,@Product)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Vendor values(@Vendor_Code,@Vendor_Name,@Vendor_Address,@Product,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@Vendor_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Vendor_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Vendor_Address", HttpUtility.HtmlDecode(TextBox2.Text));
         cmd.Parameters.AddWithValue("@Product", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -114,8 +120,12 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Vendor ORDER BY Vendor_Code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Vendor where Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -125,10 +135,14 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code='" + row.Cells[0].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code='" + row.Cells[0].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

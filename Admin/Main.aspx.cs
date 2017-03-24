@@ -50,8 +50,13 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update category set categoryname='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where category_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update category set categoryname='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where category_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' and Com_Id='" + company_id + "'  ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -66,9 +71,12 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
-
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + Label16.Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + Label16.Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

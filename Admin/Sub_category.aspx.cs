@@ -51,8 +51,13 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update subcategory set subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update subcategory set subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();

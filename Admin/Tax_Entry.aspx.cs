@@ -50,8 +50,12 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Tax set tax_per='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Tax set tax_per='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -66,9 +70,13 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + Label16.Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + Label16.Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
@@ -80,10 +88,16 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
         cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -125,8 +139,13 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Tax ORDER BY tax_id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Tax where Com_Id='" + company_id + "' ORDER BY tax_id asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -136,10 +155,15 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

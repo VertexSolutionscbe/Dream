@@ -31,6 +31,8 @@ public partial class sms_report : System.Web.UI.Page
     }
     protected void BindData()
     {
+       
+
         company_id = Convert.ToInt32(Session["company_id"].ToString());
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con.Open();

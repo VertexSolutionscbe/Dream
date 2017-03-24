@@ -54,8 +54,14 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
+
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Staff_Entry set Emp_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Emp_Add='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Department='" + HttpUtility.HtmlDecode(TextBox9.Text) + "',Branch='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Super_Visor='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',Target='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Emp_Code='" + Label29.Text + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Staff_Entry set Emp_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Emp_Add='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Department='" + HttpUtility.HtmlDecode(TextBox9.Text) + "',Branch='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Super_Visor='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',Target='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Emp_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -70,8 +76,13 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from Staff_Entry where Emp_Code='" + Label29.Text + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from Staff_Entry where Emp_Code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -111,8 +122,13 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@Emp_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Emp_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Emp_Add", HttpUtility.HtmlDecode(TextBox2.Text));
@@ -120,6 +136,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@Branch", HttpUtility.HtmlDecode(TextBox5.Text));
         cmd.Parameters.AddWithValue("@Super_Visor", HttpUtility.HtmlDecode(TextBox6.Text));
         cmd.Parameters.AddWithValue("@Target", HttpUtility.HtmlDecode(TextBox7.Text));
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -172,8 +189,13 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Staff_Entry ORDER BY Emp_Code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -183,10 +205,15 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Staff_Entry where Emp_Code='" + row.Cells[0].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Staff_Entry where Emp_Code='" + row.Cells[0].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

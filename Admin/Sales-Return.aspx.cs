@@ -41,28 +41,38 @@ public partial class Admin_Sales_Return : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Sales_Return values(@Customer_Name,@Customer_Address,@Mobile_number,@Invoice_No)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Sales_Return values(@Customer_Name,@Customer_Address,@Mobile_number,@Invoice_No,@Com_Id)", CON);
        
         cmd.Parameters.AddWithValue("@Customer_Name", HttpUtility.HtmlDecode(TextBox5.Text));
         cmd.Parameters.AddWithValue("@Customer_Address", HttpUtility.HtmlDecode(TextBox6.Text));
         cmd.Parameters.AddWithValue("@Mobile_number", HttpUtility.HtmlDecode(TextBox7.Text));
         cmd.Parameters.AddWithValue("@Invoice_No", Label1.Text);
-
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
 
 
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("insert into Sales_Rtn_Details values(@Invoice_No,@Barcode,@Product_Name,@Quantity,@Rate,@Total_Price)", CON1);
+        SqlCommand cmd1 = new SqlCommand("insert into Sales_Rtn_Details values(@Invoice_No,@Barcode,@Product_Name,@Quantity,@Rate,@Total_Price,@Com_Id)", CON1);
         cmd1.Parameters.AddWithValue("@Invoice_No", Label2.Text);
         cmd1.Parameters.AddWithValue("@Barcode", HttpUtility.HtmlDecode(TextBox8.Text));
         cmd1.Parameters.AddWithValue("@Product_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd1.Parameters.AddWithValue("@Quantity", HttpUtility.HtmlDecode(TextBox2.Text));
         cmd1.Parameters.AddWithValue("@Rate", HttpUtility.HtmlDecode(TextBox4.Text));
         cmd1.Parameters.AddWithValue("@Total_Price", HttpUtility.HtmlDecode(TextBox9.Text));
-
+        cmd1.Parameters.AddWithValue("@Com_Id", company_id);
         CON1.Open();
         cmd1.ExecuteNonQuery();
         CON1.Close();
@@ -120,8 +130,13 @@ public partial class Admin_Sales_Return : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Sales_Return ORDER BY Invoice_No asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Sales_Return where Com_Id='" + company_id + "' ORDER BY Invoice_No asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
