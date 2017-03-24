@@ -39,7 +39,72 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         }
 
     }
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label29.Text = ROW.Cells[1].Text;
+        TextBox16.Text = ROW.Cells[2].Text;
+        TextBox5.Text = ROW.Cells[3].Text;
+        TextBox6.Text = ROW.Cells[4].Text;
+        this.ModalPopupExtender3.Show();
+    }
+    protected void Button16_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update Department set Depart_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Incharge='" + HttpUtility.HtmlDecode(TextBox5.Text) + "',Branch_Location='" + HttpUtility.HtmlDecode(TextBox6.Text) + "' where Depart_Code='" + Label29.Text + "' ", CON);
 
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label31.Text = "Updated successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+
+    }
+    protected void Button17_Click(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("delete from Department where Depart_Code='" + Label29.Text + "' ", con1);
+        con1.Open();
+        cmd1.ExecuteNonQuery();
+        con1.Close();
+
+
+        Label31.Text = "Deleted successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+    }
+    protected void Button14_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from Department where Depart_Code=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
 
     protected void Button1_Click(object sender, EventArgs e)
     {

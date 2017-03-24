@@ -18,6 +18,7 @@ using System.Drawing;
 
 public partial class Admin_Sub_category : System.Web.UI.Page
 {
+    int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -66,8 +67,12 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from subcategory where subcategory_id='" + Label29.Text + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from subcategory where subcategory_id='" + Label29.Text + "' and Com_Id='"+company_id+"' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -106,11 +111,16 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id)", CON);
+        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@subcategory_id", Label1.Text);
         cmd.Parameters.AddWithValue("@subcategoryname", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@category_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -152,8 +162,12 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from subcategory ORDER BY subcategory_id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from subcategory where Com_Id='"+company_id+"' ORDER BY subcategory_id asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -163,10 +177,14 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from subcategory where subcategory_id='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from subcategory where subcategory_id='" + row.Cells[1].Text + "' and Com_Id='"+company_id+"'", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();

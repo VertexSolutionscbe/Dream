@@ -39,6 +39,75 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
 
     }
 
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Label29.Text = ROW.Cells[1].Text;
+        TextBox16.Text = ROW.Cells[2].Text;
+        TextBox8.Text = ROW.Cells[3].Text;
+        TextBox9.Text = ROW.Cells[4].Text;
+        TextBox10.Text = ROW.Cells[5].Text;
+        TextBox11.Text = ROW.Cells[6].Text;
+        TextBox12.Text = ROW.Cells[7].Text;
+        this.ModalPopupExtender3.Show();
+    }
+    protected void Button16_Click(object sender, EventArgs e)
+    {
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("update Staff_Entry set Emp_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Emp_Add='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Department='" + HttpUtility.HtmlDecode(TextBox9.Text) + "',Branch='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Super_Visor='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',Target='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Emp_Code='" + Label29.Text + "' ", CON);
+
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+        Label31.Text = "Updated successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+
+    }
+    protected void Button17_Click(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("delete from Staff_Entry where Emp_Code='" + Label29.Text + "' ", con1);
+        con1.Open();
+        cmd1.ExecuteNonQuery();
+        con1.Close();
+
+
+        Label31.Text = "Deleted successfuly";
+
+        this.ModalPopupExtender3.Hide();
+        BindData();
+        getinvoiceno();
+
+    }
+    protected void Button14_Click(object sender, EventArgs e)
+    {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from Staff_Entry where Emp_Code=" + usrid, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+        }
+        BindData();
+        getinvoiceno();
+
+    }
 
     protected void Button1_Click(object sender, EventArgs e)
     {

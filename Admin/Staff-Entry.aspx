@@ -589,7 +589,13 @@
            onselectedindexchanged="GridView1_SelectedIndexChanged">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
        <Columns>
-       
+       <asp:TemplateField>
+           
+           <ItemTemplate>
+               <asp:CheckBox ID="CheckBox3" runat="server" />
+            </ItemTemplate>
+           
+           </asp:TemplateField>
          
            <asp:BoundField HeaderText="Employee Code" DataField="Emp_Code"  />
            <asp:BoundField HeaderText=" Name" DataField="Emp_Name" />
@@ -598,6 +604,13 @@
             <asp:BoundField HeaderText="Branch" DataField="Branch" />
              <asp:BoundField HeaderText="Super Visor" DataField="Super_Visor" />
               <asp:BoundField HeaderText="Target" DataField="Target" />
+              <asp:TemplateField>
+          <ItemTemplate>
+            
+          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"  ></asp:ImageButton>
+          </ItemTemplate>
+          
+          </asp:TemplateField>
            <asp:TemplateField>
           <ItemTemplate>
               <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
@@ -624,6 +637,114 @@
     <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                  <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                 
+                   <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
+                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
+                 <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  /> 
+                   <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged" />
+                </Triggers>
+    </asp:UpdatePanel>
+  
+
+
+
+   <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+   <ContentTemplate>
+
+    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+        <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
+  
+  
+    <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
+                         HorizontalAlign="Left" ScrollBars="Both" >
+    
+       
+        <div style="background-color:#4169E1; width:100%; height:30px;" >
+  
+            <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="20px" height="20px" style="float:right" />
+        </div>
+        <table>
+       
+        <tr>
+        <td>
+            <asp:Label ID="Label28" runat="server" Text="Employee code"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label30" runat="server" Text="Employee Name"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label2" runat="server" Text="Employee Address"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox8" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label3" runat="server" Text="Department"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox9" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label4" runat="server" Text="Branch"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox10" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label5" runat="server" Text="Super_Visor"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox11" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label6" runat="server" Text="Target"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox12" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+        </tr>
+     <tr>
+        <td>
+            <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+            
+            <asp:Button ID="Button16" runat="server" Text="Update" onclick="Button16_Click" 
+                    style="height: 26px" />
+            </ContentTemplate>
+            </asp:UpdatePanel>
+            </td>
+        <td>
+         <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+      <ContentTemplate>
+            <asp:Button ID="Button17" runat="server" Text="Delete" 
+                onclick="Button17_Click" />&nbsp;&nbsp;&nbsp;
+                 </ContentTemplate>
+        
+          </asp:UpdatePanel>
+                <asp:Label ID="Label31" runat="server" Text=""></asp:Label></td>
+                
+                    
+       
+        </tr>
+        </table>
+       
+
+        </asp:Panel>
+       <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">
+        </asp:ModalPopupExtender>
+
+
+        </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
+                     <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
+                       <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
                 </Triggers>
     </asp:UpdatePanel>
   

@@ -80,10 +80,15 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into category values(@category_id,@categoryname)", CON);
+        SqlCommand cmd = new SqlCommand("insert into category values(@category_id,@categoryname,@Com_Id)", CON);
         cmd.Parameters.AddWithValue("@category_id", Label1.Text);
         cmd.Parameters.AddWithValue("@categoryname", HttpUtility.HtmlDecode(TextBox3.Text));
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -125,8 +130,12 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void BindData()
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from category ORDER BY category_id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from category where Com_Id='"+company_id+"' ORDER BY category_id asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -136,10 +145,14 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
+        if (Session["company_id"] != "")
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + row.Cells[1].Text + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
