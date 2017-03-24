@@ -1,4 +1,4 @@
-﻿#region " Using "
+﻿
 using System;
 using System.Configuration;
 using System.Data;
@@ -12,8 +12,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Drawing;
-#endregion
+using System.Net.Mail;
+using System.Net;
+using System.Windows.Forms;
+
+
+
+
 
 public partial class Admin_Sales_entry : System.Web.UI.Page
 {
@@ -89,30 +94,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         }
     }
     
-    protected void Button14_Click(object sender, EventArgs e)
-    {
-        foreach (GridViewRow gvrow in GridView1.Rows)
-        {
-            //Finiding checkbox control in gridview for particular row
-            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
-            //Condition to check checkbox selected or not
-            if (chkdelete.Checked)
-            {
-                //Getting UserId of particular row using datakey value
-                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
-                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-
-                con.Open();
-                SqlCommand cmd = new SqlCommand("delete from product_entry where code=" + usrid, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-            }
-        }
-        BindData();
-
-
-    }
+    
     protected void Button1_Click(object sender, EventArgs e)
     {
 
@@ -158,8 +140,45 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         GridView2.DataSource = dataTable;
         GridView2.DataBind();
         show_tax();
-       
+        Session["Name"] = Label1.Text;
 
+
+
+
+        DialogResult ans = MessageBox.Show("Want Print Preview?", "App Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        if (ans == DialogResult.No)
+        {
+            string OrderID = Label1.Text;
+            //Create a ReportViewer Control.
+            ReportViewer _reportviewer = new ReportViewer();
+            LocalReport _localReport = _reportviewer.LocalReport;
+            //Set the LocalReport properties for the report datasource and resource
+            _localReport.ReportPath = AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Jobs\\PrintOrder.rdlc";
+            //_localReport.ReportPath = AppDomain.CurrentDomain.BaseDirectory + "Jobs\\PrintOrder.rdlc";
+            this.Sales_invoiceTableAdapters.Fill(this.billDataSet.tblOrderItems, OrderID);
+            this.tblOrderTableAdapter.Fill(this.billDataSet.tblOrder, OrderID);
+        
+            ReportDataSource _reportDataSource1 = new ReportDataSource();
+            _reportDataSource1.Name = "BillDataSet_tblOrder";
+            _reportDataSource1.Value = this.billDataSet.tblOrder;
+            ReportDataSource _reportDataSource2 = new ReportDataSource();
+            _reportDataSource2.Name = "BillDataSet_tblOrderItems";
+            _reportDataSource2.Value = this.billDataSet.tblOrderItems;
+            _localReport.DataSources.Add(_reportDataSource1);
+            _localReport.DataSources.Add(_reportDataSource2);
+            _reportviewer.RenderingComplete += new RenderingCompleteEventHandler(_reportviewer_RenderingComplete);
+            _reportviewer.RefreshReport();
+        }
+        else
+        {
+            FormPrntOrd _Order = new FormPrntOrd(Label1.Text);
+            _Order.ShowDialog(this);
+        }
+
+
+      
+        Response.Redirect("SALES_REPORT_VIEW.aspx");
+     
     }
     private void SaveDetail(GridViewRow row)
     {
