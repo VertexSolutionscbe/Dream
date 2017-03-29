@@ -17,6 +17,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+        <link href="css1/SMScss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,127 +26,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
        
-        <style>
-         
-             .family
-            {
-                font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;font-size:16px;
-            }
-            
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
-   
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555555;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-   
-     
-    
   
-  
-           
-        }
-        
-         @media (max-width: 767px)
-        {
-      .panelx
-       {
-      
-      overflow:scroll;
-       margin-top:-20px;
-       width:100%;
-       height:400px;
-       border-radius:10px;
-      
-       }
-       .panely
-       {
-      
-      
-       
-       margin-top:-140px;
-       width:100%;
-       height:270px;
-       border-radius:10px;
-      
-      
-       }
-       }
-                .modelbackground
-    {
-        background-color:gray;
-        filter:alpha(opacity=80);
-        opacity:0.8;
-        Z-index:10000;
-        
-    }
-       .panelx
-       {
-      
-      overflow:scroll;
-       margin-top:-20px;
-       width:50%;
-       height:400px;
-       border-radius:10px;
-      
-       }
-         .dropbox1
-        {
-            width:30%;
-            height:30px;
-        }
-        .see
-        {
-           height:500px; 
-           margin-top:-60px;"
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-        .top
-        {
-            float:left; width:8%;
-        }
-        
-        
-          @media (max-width: 767px)
-        {
-             .top
-        {
-            float:left; width:30%;
-        }
-             .see
-        {
-           height:400px; 
-           margin-top:40px;
-        }
-         .see1
-        {
-            margin-top:-30px;
-            border-left:1px solid red;
-           
-        }
-         .see2
-        {
-            margin-top:40px;
-        }
-      
-        }
-        
-        </style>
     </head>
     <body>
         <!-- Static navbar -->

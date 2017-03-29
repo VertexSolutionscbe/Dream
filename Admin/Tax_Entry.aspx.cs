@@ -50,7 +50,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -70,7 +70,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -88,7 +88,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -139,7 +139,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -155,7 +155,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }

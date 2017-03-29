@@ -16,6 +16,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+         <link href="css1/Dashboardcss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,92 +25,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <style>
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
-   
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555555;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-   
-   
     
-  
-  
-           
-        }
-         .dropbox1
-        {
-            width:30%;
-            height:30px;
-        }
-        .see
-        {
-           height:500px; 
-           margin-top:-60px;
-          
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-        .top
-        {
-            float:left; width:20%;
-             padding:10px;
-        margin-bottom:5px;
-        }
-            @media (max-width: 907px)
-        {
-             .top
-        {
-            float:left; width:20%;
-        }
-          .see
-        {
-           height:400px; 
-           margin-top:-30px;
-        }
-        }
-        
-          @media (max-width: 767px)
-        {
-             .top
-        {
-         
-            float:left; width:20%;
-        }
-             .see
-        {
-           height:400px; 
-           margin-top:10px;
-        }
-         .see1
-        {
-            margin-top:-30px;
-           
-           
-        }
-         .see2
-        {
-            margin-top:40px;
-        }
-      
-        }
-        
-        </style>
     </head>
     <body>
         <!-- Static navbar -->
