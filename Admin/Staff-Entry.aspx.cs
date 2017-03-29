@@ -50,6 +50,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         TextBox10.Text = ROW.Cells[5].Text;
         TextBox11.Text = ROW.Cells[6].Text;
         TextBox12.Text = ROW.Cells[7].Text;
+        TextBox13.Text = ROW.Cells[8].Text;
         this.ModalPopupExtender3.Show();
     }
     protected void Button16_Click(object sender, EventArgs e)
@@ -122,13 +123,13 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id,@Mob_No)", CON);
         cmd.Parameters.AddWithValue("@Emp_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Emp_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Emp_Add", HttpUtility.HtmlDecode(TextBox2.Text));
@@ -137,7 +138,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@Super_Visor", HttpUtility.HtmlDecode(TextBox6.Text));
         cmd.Parameters.AddWithValue("@Target", HttpUtility.HtmlDecode(TextBox7.Text));
         cmd.Parameters.AddWithValue("@Com_Id", company_id);
-
+        cmd.Parameters.AddWithValue("@Mob_No", HttpUtility.HtmlDecode(TextBox13.Text));
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -151,6 +152,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         TextBox5.Text = "";
         TextBox6.Text = "";
         TextBox7.Text = "";
+        TextBox13.Text = "";
 
 
     }
@@ -163,6 +165,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         TextBox5.Text = "";
         TextBox6.Text = "";
         TextBox7.Text = "";
+        TextBox13.Text = "";
         getinvoiceno();
         show_category();
     }
@@ -189,7 +192,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }

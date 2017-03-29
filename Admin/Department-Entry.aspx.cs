@@ -47,6 +47,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox16.Text = ROW.Cells[2].Text;
         TextBox5.Text = ROW.Cells[3].Text;
         TextBox6.Text = ROW.Cells[4].Text;
+        TextBox7.Text = ROW.Cells[5].Text;
         this.ModalPopupExtender3.Show();
     }
     protected void Button16_Click(object sender, EventArgs e)
@@ -119,18 +120,19 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Department values(@Depart_Code,@Depart_Name,@Incharge,@Branch_Location,@Com_Id)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Department values(@Depart_Code,@Depart_Name,@Incharge,@Branch_Location,@Com_Id,@Team_Members)", CON);
         cmd.Parameters.AddWithValue("@Depart_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Depart_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Incharge", HttpUtility.HtmlDecode(TextBox2.Text));
         cmd.Parameters.AddWithValue("@Branch_Location", HttpUtility.HtmlDecode(TextBox4.Text));
         cmd.Parameters.AddWithValue("@Com_Id", company_id);
+        cmd.Parameters.AddWithValue("@Team_Members", HttpUtility.HtmlDecode(TextBox7.Text));
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -141,6 +143,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox3.Text = "";
         TextBox2.Text = "";
         TextBox4.Text = "";
+        TextBox7.Text = "";
 
 
     }
@@ -150,6 +153,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox3.Text = "";
         TextBox2.Text = "";
         TextBox4.Text = "";
+        TextBox7.Text = "";
         getinvoiceno();
         show_category();
     }
