@@ -169,6 +169,15 @@
                           
                                
                             </li>
+                              <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                              <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">

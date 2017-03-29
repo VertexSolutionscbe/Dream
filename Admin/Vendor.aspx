@@ -45,11 +45,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
-
-           
-
         <link href="css1/Vendorcss.css" type="text/css" rel="stylesheet">
-
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,10 +53,6 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-
-        <link href="css1/Vendorcss.css" type="text/css" rel="stylesheet">
-
 
 
     </head>
@@ -94,7 +86,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                            
-                          <li class="dropdown">
+                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
@@ -188,6 +180,17 @@
                           
                                
                             </li>
+                              <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+
+
                              <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
