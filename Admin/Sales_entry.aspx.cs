@@ -351,6 +351,17 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     {
       
         show_category();
+        SetInitialRow();
+        TextBox10.Text = "";
+        TextBox11.Text = "";
+        TextBox13.Text = "";
+        TextBox14.Text = "";
+        TextBox2.Text = "";
+        TextBox20.Text = "";
+        TextBox6.Text = "";
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        TextBox8.Text = "";
     }
     private void active()
     {

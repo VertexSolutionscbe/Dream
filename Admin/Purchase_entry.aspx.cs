@@ -383,6 +383,119 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         CON.Close();
 
 
+        int a111 = 0;
+        float b11 = 0;
+        float f11 = 0;
+        float c11 = 0;
+        SqlConnection con100 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+        SqlCommand cmd100 = new SqlCommand("SELECT * FROM pay_amount_status WHERE Buyer = @Buyer", con100);
+        cmd100.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
+        con100.Open();
+        SqlDataReader reader1 = cmd100.ExecuteReader();
+        if (reader1.HasRows)
+        {
+            SqlConnection con11 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd11 = new SqlCommand("Select * from pay_amount_status where Buyer='" + DropDownList3.SelectedItem.Text + "'", con11);
+            con11.Open();
+            SqlDataReader dr11;
+            dr11 = cmd11.ExecuteReader();
+            if (dr11.Read())
+            {
+
+                b11 = float.Parse(dr11["pending_amount"].ToString());
+
+
+                f11 = float.Parse(TextBox9.Text);
+
+                c11 = (b11 + f11);
+
+
+
+
+
+
+                SqlConnection con24 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@pending_amount,@outstanding,@invoice_no)", con24);
+                cmd24.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
+                cmd24.Parameters.AddWithValue("@pay_date", TextBox8.Text);
+                cmd24.Parameters.AddWithValue("@Estimate_value", TextBox11.Text);
+                cmd24.Parameters.AddWithValue("@address", TextBox12.Text);
+
+                cmd24.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
+                cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
+                cmd24.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
+                cmd24.Parameters.AddWithValue("@outstanding", string.Format("{0:0.00}", c11));
+              
+                cmd24.Parameters.AddWithValue("@invoice_no", Label1.Text);
+
+                con24.Open();
+                cmd24.ExecuteNonQuery();
+                con24.Close();
+
+
+                SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                SqlCommand cmd23 = new SqlCommand("update pay_amount_status set address=@address,total_amount=total_amount+@total_amount,pending_amount=pending_amount+@pending_amount where Buyer='" + DropDownList3.SelectedItem.Text + "' ", con23);
+
+                cmd23.Parameters.AddWithValue("@address", TextBox12.Text);
+
+                cmd23.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
+
+                cmd23.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
+
+                con23.Open();
+                cmd23.ExecuteNonQuery();
+                con23.Close();
+
+
+            }
+
+            con11.Close();
+
+
+
+
+
+
+        }
+        else
+        {
+
+
+            SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd23 = new SqlCommand("insert into pay_amount_status values(@Buyer,@address,@total_amount,@pending_amount,@paid_amount)", con23);
+            cmd23.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
+            cmd23.Parameters.AddWithValue("@address", TextBox12.Text);
+
+            cmd23.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
+
+            cmd23.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
+            cmd23.Parameters.AddWithValue("@paid_amount", TextBox7.Text);
+            con23.Open();
+            cmd23.ExecuteNonQuery();
+            con23.Close();
+            string return_by = "";
+            int value1 = 0;
+            SqlConnection con24 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@pending_amount,@outstanding,@invoice_no)", con24);
+            cmd24.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
+            cmd24.Parameters.AddWithValue("@pay_date", TextBox8.Text);
+            cmd24.Parameters.AddWithValue("@Estimate_value", TextBox11.Text);
+            cmd24.Parameters.AddWithValue("@address", TextBox12.Text);
+
+            cmd24.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
+            cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
+            cmd24.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
+            cmd24.Parameters.AddWithValue("@outstanding", string.Format("{0:0.00}", TextBox9.Text));
+            cmd24.Parameters.AddWithValue("@invoice_no", Label1.Text);
+          
+            con24.Open();
+            cmd24.ExecuteNonQuery();
+            con24.Close();
+
+
+        }
+        con100.Close();
+
 
         int rowIndex = 0;
         StringCollection sc = new StringCollection();
@@ -491,6 +604,9 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     
         TextBox10.Text = "";
         TextBox11.Text = "";
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        TextBox12.Text = "";
         SetInitialRow();
         TextBox8.Text="";
         show_supplier();
@@ -585,6 +701,9 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         TextBox8.Text = "";
         show_supplier();
         TextBox4.Text="";
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        TextBox12.Text = "";
         show_tax();
     }
     private void active()
@@ -785,7 +904,17 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("select * from Vendor where Vendor_Name='" + DropDownList3.SelectedItem.Text + "'", con);
+        SqlDataReader dr;
+        con.Open();
+        dr = cmd.ExecuteReader();
+        if (dr.Read())
+        {
+            TextBox12.Text = dr["Vendor_Address"].ToString();
 
+        }
+        con.Close();
       
     }
     protected void TextBox16_TextChanged(object sender, System.EventArgs e)

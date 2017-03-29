@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Stock_Inventory.aspx.cs" Inherits="Admin_Stock_Inventory" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Account_ledger.aspx.cs" Inherits="Admin_Account_ledger" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -35,7 +35,6 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
-        <link href="css1/Stock_Inventorycss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,6 +43,113 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <style>
+            .completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+            .red
+            {
+                text-align:center;
+            }
+            .goo
+            {
+               color:#13c4a5;
+            }
+            .goo:hover
+            {
+                color:#3a5a7a;
+            }
+            .color
+            {
+                color:#555555;
+                height:30px;
+            }
+        .dropbox
+        {
+            width:100%;
+            height:30px;
+        display: block;
+        font-size:16px;
+        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
+   
+ }
+        .gvwCasesPager
+        {
+           
+          color:black;
+          margin-right:20px;
+          text-align:right;
+          padding:20px;
+        }
+        .gvwCasesPager a
+            {
+               
+                margin-left:10px;
+                margin-right:10px;
+                font-size:20px;
+                
+                 padding:10px;
+                
+              
+              
+            }
+
+         .dropbox1
+        {
+            width:10%;
+            height:30px;
+           
+           
+            
+        }
+        
+        .see
+        {
+           height:400px; 
+           margin-top:-60px;
+        }
+        .see1
+        {
+            margin-top:-20px;
+        }
+         .see2
+        {
+          
+            margin-left:-15px;
+            margin-bottom:30px;
+        }
+        
+          @media (max-width: 767px)
+        {
+             .see
+        {
+           height:400px; 
+           margin-top:-10px;
+        }
+         .see1
+        {
+            margin-top:-40px;
+        }
+         .see2
+        {
+            margin-top:50px;
+            
+        }
+      
+        }
+        
+        </style>
     </head>
     <body>
         <!-- Static navbar -->
@@ -79,26 +185,22 @@
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
-                                <li><a href="Main.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Category</a></li>
+                                <li><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="Sub_category.aspx"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sub Category </a></li>
+                                <li><a href="#"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
                                  <li role="separator" class="divider"></li>
-                                <li><a href="Product_entry.aspx"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product Entry </a></li>
+                                <li><a href="#"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Accounts</a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="Purchase_entry.aspx"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Purchase Entry </a></li>
+                                <li><a href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Task</a></li>
                                   <li role="separator" class="divider"></li>
-                                <li><a href="Stock_Inventory.aspx"><i class="fa fa-edit"></i> &nbsp;&nbsp&nbsp;Stock / Inventory </a></li>
+                                <li><a href="#"><i class="fa fa-edit"></i> &nbsp;&nbsp&nbsp;Leads</a></li>
                                  <li role="separator" class="divider"></li>
-                                <li><a href="Customer-Entry.aspx"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  &nbsp;&nbsp&nbsp;New Customer Entry</a></li>
-
+                                <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  &nbsp;&nbsp&nbsp;Quotes</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="Vendor.aspx"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> &nbsp;&nbsp&nbsp;Supplier Entry </a></li>
+                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> &nbsp;&nbsp&nbsp;Opportunities</a></li>
                                
                                   <li role="separator" class="divider"></li>
-                                <li><a href="Department-Entry.aspx"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;New Department Entry  </a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="Sales_entry.aspx"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sales Entry </a></li>
-                               
+                                <li><a href="#"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Ticket</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -229,7 +331,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Stock / Inventory
+                                <h2>Account Ledger
                                  </h2>
                              
                              
@@ -258,112 +360,14 @@
                         
  
   <div class="panel panel-default">
-  <div class="panel-body">
-   <div class="col-md-6">
-
-                             <br /> <div class="form-group"><label class="col-lg-3 control-label">Category</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-   <ContentTemplate>
-   <asp:DropDownList ID="DropDownList3" runat="server" AutoPostBack="true"
-           class="form-control input-x2 dropbox" 
-           onselectedindexchanged="DropDownList3_SelectedIndexChanged" ></asp:DropDownList>
-                                    
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
+ 
 
 
 
-
-   <div class="col-md-6">
-
-                            <br /> <div class="form-group"><label class="col-lg-3 control-label">Sub Category</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-   <ContentTemplate>
-   <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="true" 
-           class="form-control input-x2 dropbox" 
-           onselectedindexchanged="DropDownList4_SelectedIndexChanged" ></asp:DropDownList>
-                                    
-                                      </ContentTemplate>
-                                          <Triggers>
-              
-                  <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
-                </Triggers>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-  <div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">Product</label>
-
-                                 
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-   <ContentTemplate>
-   
-                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox" ontextchanged="TextBox1_TextChanged" AutoPostBack="true" 
-                                        ></asp:TextBox>
-                                     <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="TextBox1" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>
-
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-   <div class="col-md-6">
-
-                        <div class="form-group"><label class="col-lg-3 control-label">Supplier</label>
-                           <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-   <ContentTemplate>
-  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
-           ontextchanged="TextBox2_TextChanged"></asp:TextBox>
-             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox2"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>
-                        
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-
-
-
-
-
-
-
-</div>
+  
 <div class="col-lg-12">
 
-<h4>Purchase Date  </h4>
+
 <hr />
 </div>
 
@@ -371,7 +375,7 @@
 <div class="panel-body">
    <div class="col-md-6">
 
-                             <div class="form-group"><label class="col-lg-3 control-label">From</label>
+                             <div class="form-group"><label class="col-lg-3 control-label">From Date</label>
 
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -388,7 +392,7 @@
 
    <div class="col-md-6">
 
-                        <div class="form-group"><label class="col-lg-3 control-label">To</label>
+                        <div class="form-group"><label class="col-lg-3 control-label">To Date</label>
 
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel6" runat="server">
@@ -413,59 +417,16 @@
 
 
 
-<div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">purchase Invoice No</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-   <ContentTemplate>
-  
-                                    <asp:TextBox ID="TextBox5" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
-                                        ></asp:TextBox>
-                                     
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-   <div class="col-md-6">
-
-                        <div class="form-group"><label class="col-lg-3 control-label">Barcode</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-   <ContentTemplate>
-  <asp:TextBox ID="TextBox6" runat="server" class="form-control input-x2 dropbox" 
-           AutoPostBack="true" ontextchanged="TextBox6_TextChanged" 
-           ></asp:TextBox>
-                  <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="TextBox6" WatermarkText="Filter by barcode" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers11" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox6"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>                    
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-
-
-
-
-
-
-
+</div>
 </div>
 
 
 
 
 
-</div></div>
+
+
+
 
 <div class="container">
 
@@ -477,23 +438,12 @@
    
  <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
          Font-Size="16px" 
-           AutoGenerateColumns="False" AllowPaging="True" 
+            AllowPaging="True" 
         onpageindexchanging="GridView1_PageIndexChanging" 
         onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
         GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-       <Columns>
       
-               <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
-           <asp:BoundField HeaderText="Product Code" DataField="Product_code"  />
-           <asp:BoundField HeaderText="Product Name" DataField="product_name" />
-             <asp:BoundField HeaderText="Barcode" DataField="barcode" />
-            
-              <asp:BoundField HeaderText="MRP" DataField="mrp" />
-               <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" />
-                <asp:BoundField HeaderText="Qty" DataField="qty" />
-                 
-       </Columns>
        <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
        <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
@@ -512,24 +462,29 @@
         </ContentTemplate>
                                      <Triggers>
               
-                  <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
-                     <asp:AsyncPostBackTrigger ControlID="TextBox2" EventName="TextChanged"  />
-                       <asp:AsyncPostBackTrigger ControlID="TextBox6" EventName="TextChanged"  />
-                        <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
-                    <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
-                     <asp:AsyncPostBackTrigger ControlID="DropDownList4" EventName="SelectedIndexChanged"  />
+              
+                    
+                  
                   </Triggers>
               
                 
                
               
                            </asp:UpdatePanel>
-</div></div></div></div>
+                           <asp:Button ID="Button1" runat="server" 
+           Text="Export to excel" onclick="Button1_Click"></asp:Button>
 
 
-
-</div></div></div></div></div></div>
-
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
                 
                    
                   
