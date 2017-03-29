@@ -274,6 +274,11 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
+        ImageButton IMG = (ImageButton)sender;
+        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
+        Session["supplier"] = ROW.Cells[0].Text;
+       
         Response.Redirect("Purchase_pay_amount.aspx");
+
     }
 }

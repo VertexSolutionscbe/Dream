@@ -415,15 +415,17 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
 
                 SqlConnection con24 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
-                SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@outstanding,@invoice_no)", con24);
+                SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@pending_amount,@outstanding,@invoice_no)", con24);
                 cmd24.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
                 cmd24.Parameters.AddWithValue("@pay_date", TextBox8.Text);
                 cmd24.Parameters.AddWithValue("@Estimate_value", TextBox11.Text);
-                cmd24.Parameters.AddWithValue("@address", DropDownList3.SelectedItem.Text);
+                cmd24.Parameters.AddWithValue("@address", TextBox12.Text);
 
                 cmd24.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
                 cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
+                cmd24.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
                 cmd24.Parameters.AddWithValue("@outstanding", string.Format("{0:0.00}", c11));
+              
                 cmd24.Parameters.AddWithValue("@invoice_no", Label1.Text);
 
                 con24.Open();
@@ -434,7 +436,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                 SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
                 SqlCommand cmd23 = new SqlCommand("update pay_amount_status set address=@address,total_amount=total_amount+@total_amount,pending_amount=pending_amount+@pending_amount where Buyer='" + DropDownList3.SelectedItem.Text + "' ", con23);
 
-                cmd23.Parameters.AddWithValue("@address", DropDownList3.SelectedItem.Text);
+                cmd23.Parameters.AddWithValue("@address", TextBox12.Text);
 
                 cmd23.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
 
@@ -462,7 +464,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
             SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
             SqlCommand cmd23 = new SqlCommand("insert into pay_amount_status values(@Buyer,@address,@total_amount,@pending_amount,@paid_amount)", con23);
             cmd23.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
-            cmd23.Parameters.AddWithValue("@address", DropDownList3.SelectedItem.Text);
+            cmd23.Parameters.AddWithValue("@address", TextBox12.Text);
 
             cmd23.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
 
@@ -474,14 +476,15 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
             string return_by = "";
             int value1 = 0;
             SqlConnection con24 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
-            SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@outstanding,@invoice_no)", con24);
+            SqlCommand cmd24 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@address,@total_amount,@pay_amount,@pending_amount,@outstanding,@invoice_no)", con24);
             cmd24.Parameters.AddWithValue("@Buyer", DropDownList3.SelectedItem.Text);
             cmd24.Parameters.AddWithValue("@pay_date", TextBox8.Text);
             cmd24.Parameters.AddWithValue("@Estimate_value", TextBox11.Text);
-            cmd24.Parameters.AddWithValue("@address", DropDownList3.SelectedItem.Text);
+            cmd24.Parameters.AddWithValue("@address", TextBox12.Text);
 
             cmd24.Parameters.AddWithValue("@total_amount", string.Format("{0:0.00}", TextBox11.Text));
             cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
+            cmd24.Parameters.AddWithValue("@pending_amount", string.Format("{0:0.00}", TextBox9.Text));
             cmd24.Parameters.AddWithValue("@outstanding", string.Format("{0:0.00}", TextBox9.Text));
             cmd24.Parameters.AddWithValue("@invoice_no", Label1.Text);
           
@@ -601,6 +604,9 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     
         TextBox10.Text = "";
         TextBox11.Text = "";
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        TextBox12.Text = "";
         SetInitialRow();
         TextBox8.Text="";
         show_supplier();
@@ -695,6 +701,9 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         TextBox8.Text = "";
         show_supplier();
         TextBox4.Text="";
+        TextBox7.Text = "";
+        TextBox9.Text = "";
+        TextBox12.Text = "";
         show_tax();
     }
     private void active()

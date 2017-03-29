@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Purchase_pay_amount.aspx.cs" Inherits="Admin_Purchase_pay_amount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="Purchase_pay_amount.aspx.cs" Inherits="Admin_Purchase_pay_amount" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -399,7 +399,7 @@
    <ContentTemplate>
   <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" 
            ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                                  
+                                  <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox4"></asp:CalendarExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -465,7 +465,8 @@
 
 </div>
 
-<asp:Button ID="Button2" runat="server" Text="Save" Width="100px"></asp:Button>
+<asp:Button ID="Button2" runat="server" Text="Save" Width="100px" 
+          onclick="Button2_Click"></asp:Button>
 </div>
 
 </div>
@@ -504,6 +505,7 @@
           <asp:BoundField HeaderText="Address" DataField="address"  />
          <asp:BoundField HeaderText="Total Amount" DataField="total_amount"  />
             <asp:BoundField HeaderText="Paid amount" DataField="pay_amount"  />
+              <asp:BoundField HeaderText="Pending amount" DataField="pending_amount"  />
                <asp:BoundField HeaderText="Total Outstanding" DataField="outstanding"  />
       
       </Columns>
