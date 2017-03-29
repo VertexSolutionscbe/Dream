@@ -355,8 +355,17 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
             con22.Close();
 
 
-
-          
+        string status="Purchase";
+        int value=0;
+            SqlConnection con26= new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd26 = new SqlCommand("insert into purchase_amount values(@date,@status,@amount,@value)", con26);
+            cmd26.Parameters.AddWithValue("@date", TextBox4.Text);
+        cmd26.Parameters.AddWithValue("@status",status);
+        cmd26.Parameters.AddWithValue("@amount", TextBox5.Text);
+        cmd26.Parameters.AddWithValue("value", value);
+        con26.Open();
+        cmd26.ExecuteNonQuery();
+        con26.Close();
 
 
 

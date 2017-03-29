@@ -363,7 +363,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-        string status = "Sales";
+        string status = "Purchase";
         float value = 0;
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         SqlCommand cmd = new SqlCommand("insert into purchase_entry values(@purchase_invoice,@date,@Supplier,@Toal_qty,@total_amount,@Grand__total,@Com_Id,@paid_amount,@pending_amount,@status,@value)", CON);

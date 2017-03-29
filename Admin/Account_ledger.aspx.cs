@@ -150,7 +150,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     {
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a  group by date,status,Grand__total,value", con1);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a  group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a  group by date,status,amount,value", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -247,7 +247,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' group by date,status,Grand__total,value", con1);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date='" + TextBox3.Text + "' group by date,status,amount,value", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -258,7 +258,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' group by date,status,Grand__total,value", con1);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "'   group by date,status,amount,value", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
