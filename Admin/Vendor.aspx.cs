@@ -61,7 +61,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -82,7 +82,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -178,7 +178,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }

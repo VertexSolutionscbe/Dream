@@ -420,6 +420,26 @@
                                 
                                 
                                 </div>
+
+
+                                                                
+                                                           <div class="form-group"><label class="col-lg-3 control-label">Total Members</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox7" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
                                  
                                
                             </div>
@@ -553,6 +573,7 @@
            <asp:BoundField HeaderText="Department Name" DataField="Depart_Name" />
            <asp:BoundField HeaderText="Incharge" DataField="Incharge"  />
            <asp:BoundField HeaderText="Branch / Location" DataField="Branch_Location" />
+                     <asp:BoundField HeaderText="Team Members" DataField="Team_Members" />
             <asp:TemplateField>
           <ItemTemplate>
             

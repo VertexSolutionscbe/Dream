@@ -399,6 +399,30 @@
                            </asp:UpdatePanel>
                                     
                                     </div>
+
+
+                                
+                                
+                                </div>
+
+
+                                                                                           <div class="form-group"><label class="col-lg-3 control-label">Mobile No </label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox13" runat="server" class="form-control input-x2 dropbox" 
+                                        ></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+
+
                                 
                                 
                                 </div>
@@ -612,6 +636,7 @@
             <asp:BoundField HeaderText="Branch" DataField="Branch" />
              <asp:BoundField HeaderText="Super Visor" DataField="Super_Visor" />
               <asp:BoundField HeaderText="Target" DataField="Target" />
+               <asp:BoundField HeaderText="Mobile No" DataField="Mob_No"  />
               <asp:TemplateField>
           <ItemTemplate>
             
