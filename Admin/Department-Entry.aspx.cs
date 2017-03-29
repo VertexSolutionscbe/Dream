@@ -176,7 +176,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }

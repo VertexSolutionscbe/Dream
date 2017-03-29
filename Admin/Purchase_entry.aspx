@@ -469,11 +469,29 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
-                                  <asp:DropDownList ID="DropDownList3" runat="server" class="form-control input-x2 dropbox"></asp:DropDownList>
+                                  <asp:DropDownList ID="DropDownList3" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" onselectedindexchanged="DropDownList3_SelectedIndexChanged"></asp:DropDownList>
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                 
+                                
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Address</label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel13" runat="server" >
+   <ContentTemplate>
+                                  <asp:TextBox ID="TextBox12" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                    <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
                 </Triggers>
                            </asp:UpdatePanel>
                                     
