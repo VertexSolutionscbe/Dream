@@ -45,7 +45,11 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+<<<<<<< HEAD
            
+=======
+        <link href="css1/Vendorcss.css" type="text/css" rel="stylesheet">
+>>>>>>> ce05942edd3cddc9b37042a84587f601c0553662
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +58,11 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+<<<<<<< HEAD
         <link href="css1/Vendorcss.css" type="text/css" rel="stylesheet">
+=======
+
+>>>>>>> ce05942edd3cddc9b37042a84587f601c0553662
     </head>
     <body>
         <!-- Static navbar -->

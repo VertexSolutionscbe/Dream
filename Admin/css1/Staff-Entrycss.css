@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿.red
-=======
 ﻿  .red
->>>>>>> ce05942edd3cddc9b37042a84587f601c0553662
             {
                 text-align:center;
             }
@@ -19,20 +15,6 @@
                 color:#555555;
                 height:30px;
             }
-             .completionList {
-        border:solid 1px Gray;
-        margin:0px;
-        padding:3px;
-        height: 120px;
-        overflow:auto;
-        background-color:#FAEBD7;     
-        } 
-        .listItem {
-        color: #191919;
-        } 
-        .itemHighlighted {
-        background-color: #ADD6FF;       
-        }
         .dropbox
         {
             width:100%;
@@ -105,9 +87,5 @@
             
         }
       
-<<<<<<< HEAD
-        }
-=======
         }
         
->>>>>>> ce05942edd3cddc9b37042a84587f601c0553662

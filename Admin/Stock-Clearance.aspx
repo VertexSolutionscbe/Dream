@@ -35,6 +35,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+           <link href="css1/Stock-Clearancecss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,99 +44,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <style>
-            .red
-            {
-                text-align:center;
-            }
-            .goo
-            {
-               color:#13c4a5;
-            }
-            .goo:hover
-            {
-                color:#3a5a7a;
-            }
-            .color
-            {
-                color:#555555;
-                height:30px;
-            }
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
-        font-size:16px;
-        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
-   
- }
-        .gvwCasesPager
-        {
-           
-          color:black;
-          margin-right:20px;
-          text-align:right;
-          padding:20px;
-        }
-        .gvwCasesPager a
-            {
-               
-                margin-left:10px;
-                margin-right:10px;
-                font-size:20px;
-                
-                 padding:10px;
-                
-              
-              
-            }
-
-         .dropbox1
-        {
-            width:10%;
-            height:30px;
-           
-           
-            
-        }
-        
-        .see
-        {
-           height:400px; 
-           margin-top:-60px;
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-         .see2
-        {
-          
-            margin-left:-15px;
-            margin-bottom:30px;
-        }
-        
-          @media (max-width: 767px)
-        {
-             .see
-        {
-           height:400px; 
-           margin-top:-10px;
-        }
-         .see1
-        {
-            margin-top:-40px;
-        }
-         .see2
-        {
-            margin-top:50px;
-            
-        }
-      
-        }
-        
-        </style>
+       
     </head>
     <body>
         <!-- Static navbar -->
