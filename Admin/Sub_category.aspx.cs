@@ -45,7 +45,8 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         ImageButton IMG = (ImageButton)sender;
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
         Label29.Text = ROW.Cells[1].Text;
-        TextBox16.Text = ROW.Cells[2].Text;
+        Label3.Text = ROW.Cells[2].Text;
+        TextBox16.Text = ROW.Cells[3].Text;
        
         this.ModalPopupExtender3.Show();
     }
@@ -57,7 +58,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update subcategory set subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update subcategory set category_name='" + HttpUtility.HtmlDecode(Label3.Text) + "', subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -121,11 +122,12 @@ public partial class Admin_Sub_category : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id,@Com_Id)", CON);
+        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id,@Com_Id,@category_name)", CON);
         cmd.Parameters.AddWithValue("@subcategory_id", Label1.Text);
         cmd.Parameters.AddWithValue("@subcategoryname", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@category_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
         cmd.Parameters.AddWithValue("@Com_Id", company_id);
+        cmd.Parameters.AddWithValue("@category_name", DropDownList3.SelectedItem.Text);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();

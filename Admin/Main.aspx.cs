@@ -23,7 +23,7 @@ public partial class Admin_Main : System.Web.UI.Page
         if (!IsPostBack)
         {
             TextBox3.Focus();
-            this.Form.DefaultButton = Button1.UniqueID;
+           
           
             getinvoiceno();
             show_category();

@@ -30,7 +30,7 @@ public partial class Loginrabbit : System.Web.UI.Page
             string name = dr1["user_name"].ToString();
             string password = dr1["password"].ToString();
             string role = dr1["Role"].ToString();
-            string Role0 = "Adminuser";
+            string Role0 = "Superuser";
             if (this.TextBox1.Text.Trim() == name
            && this.TextBox2.Text.Trim() == password && Role0 == role)
             {

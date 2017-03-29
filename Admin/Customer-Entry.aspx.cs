@@ -23,7 +23,9 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         if (!IsPostBack)
         {
             TextBox3.Attributes.Add("onkeypress", "return controlEnter('" + TextBox2.ClientID + "', event)");
-            TextBox2.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
+            TextBox2.Attributes.Add("onkeypress", "return controlEnter('" + TextBox9.ClientID + "', event)");
+            TextBox9.Attributes.Add("onkeypress", "return controlEnter('" + DropDownList1.ClientID + "', event)");
+            DropDownList1.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
             TextBox4.Attributes.Add("onkeypress", "return controlEnter('" + TextBox5.ClientID + "', event)");
             getinvoiceno();
             show_category();
@@ -47,8 +49,10 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         Label29.Text = ROW.Cells[1].Text;
         TextBox16.Text = ROW.Cells[2].Text;
         TextBox6.Text = ROW.Cells[3].Text;
-        TextBox7.Text = ROW.Cells[4].Text;
-        TextBox8.Text = ROW.Cells[5].Text;
+        TextBox10.Text = ROW.Cells[4].Text;
+        DropDownList3.SelectedItem.Text = ROW.Cells[5].Text;
+        TextBox7.Text = ROW.Cells[6].Text;
+        TextBox8.Text = ROW.Cells[7].Text;
         this.ModalPopupExtender3.Show();
     }
     protected void Button16_Click(object sender, EventArgs e)
@@ -59,7 +63,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "' where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "'", CON);
+        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Mobile_no='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Sale_option='" + HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "' where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "'", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -123,26 +127,35 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Profession,@Customer_Type,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
-        cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
-        cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Entry created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox5.Text = "";
+        if (TextBox3.Text == "")
+        {
+        }
+        else
+        {
+            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Sale_option,@Profession,@Customer_Type,@Com_Id)", CON);
+            cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
+            cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
+            cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
+            cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox9.Text));
+            cmd.Parameters.AddWithValue("@Sale_option", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
+            cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
+            cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
+            cmd.Parameters.AddWithValue("@Com_Id", company_id);
+            CON.Open();
+            cmd.ExecuteNonQuery();
+            CON.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Entry created successfully')", true);
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox3.Text = "";
+            TextBox2.Text = "";
+            TextBox4.Text = "";
+            TextBox5.Text = "";
+            TextBox9.Text = "";
+            DropDownList1.SelectedItem.Text = "-Select item-";
+        }
 
     }
 
@@ -152,8 +165,10 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         TextBox2.Text = "";
         TextBox4.Text = "";
         TextBox5.Text = "";
+        TextBox9.Text = "";
         getinvoiceno();
         show_category();
+        DropDownList1.SelectedItem.Text = "-Select item-";
     }
     private void active()
     {

@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Piple - Admin</title>
+        <title>Dream Garments</title>
       
 
               <script type="text/javascript">
@@ -186,7 +186,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Vertex Solutions Pvt Ltd</a>
+                    <a class="navbar-brand" href="#">Dream Garments</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -241,7 +241,7 @@
         </nav>
         <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -275,9 +275,9 @@
                            
 
                              <li>
-                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase Entry </span><span class="fa arrow"></span></a>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Purchase_entry.aspx">Purchase Entry</a></li>
+                                    <li><a href="Purchase_entry.aspx">Entry</a></li>
                            </ul>
                           
                                
@@ -285,40 +285,48 @@
                              <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Stock_Inventory.aspx">Inventory</a></li>
+                                    <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
                            </ul>
                           
                                
                             </li>
                               <li>
-                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                             
                              <li>
-                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                                    <li><a href="Vendor.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff Entry </span><span class="fa arrow"></span></a>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
+                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                              <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department Entry </span><span class="fa arrow"></span></a>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Department-Entry.aspx">Department Entry</a></li>
+                                    <li><a href="Department-Entry.aspx">Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Sales_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Sales_entry.aspx">Sales</a></li>
                            </ul>
                           
                                
@@ -566,6 +574,7 @@
            </asp:TemplateField>
          
            <asp:BoundField HeaderText="Sub Category Id" DataField="subcategory_id"  />
+            <asp:BoundField HeaderText="Category Name" DataField="category_name"  />
            <asp:BoundField HeaderText="Sub Category Name" DataField="subcategoryname" />
             <asp:TemplateField>
           <ItemTemplate>
@@ -632,6 +641,12 @@
             <asp:Label ID="Label28" runat="server" Text="SubCategory Id"></asp:Label></td>
         <td>
             <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label2" runat="server" Text="Category Name"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label3" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
         <td>

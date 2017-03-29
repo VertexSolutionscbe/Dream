@@ -3,12 +3,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head runat="server">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Piple - Admin</title>
+        <title>Dream Garments</title>
 
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,8 @@
         .see
         {
            height:500px; 
-           margin-top:-60px;"
+           margin-top:-60px;
+          
         }
         .see1
         {
@@ -66,13 +67,15 @@
         }
         .top
         {
-            float:left; width:8%;
+            float:left; width:20%;
+             padding:10px;
+        margin-bottom:5px;
         }
             @media (max-width: 907px)
         {
              .top
         {
-            float:left; width:10%;
+            float:left; width:20%;
         }
           .see
         {
@@ -125,23 +128,21 @@
                         <span class="search-close"><i class="fa fa-times"></i></span>
                     </form>
                 </div>
-                 <div class="navbar-header">
+                  <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dream Garments Pvt Ltd</a>
+                    <a class="navbar-brand" href="#">Dream Garments</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                            
                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
-
-expanded="false">
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
@@ -171,7 +172,7 @@ expanded="false">
 
                             
                         <li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../img1/default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
                             <ul class="dropdown-menu">
                                 <li><a href="Profile_main.aspx"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="Seetings.aspx"><i class="fa fa-calendar"></i>Settings</a></li>                         
@@ -223,9 +224,10 @@ expanded="false">
                            
 
                              <li>
-                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase Entry </span><span class="fa arrow"></span></a>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Purchase_entry.aspx">Purchase Entry</a></li>
+                                    <li><a href="Purchase_entry.aspx">Entry</a></li>
+                                     <li><a href="">Report</a></li>
                            </ul>
                           
                                
@@ -233,58 +235,59 @@ expanded="false">
                              <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Stock_Inventory.aspx">Inventory</a></li>
+                                    <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
                            </ul>
                           
                                
                             </li>
                               <li>
-                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer Entry </span><span class="fa arrow"></span></a>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                             
                              <li>
-                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Vendor Entry </span><span class="fa arrow"></span></a>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Vendor.aspx">Vendor Entry</a></li>
+                                    <li><a href="Vendor.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff Entry </span><span class="fa arrow"></span></a>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
+                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
                              <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department Entry </span><span class="fa arrow"></span></a>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Department-Entry.aspx">Department Entry</a></li>
+                                    <li><a href="Department-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
-                                  <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales Entry </span><span class="fa arrow"></span></a>
+                             <li>
+                                <a href="Sales_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Sales_entry.aspx">sales entry</a></li>
+                                    <li><a href="Sales_entry.aspx">Sales</a></li>
                            </ul>
                           
                                
-                            </li>           
+                            </li>
+                                            
                         </ul>
 
                     </div>
                 </div>
             </nav>
-
+           
             <div id="wrapper">
                 <div class="content-wrapper container">
                     <div class="row">
@@ -306,47 +309,88 @@ expanded="false">
 
  
    <div class="top">
-<a href="product.aspx"><button type="button" class="btn btn-default2 btn-circle btn-xl"><i class="fa fa-product-hunt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Products</a></div>
+<a href="Main.aspx"><button type="button" class="btn btn-default2 btn-circle btn-xl"><i class="fa fa-product-hunt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Category Entry</a></div>
   <div class="top">
-<a href="Account.aspx"><button type="button" class="btn btn-default1 btn-circle btn-xl"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Accounts</a></div>
+<a href="Sub_category.aspx"><button type="button" class="btn btn-default1 btn-circle btn-xl"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Brand Entry</a></div>
 
    <div class="top">
-<a href="leads.aspx"><button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Leads</a></div>
+<a href="Product_entry.aspx"><button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Product Entry</a></div>
  <div class="top" >
-<a href="Opportunity.aspx"><button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button><br />Opportunities</a></div>
+<a href="Purchase_entry.aspx"><button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button><br />Purchase Entry</a></div>
 <div class="top" >
-<a href="Task.aspx">
-<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check-square-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;Tasks</a></div>
+<a href="Customer-Entry.aspx">
+<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check-square-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;Customer Entry</a></div>
 <div class="top" >
-<a href="Quotes.aspx">
+<a href="Vendor.aspx">
 
-<button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square" aria-hidden="true"></i></button><br />&nbsp;&nbsp;Quotes</a></div>
+<button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square" aria-hidden="true"></i></button><br />&nbsp;&nbsp;Vendor Entry</a></div>
 <div class="top">
-<a href="">
+<a href="Staff-Entry.aspx">
 
-<button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-briefcase" aria-hidden="true"></i></button><br />Sales Orders</a></div>
+<button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-briefcase" aria-hidden="true"></i></button><br />Staff entry</a></div>
 <div class="top" >
-<a href="Ticket.aspx">
+<a href="Sales_entry.aspx">
 
-<button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-ticket" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Tickets</a></div>
+<button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-ticket" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Sales entry</a></div>
 <div class="top" >
 <a href="">
 
 <button type="button" class="btn btn-see btn-circle btn-xl"><i class="fa fa-plus" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</a></div>
 </div>            
+<br />
+<br />
 
+<div>
+<br />
+<asp:Chart ID="Chart1"  runat=server><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
+</div>
 
+<h2 style="margin-top:20px">Product Stock</h2>
                         
-                      
+                    <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
+         Font-Size="16px" 
+           AutoGenerateColumns="False" AllowPaging="True" 
+        onpageindexchanging="GridView1_PageIndexChanging" 
+        onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
+        GridLines="None" PageSize="4">
+       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+       <Columns>
+      
+            <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
+           <asp:BoundField HeaderText="Product Code" DataField="Product_code"  />
+           <asp:BoundField HeaderText="Product Name" DataField="product_name" />
+             <asp:BoundField HeaderText="Barcode" DataField="barcode" />
+              <asp:BoundField HeaderText="MRP" DataField="mrp" />
+               <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" />
+                <asp:BoundField HeaderText="Qty" DataField="qty" />
+              
+       </Columns>
+       <EditRowStyle BackColor="#999999" />
+       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
+       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
+       <PagerSettings FirstPageText="First" LastPageText="Last" />
+       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
+           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
+           HorizontalAlign="Center" />
+       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
+       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+       <SortedAscendingCellStyle BackColor="#E9E7E2" />
+       <SortedAscendingHeaderStyle BackColor="#506C8C" />
+       <SortedDescendingCellStyle BackColor="#FFFDF8" />
+       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+       </asp:GridView>  
 
 
+       </div>
+      
                         
                     </div><!--end .row-->
 
+                    
                   </div>
                   </div>
                   
-
+                  
                    
                            
         </section>

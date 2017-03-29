@@ -113,8 +113,10 @@
 }
 .b .panel {
     border-color: #e3e8ed;
-    background-color:white;
-    margin-top: -20px;
+    background-color:transparent;
+  margin-top:160px;
+
+   
 }
  .panel {
     
@@ -219,7 +221,7 @@
 .panel-heading 
 {
      border-color: #e3e8ed;
-   
+ 
     
     border-bottom: 1px solid transparent;
     border-top-right-radius: 3px;
@@ -231,15 +233,16 @@
    
      display:inline-block;
      float:left;
-  
+       background-image:url('img1.jpg');
+       background-position:center;
     }
     .a
     {
         float:left;
         width:30%;
-    height:100px;
-        background-color:white;
-        font-family:'Open Sans', sans-serif;
+        background-color:transparent;
+       
+  
         
     }
     .b
@@ -248,15 +251,20 @@
          width:40%;
          height:400px;
         
-        
-          margin-top:100px;
+        margin-left:350px;
+          margin-top:200px;
          
+    }
+    .b table
+    {
+        margin-top:70px;
+        
     }
     
     .c
     {
         float:left;
-           width:30%;
+          width:30%;
        
         background-color:white;
     }
@@ -276,11 +284,14 @@
         .a
         {
             width:100%;
-         
+         height:300px;
+      
+        
         }
         .b
         {
             width:100%;
+           
          
         }
         .c
@@ -296,28 +307,31 @@
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
     <div style="float:left;">
-    <img src="logo11.png" width="200" height="60" alt="Vertex Solution">
+    <img src="dream.jpg" width="200" height="60" alt="Dream garments">
  </div>
     <div class="top">
+    <div class="a">
     
-    <div class="a"></div>
-    <div class="b" >
- <div class="panel-heading"  >
-   <img src="logo1.png" width="80" height="60" border="0" alt="Vertex Solution">
-  
-   </div>
+    
+    
+    </div>
+  <br />
+   <br />
+    <br />
      <br />
+      <br />
+  <br />
+  <br />
+    <div class="b" >
+ 
      
 
-     <div>
      
-     
-     </div>
 
-     <div class="panel">
+   
       <table>
       <tr>
-      <td><span style="font-weight:bold">Email</span><span class="star">*</span></td>
+      <td><span style="font-weight:bold;color:white">Email</span><span class="star">*</span></td>
        </tr>
       <tr>
       <td> <asp:TextBox ID="TextBox1" runat="server" CssClass="textbox" 
@@ -326,7 +340,7 @@
       </tr>
      
       <tr>
-      <td><span style="font-weight:bold">Password</span><span class="star">*</span></td>
+      <td><span style="font-weight:bold;color:white">Password</span><span class="star">*</span></td>
       </tr>
       <tr>
       <td>   
@@ -350,9 +364,9 @@
       
       
       </table>
-      </div>
+      
        <p style="text-align:right;margin-right:50px; text-decoration:none;"><a style="text-decoration:none;  color: #656565;" href="">  
-           <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click1">Forgot password?</asp:LinkButton></a></p>
+           <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click1"><span style="color:White">Forgot password?</span></asp:LinkButton></a></p>
     
         <asp:Panel ID="Panel1" runat="server"  BorderColor="#999999" BackColor="White" BorderWidth="1px" CssClass="panelx" style="display:none">
 
@@ -411,7 +425,7 @@
  
      <div style="clear:both; text-align:center;    color: #656565;">
     
-    <p><small>©2014 Vertex Solutions, All Rights Reserved.</small></p>
+    <p><small>©2014 Dreamgarment, All Rights Reserved.</small></p>
     </div>
     </form>
 </body>

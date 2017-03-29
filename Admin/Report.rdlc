@@ -728,8 +728,8 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.17639cm</Top>
         <Left>0.36484cm</Left>
-        <Height>3.10498cm</Height>
-        <Width>34.22248cm</Width>
+        <Height>3.10497cm</Height>
+        <Width>34.22246cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3109,7 +3109,7 @@
       </Style>
     </PageFooter>
     <PageHeight>61.8cm</PageHeight>
-    <PageWidth>39cm</PageWidth>
+    <PageWidth>41cm</PageWidth>
     <LeftMargin>2cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
     <TopMargin>2cm</TopMargin>

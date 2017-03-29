@@ -96,6 +96,11 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         cmd1.ExecuteNonQuery();
         con1.Close();
 
+        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd2 = new SqlCommand("delete from code where code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con2);
+        con2.Open();
+        cmd2.ExecuteNonQuery();
+        con2.Close();
 
         Label31.Text = "Deleted successfuly";
 
@@ -118,9 +123,15 @@ public partial class Admin_Product_entry : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from product_entry where code=" + usrid, con);
+                SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + usrid+"' and and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
+
+                SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd2 = new SqlCommand("delete from code where code='" + usrid + "' and Com_Id='" + company_id + "' ", con2);
+                con2.Open();
+                cmd2.ExecuteNonQuery();
+                con2.Close();
 
             }
         }
@@ -224,11 +235,17 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
+
+        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd2 = new SqlCommand("delete from code where code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con2);
+        con2.Open();
+        cmd2.ExecuteNonQuery();
+        con2.Close();
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Product entry deleted successfully')", true);
 
         BindData();
         show_category();
-       
+        getinvoiceno();
 
 
     }
