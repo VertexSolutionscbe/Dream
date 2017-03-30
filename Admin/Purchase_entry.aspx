@@ -61,6 +61,7 @@
             {
                 text-align:center;
             }
+             
             .red
             {
                 text-align:center;
@@ -292,6 +293,16 @@
                           
                                
                             </li>
+
+                             <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
+                           </ul>
+                          
+                               
+                            </li>
                              <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
@@ -513,9 +524,7 @@
             onrowediting="Gridview1_RowEditing" 
             onrowdatabound="Gridview1_RowDataBound" 
             onselectedindexchanged="Gridview1_SelectedIndexChanged" 
-            onrowupdated="Gridview1_RowUpdated" onload="Gridview1_Load" BackColor="#DEBA84" 
-                              BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-                              CellSpacing="2">
+            onrowupdated="Gridview1_RowUpdated" onload="Gridview1_Load">
             <Columns>
             <asp:BoundField DataField="RowNumber" HeaderText="Row Number"  />
             <asp:TemplateField HeaderText="Product name"  >
@@ -531,23 +540,25 @@
             
             <asp:TemplateField HeaderText="Product Code" >
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="80px" 
+                        ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Barcode">
                 <ItemTemplate>
-                     <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                     <asp:TextBox ID="TextBox3" runat="server" AutoPostBack="true" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                
                     <asp:TemplateField HeaderText="MRP">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="150px" ></asp:TextBox>
+                    <asp:TextBox ID="TextBox5" runat="server" Width="150px" AutoPostBack="true" 
+                        ontextchanged="TextBox5_TextChanged" ></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                    <asp:TemplateField HeaderText="Purchase Price">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox6" runat="server" Width="150px" ></asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" Width="150px" AutoPostBack="true"  ontextchanged="TextBox6_TextChanged" ></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                  
@@ -565,7 +576,7 @@
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Tax Amt">
                 <ItemTemplate>
-             <asp:TextBox ID="TextBox18" runat="server" Width="80px"></asp:TextBox>
+             <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox18_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Total Amt">
@@ -581,13 +592,10 @@
             </asp:TemplateField>
                 
             </Columns>
-                           <EditRowStyle BackColor="#999999" />
+     <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
        <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
-       <PagerSettings FirstPageText="First" LastPageText="Last" />
-       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
-           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
-           HorizontalAlign="Center" />
+       
        <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
        <SortedAscendingCellStyle BackColor="#E9E7E2" />

@@ -462,6 +462,11 @@
               <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Width="20px" Height="20px"></asp:ImageButton>
               </ItemTemplate>
               </asp:TemplateField>
+               <asp:TemplateField>
+              <ItemTemplate>
+             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Admin/show1.png" Width="100px" Height="20px"></asp:ImageButton>
+              </ItemTemplate>
+              </asp:TemplateField>
                  
        </Columns>
        <EditRowStyle BackColor="#999999" />

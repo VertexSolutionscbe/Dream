@@ -471,10 +471,13 @@
  </div>
   <div class="row">
 
-
+  <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+   <ContentTemplate>
     
-   <div class="col-md-4"><h3>Vendor Name : </h3><asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" ></asp:DropDownList>
+   <div class="col-md-4"><h3>staff Name : </h3><asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" onselectedindexchanged="DropDownList2_SelectedIndexChanged" ></asp:DropDownList>
    
+    </ContentTemplate>
+                           </asp:UpdatePanel>
    
    </div>
     

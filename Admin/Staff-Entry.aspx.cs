@@ -38,7 +38,24 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         }
 
     }
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
+
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Emp_Name='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "'   ORDER BY Vendor_Code asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         ImageButton IMG = (ImageButton)sender;
