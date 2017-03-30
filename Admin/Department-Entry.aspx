@@ -546,7 +546,9 @@
     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
    <ContentTemplate>
 
-    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>  
+       <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
+           onclick="Button5_Click"></asp:Button>  
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   

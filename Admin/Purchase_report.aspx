@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Account_ledger.aspx.cs" Inherits="Admin_Account_ledger" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Purchase_report.aspx.cs" Inherits="Admin_Purchase_report" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -35,6 +35,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+        <link href="css1/Stock_Inventorycss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,113 +44,6 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <style>
-            .completionList {
-        border:solid 1px Gray;
-        margin:0px;
-        padding:3px;
-        height: 120px;
-        overflow:auto;
-        background-color:#FAEBD7;     
-        } 
-        .listItem {
-        color: #191919;
-        } 
-        .itemHighlighted {
-        background-color: #ADD6FF;       
-        }
-            .red
-            {
-                text-align:center;
-            }
-            .goo
-            {
-               color:#13c4a5;
-            }
-            .goo:hover
-            {
-                color:#3a5a7a;
-            }
-            .color
-            {
-                color:#555555;
-                height:30px;
-            }
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
-        font-size:16px;
-        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
-   
- }
-        .gvwCasesPager
-        {
-           
-          color:black;
-          margin-right:20px;
-          text-align:right;
-          padding:20px;
-        }
-        .gvwCasesPager a
-            {
-               
-                margin-left:10px;
-                margin-right:10px;
-                font-size:20px;
-                
-                 padding:10px;
-                
-              
-              
-            }
-
-         .dropbox1
-        {
-            width:10%;
-            height:30px;
-           
-           
-            
-        }
-        
-        .see
-        {
-           height:400px; 
-           margin-top:-60px;
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-         .see2
-        {
-          
-            margin-left:-15px;
-            margin-bottom:30px;
-        }
-        
-          @media (max-width: 767px)
-        {
-             .see
-        {
-           height:400px; 
-           margin-top:-10px;
-        }
-         .see1
-        {
-            margin-top:-40px;
-        }
-         .see2
-        {
-            margin-top:50px;
-            
-        }
-      
-        }
-        
-        </style>
     </head>
     <body>
         <!-- Static navbar -->
@@ -239,14 +133,14 @@
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
 
-                            <li>
+                            <li class="active">
                                 <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                               <li>
-                                <a href=""><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
+                            <li>
+                                <a href=""><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Main.aspx">Main Category</a></li>
@@ -268,17 +162,16 @@
                            
 
                              <li>
-                                <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
-                                     <li><a href="">Report</a></li>
                            </ul>
                           
                                
                             </li>
 
-                             <li   class="active">
-                                <a href="Account_ledger.aspx"><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                              <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Account_ledger.aspx">Account ledger</a></li>
                                     <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
@@ -287,7 +180,7 @@
                                
                             </li>
                              <li>
-                                <a href="Stock_Inventory.aspx"><i class="fa fa-clone fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                                <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
                            </ul>
@@ -295,7 +188,7 @@
                                
                             </li>
                               <li>
-                                <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Customer-Entry.aspx">Entry</a></li>
                            </ul>
@@ -304,7 +197,7 @@
                             </li>
                             
                              <li>
-                                <a href="Vendor.aspx"><i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>  <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
+                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Vendor.aspx">Entry</a></li>
                            </ul>
@@ -312,7 +205,7 @@
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Staff-Entry.aspx">Entry</a></li>
                            </ul>
@@ -320,7 +213,7 @@
                                
                             </li>
                              <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
+                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Department-Entry.aspx">Entry</a></li>
                            </ul>
@@ -328,13 +221,14 @@
                                
                             </li>
                              <li>
-                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
+                                <a href="Sales_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
                            </ul>
                           
                                
                             </li>
+                                            
                         </ul>
 
                     </div>
@@ -345,7 +239,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Account Ledger
+                                <h2>Purchase report
                                  </h2>
                              
                              
@@ -374,14 +268,84 @@
                         
  
   <div class="panel panel-default">
- 
+  <div class="panel-body">
+   
 
 
 
-  
+
+   
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  <div class="panel-body">
+   <div class="col-md-6">
+
+                             <div class="form-group"><label class="col-lg-3 control-label">Product</label>
+
+                                 
+
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+   <ContentTemplate>
+   
+                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox" ontextchanged="TextBox1_TextChanged" AutoPostBack="true" 
+                                        ></asp:TextBox>
+                                     <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="TextBox1" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
+
+                                      </ContentTemplate>
+                                      </asp:UpdatePanel></div></div></div>
+
+
+
+
+   <div class="col-md-6">
+
+                        <div class="form-group"><label class="col-lg-3 control-label">Supplier</label>
+                           <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+   <ContentTemplate>
+  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
+           ontextchanged="TextBox2_TextChanged"></asp:TextBox>
+             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox2"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
+                        
+                                      </ContentTemplate>
+                                      </asp:UpdatePanel></div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
 <div class="col-lg-12">
 
-
+<h4>Purchase Date  </h4>
 <hr />
 </div>
 
@@ -431,16 +395,43 @@
 
 
 
+<div class="panel-body">
+   <div class="col-md-6">
+
+                             <div class="form-group"><label class="col-lg-3 control-label">purchase Invoice No</label>
+
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+   <ContentTemplate>
+  
+                                    <asp:TextBox ID="TextBox5" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
+                                        ></asp:TextBox>
+                                     
+                                      </ContentTemplate>
+                                      </asp:UpdatePanel></div></div></div>
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
 </div>
-</div>
 
 
 
 
 
-
-
-
+</div></div>
 
 <div class="container">
 
@@ -452,12 +443,32 @@
    
  <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
          Font-Size="16px" 
-            AllowPaging="True" 
+           AutoGenerateColumns="False" AllowPaging="True" 
         onpageindexchanging="GridView1_PageIndexChanging" 
         onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
         GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+       <Columns>
       
+               <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
+           <asp:BoundField HeaderText="Date" DataField="date"  />
+           <asp:BoundField HeaderText="Supplier" DataField="Supplier" />
+             <asp:BoundField HeaderText="Total amount" DataField="Grand__total" />
+            
+              <asp:BoundField HeaderText="Paid Amount" DataField="paid_amount" />
+               <asp:BoundField HeaderText="Pending amount" DataField="pending_amount" />
+              <asp:TemplateField>
+              <ItemTemplate>
+              <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Width="20px" Height="20px"></asp:ImageButton>
+              </ItemTemplate>
+              </asp:TemplateField>
+               <asp:TemplateField>
+              <ItemTemplate>
+             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Admin/show1.png" Width="100px" Height="20px"></asp:ImageButton>
+              </ItemTemplate>
+              </asp:TemplateField>
+                 
+       </Columns>
        <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
        <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
@@ -476,8 +487,11 @@
         </ContentTemplate>
                                      <Triggers>
               
-              
-                    
+                  <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
+                     <asp:AsyncPostBackTrigger ControlID="TextBox2" EventName="TextChanged"  />
+                     
+                        <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
+                   
                   
                   </Triggers>
               
@@ -485,20 +499,12 @@
                
               
                            </asp:UpdatePanel>
-                           <asp:Button ID="Button1" runat="server" 
-           Text="Export to excel" onclick="Button1_Click"></asp:Button>
+</div></div></div></div>
 
 
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
+
+</div></div></div></div></div></div>
+
                 
                    
                   

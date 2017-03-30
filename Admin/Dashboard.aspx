@@ -147,7 +147,7 @@
                                 <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
-                                     <li><a href="">Report</a></li>
+                                     <li><a href="Purchase_report.aspx">Report</a></li>
                            </ul>
                           
                                

@@ -463,7 +463,7 @@
                         </div>
                         <br />
                         <br />
-                          <div class="panel panel-default">
+                                                  <div class="panel panel-default">
   <div class="panel-body">
   <div class="col-md-12">
   <br /> <div class="row">
@@ -475,9 +475,9 @@
 
 
     
-   <div class="col-md-4"><h3>Staff Name : </h3><asp:DropDownList ID="DropDownList2" 
-           runat="server"  CssClass="selectpicker" data-style="btn-primary1" 
-           data-width="100%" AutoPostBack="true" 
+   <div class="col-md-4"><h3>Staff Name</h3>
+       <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" 
+           data-style="btn-primary1" data-width="100%" AutoPostBack="true" 
            onselectedindexchanged="DropDownList2_SelectedIndexChanged" ></asp:DropDownList>
    
    
@@ -497,7 +497,6 @@
                                 </div>
                                  
                             </div><!-- End .panel -->
-
                      
                      <br />
                    
@@ -612,6 +611,10 @@
    <ContentTemplate>
 
     <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+        
+        <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
+           onclick="Button5_Click"></asp:Button>
+        
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   

@@ -666,6 +666,11 @@
      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
     <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+       
+       <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
+           onclick="Button5_Click"></asp:Button>
+       
+       
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   
@@ -734,28 +739,29 @@
            <asp:DropDownList ID="DropDownList3" runat="server"></asp:DropDownList></td>
         </tr>
         
-        <td>
-            <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-            
-            <asp:Button ID="Button16" runat="server" Text="Update" onclick="Button16_Click" 
-                    style="height: 26px" />
-            </ContentTemplate>
-            </asp:UpdatePanel>
-            </td>
-        <td>
-         <asp:UpdatePanel ID="UpdatePanel11" runat="server">
-      <ContentTemplate>
-            <asp:Button ID="Button17" runat="server" Text="Delete" 
-                onclick="Button17_Click" />&nbsp;&nbsp;&nbsp;
-                 </ContentTemplate>
-        
-          </asp:UpdatePanel>
-                <asp:Label ID="Label31" runat="server" Text=""></asp:Label></td>
-                
                     
        
         </tr>
+            <tr>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:Button ID="Button16" runat="server" onclick="Button16_Click" 
+                                style="height: 26px" Text="Update" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                        <ContentTemplate>
+                            <asp:Button ID="Button17" runat="server" onclick="Button17_Click" 
+                                Text="Delete" />
+                            &nbsp;&nbsp;&nbsp;
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:Label ID="Label31" runat="server" Text=""></asp:Label>
+                </td>
+            </tr>
         </table>
        
 

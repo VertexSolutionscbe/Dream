@@ -259,7 +259,7 @@
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                        <li>
+                           <li>
                                 <a href=""><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
@@ -341,7 +341,7 @@
                           
                                
                             </li>
-                             <li  class="active">
+                             <li class="active">
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
@@ -349,6 +349,7 @@
                           
                                
                             </li>
+                                            
                         </ul>
 
                     </div>

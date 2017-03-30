@@ -275,11 +275,14 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' ORDER BY Vendor_Code asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' and and Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -429,5 +432,16 @@ public partial class Admin_Vendor : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
     }
 }

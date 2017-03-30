@@ -14,8 +14,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
-
-public partial class Admin_Account_ledger : System.Web.UI.Page
+public partial class Admin_Purchase_report : System.Web.UI.Page
 {
     int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
@@ -30,13 +29,12 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
             active();
             created();
-          
-        
+           
 
 
         }
     }
-    private void active()
+     private void active()
     {
 
     }
@@ -149,23 +147,26 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     private void show_category()
     {
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a  group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a  group by date,status,amount,value", con1);
+       
+    }
+    protected void BindData()
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from purchase_entry where Com_Id='" + company_id + "' ORDER BY purchase_invoice asc", con);
         DataTable dt1 = new DataTable();
-        con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
-    }
-    protected void BindData()
-    {
-        
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
-
+       
 
 
     }
@@ -180,11 +181,11 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
         {
-
+            
+            }
         }
-    }
-
-
+    
+    
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
         FormsAuthentication.SignOut();
@@ -208,17 +209,17 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     }
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-
+       
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
+       
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
 
     }
-
+   
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -227,17 +228,23 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
-       
+        
     }
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
-        
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from purchase_entry where Supplier='" + TextBox2.Text + "' ORDER BY purchase_invoice asc", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
        
 
-
+       
 
     }
     protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
@@ -247,7 +254,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date='" + TextBox3.Text + "' group by date,status,amount,value", con1);
+        SqlCommand CMD = new SqlCommand("select * from purchase_entry where date='" + TextBox3.Text + "' ORDER BY purchase_invoice asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -258,7 +265,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "'   group by date,status,amount,value", con1);
+        SqlCommand CMD = new SqlCommand("select * from purchase_entry where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' ORDER BY purchase_invoice asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -268,22 +275,11 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     }
     protected void TextBox6_TextChanged(object sender, EventArgs e)
     {
-       
+        
     }
-    protected void Button1_Click(object sender, EventArgs e)
+
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
-        Response.ContentType = "application/excel";
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        HtmlTextWriter htw = new HtmlTextWriter(sw);
-        GridView1.RenderControl(htw);
-        Response.Write(sw.ToString());
-        Response.End();
-    }
-    public override void VerifyRenderingInServerForm(Control control)
-    {
-        /*Tell the compiler that the control is rendered
-         * explicitly by overriding the VerifyRenderingInServerForm event.*/
+      
     }
 }

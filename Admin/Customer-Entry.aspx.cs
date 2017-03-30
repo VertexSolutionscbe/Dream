@@ -333,4 +333,15 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         GridView1.DataBind();
     
     }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
+    }
 }
