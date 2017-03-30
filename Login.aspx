@@ -235,6 +235,7 @@
      float:left;
        background-image:url('img1.jpg');
        background-position:center;
+       background-repeat:no-repeat;
     }
     .a
     {
@@ -249,15 +250,15 @@
     {
         float:left;
          width:40%;
-         height:400px;
+         height:100px;
         
-        margin-left:350px;
+        margin-left:400px;
           margin-top:200px;
          
     }
     .b table
     {
-        margin-top:70px;
+         margin-top:-100px;
         
     }
     

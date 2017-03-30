@@ -34,6 +34,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+                <link href="css1/Seetingscss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,179 +42,7 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-       
-        <style>
-            .grid
-            {
-                height:200px; overflow:scroll; font-size:16px;
-            }
-            .edit
-            {
-                width:30px;
-                height:30px;
-            }
-              .delete
-            {
-                width:20px;
-                height:20px;
-            }
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
    
-   
-   
-   
-    
-  
-  
-           
-        }
-        
-         .dropbox1
-        {
-            width:30%;
-            height:30px;
-        }
-        .see
-        {
-           height:400px; 
-           margin-top:-60px;"
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-        
-        
-          @media (max-width: 767px)
-        {
-       
-             .see
-        {
-           height:400px; 
-          
-        }
-        .tablestyle
-        {
-            width:100%;
-           
-        }
-        .tablestyle1
-        {
-            width:100%;
-           
-           
-        }
-         .toop
-        {
-            background-color:	#FFEFD5;border: 1px solid #f2f2f2;width:100%; 
-        }
-       
-         .see1
-        {
-            margin-top:-40px;
-        }
-         .see2
-        {
-            margin-top:40px;
-        }
-      
-        }
-        
-        </style>
-        <style>
-             
-        .text1
-{
-    
-    width:200px;
-    height:25px;
-    
-}
-.dropbox
-{
-     width:200px;
-    height:30px;
-   
-}
-.buttonbox
-{
-    
-    font-size:18px;
-    
-}
-        .main
-        {
-            width:100%;
-            position:absolute;
-            margin-bottom:100px;
-        }
-        .left 
-        {
-            width:18%;
-            float:left;
-         
-             margin-top:24px;
-             background-color: #282f33;
-         
-           
-     
-        }
-        .right
-        {
-            width:82%;
-            float:left;
-             margin-top:50px;
-             border:solid 1px #d3d3d3;
-        margin-left:245px;
-            background-color:#FFFFFF;
-        }
-        .tablestyle
-        {
-            width:100%;
-             padding:10px;
-        }
-        .tablestyle1
-        {
-            width:25%;
-            float:left;
-           
-        }
-        .toop
-        {
-                border: 1px solid #e6e6e6;
-                 font-family: 'Roboto', sans-serif;
-                 font-weight:600;
-            background-color:#FFEFD5;padding-left:5px;padding-top:10px;padding-bottom:10px; background-color:#f5f6f7; width:100%;  margin-top:20px; text-align:center; font-size:16px;
-        }
-         .tablestyle2
-        {
-            width:25%;
-            float:left; 
-        }
-         .tablestyle3
-        {
-            width:25%;
-            float:left;
-           
-        }
-         .tablestyle4
-        {
-            width:25%;
-            float:left;
-           
-        }
-        .tablestyle5
-        {
-            width:25%;
-            float:left;
-            padding:10px;
-           
-        }
-        </style>
          <script>
 
              $(document).ready(function () {
@@ -509,29 +338,30 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                           
-                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-
-
-expanded="false">
+                           <li class="dropdown">
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
+                                <li><a href="Main.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Category</a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product</a></li>
+                                <li><a href="Sub_category.aspx"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sub Category </a></li>
                                  <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Accounts</a></li>
+                                <li><a href="Product_entry.aspx"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product Entry </a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Task</a></li>
+                                <li><a href="Purchase_entry.aspx"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Purchase Entry </a></li>
                                   <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-edit"></i> &nbsp;&nbsp&nbsp;Leads</a></li>
+                                <li><a href="Stock_Inventory.aspx"><i class="fa fa-edit"></i> &nbsp;&nbsp&nbsp;Stock / Inventory </a></li>
                                  <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  &nbsp;&nbsp&nbsp;Quotes</a></li>
+                                <li><a href="Customer-Entry.aspx"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  &nbsp;&nbsp&nbsp;New Customer Entry</a></li>
+
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> &nbsp;&nbsp&nbsp;Opportunities</a></li>
+                                <li><a href="Vendor.aspx"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> &nbsp;&nbsp&nbsp;Supplier Entry </a></li>
                                
                                   <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Ticket</a></li>
+                                <li><a href="Department-Entry.aspx"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;New Department Entry  </a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="Sales_entry.aspx"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sales Entry </a></li>
+                               
                             </ul>
                         </li>
                     </ul>
@@ -598,6 +428,16 @@ expanded="false">
                                 <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+
+                              <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
                            </ul>
                           
                                

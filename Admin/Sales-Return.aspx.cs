@@ -42,7 +42,7 @@ public partial class Admin_Sales_Return : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
 
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -60,7 +60,7 @@ public partial class Admin_Sales_Return : System.Web.UI.Page
         CON.Close();
 
 
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -130,7 +130,7 @@ public partial class Admin_Sales_Return : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }

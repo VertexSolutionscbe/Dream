@@ -64,7 +64,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void Button16_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -85,7 +85,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void Button17_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -154,7 +154,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     private void SaveDetail(GridViewRow row)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -207,7 +207,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -223,7 +223,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
@@ -441,7 +441,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
        
         TextBox4.Text = "";
 
-        if (Session["company_id"] != "")
+        if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
