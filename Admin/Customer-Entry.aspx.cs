@@ -213,14 +213,15 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
+
         con.Open();
+        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         cmd.ExecuteNonQuery();
         con.Close();
+
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Details deleted successfully')", true);
 
         BindData();
@@ -315,6 +316,21 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
+      
+    }
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+    
 
+
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from Customer_Entry where Custom_Code='" + DropDownList2.SelectedItem.Value + "' ORDER BY Custom_Code asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    
     }
 }
