@@ -295,7 +295,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                     //extract the TextBox values
                     TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBox1");
                     TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[2].FindControl("TextBox2");
-
+                    TextBox box3 = (TextBox)Gridview1.Rows[rowIndex].Cells[3].FindControl("TextBox3");
                     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                     con.Open();
@@ -315,6 +315,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                     con.Close();
                    
                     rowIndex++;
+                    box3.Focus();
                 }
 
             }
@@ -891,10 +892,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
    
    
-    protected void TextBox6_TextChanged(object sender, EventArgs e)
-    {
-        
-    }
+    
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
       
@@ -932,11 +930,12 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                     TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[5].FindControl("TextBox6");
                     TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[6].FindControl("TextBox16");
                     TextBox box3 = (TextBox)Gridview1.Rows[rowIndex].Cells[9].FindControl("TextBox19");
-
+                    TextBox box4 = (TextBox)Gridview1.Rows[rowIndex].Cells[7].FindControl("TextBox17");
                     int a =Convert.ToInt32( box1.Text) *Convert.ToInt32( box2.Text);
                     box3.Text = a.ToString();
 
                     rowIndex++;
+                    box4.Focus();
                 }
 
             }
@@ -966,7 +965,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
                     box1.Text = string.Format("{0:0.00}", (A + total)).ToString();
 
                     rowIndex++;
-                    
+                    box3.Focus();
                 }
 
             }
@@ -1029,5 +1028,101 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         }
         catch (Exception er)
         { }
+    }
+    protected void TextBox2_TextChanged(object sender, System.EventArgs e)
+    {
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[3].FindControl("TextBox3");
+                    
+                  
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+    }
+    protected void TextBox3_TextChanged(object sender, System.EventArgs e)
+    {
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[4].FindControl("TextBox5");
+
+
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+    }
+    protected void TextBox5_TextChanged(object sender, System.EventArgs e)
+    {
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[5].FindControl("TextBox6");
+
+
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+    }
+    protected void TextBox6_TextChanged(object sender, System.EventArgs e)
+    {
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[6].FindControl("TextBox16");
+
+
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+    }
+    protected void TextBox18_TextChanged(object sender, System.EventArgs e)
+    {
+        AddNewRowToGrid();
     }
 }

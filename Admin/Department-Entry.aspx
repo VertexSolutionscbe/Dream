@@ -132,14 +132,14 @@
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
 
-                            <li class="active">
+                            <li>
                                 <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
                             <li>
-                                <a href=""><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
+                                <a href=""><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Main.aspx">Main Category</a></li>
@@ -161,16 +161,17 @@
                            
 
                              <li>
-                                <a href="Purchase_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
+                                <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
+                                     <li><a href="">Report</a></li>
                            </ul>
                           
                                
                             </li>
 
-                              <li>
-                                <a href="Account_ledger.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                             <li>
+                                <a href="Account_ledger.aspx"><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Account_ledger.aspx">Account ledger</a></li>
                                     <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
@@ -179,7 +180,7 @@
                                
                             </li>
                              <li>
-                                <a href="Stock_Inventory.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                                <a href="Stock_Inventory.aspx"><i class="fa fa-clone fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
                            </ul>
@@ -187,7 +188,7 @@
                                
                             </li>
                               <li>
-                                <a href="Customer-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
+                                <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Customer-Entry.aspx">Entry</a></li>
                            </ul>
@@ -195,8 +196,8 @@
                                
                             </li>
                             
-                              <li>
-                                <a href="Vendor.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
+                             <li>
+                                <a href="Vendor.aspx"><i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>  <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Vendor.aspx">Entry</a></li>
                            </ul>
@@ -204,15 +205,15 @@
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Staff-Entry.aspx">Entry</a></li>
                            </ul>
                           
                                
                             </li>
-                             <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
+                             <li  class="active"> 
+                                <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Department-Entry.aspx">Entry</a></li>
                            </ul>
@@ -220,14 +221,13 @@
                                
                             </li>
                              <li>
-                                <a href="Sales_entry.aspx"><i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
+                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
                            </ul>
                           
                                
                             </li>
-                                            
                         </ul>
 
                     </div>
@@ -414,7 +414,10 @@
 
 
     
-   <div class="col-md-4"><h3>Department Name : </h3><asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" data-style="btn-primary1" data-width="100%" AutoPostBack="true" ></asp:DropDownList>
+   <div class="col-md-4"><h3>Department Name : </h3>
+       <asp:DropDownList ID="DropDownList2" runat="server"  CssClass="selectpicker" 
+           data-style="btn-primary1" data-width="100%" AutoPostBack="true" 
+           onselectedindexchanged="DropDownList2_SelectedIndexChanged" ></asp:DropDownList>
    
    
    </div>
@@ -543,7 +546,9 @@
     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
    <ContentTemplate>
 
-    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>  
+       <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
+           onclick="Button5_Click"></asp:Button>  
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   

@@ -278,4 +278,8 @@ public partial class Admin_Purchase_report : System.Web.UI.Page
         
     }
 
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    {
+      
+    }
 }

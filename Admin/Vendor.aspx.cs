@@ -87,7 +87,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from Vendor_Code where Vendor_Code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from Vendor where Vendor_Code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -275,11 +275,14 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' ORDER BY Vendor_Code asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' and and Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -328,10 +331,12 @@ public partial class Admin_Vendor : System.Web.UI.Page
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
+
         con.Open();
+        SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         cmd.ExecuteNonQuery();
         con.Close();
+       
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Vendor deleted successfully')", true);
 
         BindData();
@@ -427,5 +432,16 @@ public partial class Admin_Vendor : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
     }
 }
