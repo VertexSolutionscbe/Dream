@@ -268,6 +268,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@date", TextBox8.Text);
         cmd.Parameters.AddWithValue("@customer_name", TextBox13.Text);
         cmd.Parameters.AddWithValue("@customer_Address", TextBox14.Text);
+        cmd.Parameters.AddWithValue("@Mobile_no", TextBox6.Text);
         cmd.Parameters.AddWithValue("@staff_name", DropDownList3.SelectedItem.Text);
         cmd.Parameters.AddWithValue("@total_qty", TextBox2.Text);
         cmd.Parameters.AddWithValue("@total_amount", TextBox10.Text);
@@ -304,7 +305,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
 
 
-       Response.Redirect("SALES_REPORT_VIEW.aspx");
+       Response.Redirect("Sales_report.aspx");
      
     }
     private void SaveDetail(GridViewRow row)
@@ -313,16 +314,20 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@qty,@total_amount,@size)", CON);
+        SqlCommand cmd = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@size,@color,@qty,@dis_per,@dis_amount,@total_amount)", CON);
         cmd.Parameters.AddWithValue("@invoice_no", Label1.Text);
-        cmd.Parameters.AddWithValue("@barcode", row.Cells[0].Text);
-        cmd.Parameters.AddWithValue("@Product_code", row.Cells[1].Text);
-        cmd.Parameters.AddWithValue("@product_name", row.Cells[1].Text);
+        cmd.Parameters.AddWithValue("@barcode", row.Cells[1].Text);
+        cmd.Parameters.AddWithValue("@Product_code", row.Cells[3].Text);
+        cmd.Parameters.AddWithValue("@product_name", row.Cells[2].Text);
 
-        cmd.Parameters.AddWithValue("@mrp", row.Cells[3].Text);
-        cmd.Parameters.AddWithValue("@qty", row.Cells[4].Text);
-        cmd.Parameters.AddWithValue("@total_amount", row.Cells[5].Text);
-        cmd.Parameters.AddWithValue("@size", row.Cells[2].Text);
+        cmd.Parameters.AddWithValue("@mrp", row.Cells[4].Text);
+        cmd.Parameters.AddWithValue("@size", row.Cells[5].Text);
+        cmd.Parameters.AddWithValue("@color", row.Cells[6].Text);
+        cmd.Parameters.AddWithValue("@qty", row.Cells[7].Text);
+        cmd.Parameters.AddWithValue("@dis_per", row.Cells[8].Text);
+        cmd.Parameters.AddWithValue("@dis_amount", row.Cells[9].Text);
+        cmd.Parameters.AddWithValue("@total_amount", row.Cells[10].Text);
+      
       
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -330,13 +335,13 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
         
             SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + row.Cells[0].Text + "'", CON1);
+            SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + row.Cells[1].Text + "'", CON1);
 
 
        
 
 
-            cmd1.Parameters.AddWithValue("@qty", row.Cells[4].Text);
+            cmd1.Parameters.AddWithValue("@qty", row.Cells[7].Text);
           
             CON1.Open();
             cmd1.ExecuteNonQuery();
@@ -619,7 +624,8 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     //extract the TextBox values
                     TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[1].FindControl("TextBox1");
                     TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[2].FindControl("TextBox2");
-                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox5");
+                    TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox12");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox5");
                     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
                   
                     con.Open();
@@ -634,8 +640,9 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     if (dr.Read())
                     {
                         box2.Text = dr["Product_name"].ToString();
-                    
+                        box4.Text = dr["Product_code"].ToString();
                         float Mop = float.Parse(dr["mrp"].ToString());
+                        
                         float tax = 105;
                         float A = float.Parse(string.Format("{0:0.00}", (Mop / tax)).ToString());
                         float a1 = float.Parse(string.Format("{0:0.00}", (A * 100)).ToString());
@@ -697,9 +704,9 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
                     //extract the TextBox values
-                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
-                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
-                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[10].FindControl("TextBox19");
+                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox17");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox18");
 
                     float tax = float.Parse(box2.Text);
                     float total = float.Parse(box1.Text);

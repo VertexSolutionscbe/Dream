@@ -9,6 +9,6 @@ public partial class Admin_Sales_report : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        TextBox1.Text = Session["Name"].ToString();
     }
 }

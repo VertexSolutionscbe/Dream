@@ -14,16 +14,24 @@
     <div>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" 
-            Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
-            WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
+            Font-Size="8pt" Height="480px" InteractiveDeviceInfos="(Collection)" 
+            WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="712px">
             <LocalReport ReportPath="Admin\Report2.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="DataSet1" />
                 </DataSources>
             </LocalReport>
         </rsweb:ReportViewer>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" 
+            OldValuesParameterFormatString="original_{0}" SelectMethod="GetData" 
+            TypeName="DataSet2TableAdapters.DataTable1TableAdapter">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="TextBox1" Name="x" PropertyName="Text" 
+                    Type="String" />
+            </SelectParameters>
+        </asp:ObjectDataSource>
     </div>
     </form>
 </body>
