@@ -24,8 +24,6 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         {
             TextBox3.Attributes.Add("onkeypress", "return controlEnter('" + TextBox2.ClientID + "', event)");
             TextBox2.Attributes.Add("onkeypress", "return controlEnter('" + TextBox9.ClientID + "', event)");
-            TextBox9.Attributes.Add("onkeypress", "return controlEnter('" + DropDownList1.ClientID + "', event)");
-            DropDownList1.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
             TextBox4.Attributes.Add("onkeypress", "return controlEnter('" + TextBox5.ClientID + "', event)");
             getinvoiceno();
             show_category();
@@ -133,12 +131,11 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         else
         {
             SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Sale_option,@Profession,@Customer_Type,@Com_Id)", CON);
+            SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Profession,@Customer_Type,@Com_Id)", CON);
             cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
             cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
             cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
             cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox9.Text));
-            cmd.Parameters.AddWithValue("@Sale_option", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
             cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
             cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
             cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -154,7 +151,6 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
             TextBox4.Text = "";
             TextBox5.Text = "";
             TextBox9.Text = "";
-            DropDownList1.SelectedItem.Text = "-Select item-";
         }
 
     }
@@ -168,7 +164,6 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         TextBox9.Text = "";
         getinvoiceno();
         show_category();
-        DropDownList1.SelectedItem.Text = "-Select item-";
     }
     private void active()
     {
@@ -343,5 +338,9 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         GridView1.RenderControl(htw);
         Response.Write(sw.ToString());
         Response.End();
+    }
+    protected void TextBox9_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

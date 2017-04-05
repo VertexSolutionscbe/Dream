@@ -17,14 +17,13 @@ using System.Drawing;
 
 public partial class Admin_Customer_Wholesale : System.Web.UI.Page
 {
+    int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             TextBox3.Attributes.Add("onkeypress", "return controlEnter('" + TextBox2.ClientID + "', event)");
             TextBox2.Attributes.Add("onkeypress", "return controlEnter('" + TextBox9.ClientID + "', event)");
-            TextBox9.Attributes.Add("onkeypress", "return controlEnter('" + DropDownList1.ClientID + "', event)");
-            DropDownList1.Attributes.Add("onkeypress", "return controlEnter('" + TextBox4.ClientID + "', event)");
             TextBox4.Attributes.Add("onkeypress", "return controlEnter('" + TextBox5.ClientID + "', event)");
             getinvoiceno();
             show_category();
@@ -40,9 +39,8 @@ public partial class Admin_Customer_Wholesale : System.Web.UI.Page
         }
 
     }
-}
 
-protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         ImageButton IMG = (ImageButton)sender;
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
@@ -138,7 +136,6 @@ protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
             cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
             cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
             cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox9.Text));
-            cmd.Parameters.AddWithValue("@Sale_option", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
             cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
             cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(TextBox5.Text));
             cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -154,7 +151,6 @@ protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
             TextBox4.Text = "";
             TextBox5.Text = "";
             TextBox9.Text = "";
-            DropDownList1.SelectedItem.Text = "-Select item-";
         }
 
     }
@@ -168,7 +164,6 @@ protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         TextBox9.Text = "";
         getinvoiceno();
         show_category();
-        DropDownList1.SelectedItem.Text = "-Select item-";
     }
     private void active()
     {
@@ -317,3 +312,5 @@ protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
 
     }
+
+}
