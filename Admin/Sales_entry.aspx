@@ -546,7 +546,11 @@
                         ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-            
+             <asp:TemplateField HeaderText="Product Code" >
+                <ItemTemplate>
+                   <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
                
                     <asp:TemplateField HeaderText="MRP">
                 <ItemTemplate>
@@ -828,7 +832,7 @@
 
 
                         
-                    </div><!--end .row-->
+    </div><!--end .row-->
 
                   
                   

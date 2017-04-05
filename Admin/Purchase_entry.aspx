@@ -540,59 +540,59 @@
             <asp:BoundField DataField="RowNumber" HeaderText="Row Number"  />
             <asp:TemplateField HeaderText="Product name"  >
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" Width="150px" 
+                    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" Width="150px" Height="40px"
                         ontextchanged="TextBox1_TextChanged"></asp:TextBox>
-                     <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="-100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
+                     <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="0" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
       </asp:AutoCompleteExtender>
                 </ItemTemplate>
             </asp:TemplateField>
             
-            <asp:TemplateField HeaderText="Product Code" >
+            <asp:TemplateField HeaderText="Product Code">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="80px" 
+                    <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="80px" Height="40px" 
                         ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Barcode">
                 <ItemTemplate>
-                     <asp:TextBox ID="TextBox3" runat="server" AutoPostBack="true" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
+                     <asp:TextBox ID="TextBox3" runat="server" AutoPostBack="true" Height="40px" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                
                     <asp:TemplateField HeaderText="MRP">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="150px" AutoPostBack="true" 
+                    <asp:TextBox ID="TextBox5" runat="server" Width="150px" AutoPostBack="true" Height="40px" 
                         ontextchanged="TextBox5_TextChanged" ></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                    <asp:TemplateField HeaderText="Purchase Price">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox6" runat="server" Width="150px" AutoPostBack="true"  ontextchanged="TextBox6_TextChanged" ></asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" Width="150px" AutoPostBack="true" Height="40px"  ontextchanged="TextBox6_TextChanged" ></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                  
                   <asp:TemplateField HeaderText="Qty">
                 <ItemTemplate>
-                <asp:TextBox ID="TextBox16" runat="server" Width="40px" AutoPostBack="true" 
+                <asp:TextBox ID="TextBox16" runat="server" Width="40px" AutoPostBack="true" Height="40px" 
                         ontextchanged="TextBox16_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                 </asp:TemplateField>
                   <asp:TemplateField HeaderText="Tax %">
                 <ItemTemplate>
                <asp:TextBox ID="TextBox17" runat="server" Width="40px" 
-                        ontextchanged="TextBox17_TextChanged" AutoPostBack="true"></asp:TextBox>
+                        ontextchanged="TextBox17_TextChanged" AutoPostBack="true" Height="40px"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Tax Amt">
                 <ItemTemplate>
-             <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox18_TextChanged"></asp:TextBox>
+             <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" Height="40px" ontextchanged="TextBox18_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Total Amt">
                 <ItemTemplate>
-           <asp:TextBox ID="TextBox19" runat="server"  Width="100px" 
+           <asp:TextBox ID="TextBox19" runat="server"  Width="100px" Height="40px" 
                         ontextchanged="TextBox19_TextChanged" AutoPostBack="true"></asp:TextBox>
                 </ItemTemplate>
                 <FooterStyle HorizontalAlign="Right" />
@@ -616,6 +616,11 @@
         </asp:gridview>
         </div>
           </ContentTemplate>
+           <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Gridview1"  />
+                
+                
+                </Triggers>
                            </asp:UpdatePanel>
        
     </div>
