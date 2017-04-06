@@ -68,8 +68,7 @@
 
     </head>
     <body>
-        <!-- Static navbar -->
- <form id="form1" runat="server">
+        <form id="form1" runat="server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
         
 </asp:ToolkitScriptManager>
@@ -213,11 +212,11 @@
                               <li  class="active">
                                 <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Retail</a></li>
+                                    <li><a href="Customer Wholesale.aspx">Wholesale</a></li>
                            </ul>
                           
                                
-                            </li>
                             
                              <li>
                                 <a href="Vendor.aspx"><i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>  <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
@@ -354,7 +353,7 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel8" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox9" runat="server" class="form-control input-x2 dropbox" 
+                                    <asp:TextBox ID="TextBox9" runat="server" class="form-control input-x2 dropbox" ontextchanged="TextBox9_TextChanged" 
                                         ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
@@ -368,24 +367,7 @@
                                 
                                 </div>
 
-                                 <div class="form-group"><label class="col-lg-3 control-label">Sales option : </label>
-                              
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-   <ContentTemplate>
-                                  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox">
-                                    <asp:ListItem>-Select Item- </asp:ListItem>
-                                      <asp:ListItem>Retail </asp:ListItem>
-                                      <asp:ListItem>Wholesale</asp:ListItem>
-                                  </asp:DropDownList>
-                                    </ContentTemplate>
-                                     <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
-                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
-                </Triggers>
-                           </asp:UpdatePanel>
-                                    
-                                    </div>
+                                 
                                 
                                 
                                 </div>

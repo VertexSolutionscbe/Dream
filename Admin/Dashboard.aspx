@@ -173,7 +173,10 @@
                               <li>
                                 <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Retail</a></li>
+                           </ul>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer-Entry.aspx">Wholesale</a></li>
                            </ul>
                           
                                
