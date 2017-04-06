@@ -43,12 +43,18 @@
             float:left; width:20%;
              padding:10px;
         margin-bottom:5px;
+         color:White;
+        }
+        .top a
+        {
+            color:White;
         }
             @media (max-width: 907px)
         {
              .top
         {
             float:left; width:20%;
+             color:White;
         }
           .see
         {
@@ -63,6 +69,7 @@
         {
          
             float:left; width:20%;
+            color:White;
         }
              .see
         {

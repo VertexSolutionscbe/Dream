@@ -608,7 +608,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>Dream Garments</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>14pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -617,8 +619,8 @@
           <rd:DefaultName>Textbox12</rd:DefaultName>
           <Top>0.30903cm</Top>
           <Left>8.24653cm</Left>
-          <Height>0.6cm</Height>
-          <Width>3.98167cm</Width>
+          <Height>0.94396cm</Height>
+          <Width>4.64313cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -904,39 +906,10 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.54cm</Height>
+      <Height>6.0325cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="total_amount">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Sum(Fields!total_amount.Value, "DataSet1")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>total_amount</rd:DefaultName>
-          <Top>0.14111cm</Top>
-          <Left>5.48605cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Textbox Name="total_amount1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -948,7 +921,9 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>total_amount1</rd:DefaultName>
@@ -956,7 +931,6 @@
           <Left>14.97417cm</Left>
           <Height>0.6cm</Height>
           <Width>4.03583cm</Width>
-          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -978,7 +952,9 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>grand_total</rd:DefaultName>
@@ -986,7 +962,7 @@
           <Left>14.97417cm</Left>
           <Height>0.6cm</Height>
           <Width>4.03583cm</Width>
-          <ZIndex>2</ZIndex>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1016,7 +992,7 @@
           <Left>3.53285cm</Left>
           <Height>0.6cm</Height>
           <Width>1.81208cm</Width>
-          <ZIndex>3</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1046,7 +1022,7 @@
           <Left>12.37715cm</Left>
           <Height>0.6cm</Height>
           <Width>2.59701cm</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1076,6 +1052,36 @@
           <Left>12.69465cm</Left>
           <Height>0.6cm</Height>
           <Width>2.10312cm</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="total_qty">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Sum(Fields!total_qty.Value, "DataSet1")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>total_qty</rd:DefaultName>
+          <Top>0.17639cm</Top>
+          <Left>5.48605cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.5cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>

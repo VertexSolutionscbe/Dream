@@ -310,7 +310,7 @@ body.mini-navbar .profile-element, body.mini-navbar .nav-label, body.mini-navbar
     transition-property: height, visibility;
 }
 .navbar-aside {
-    background-color:#282f33;
+    background-color:#FFA07A;
     border-color: #282f33;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
@@ -329,7 +329,7 @@ body.mini-navbar .nav>li{
     border-top: 0px;
 }
 .navbar-aside .nav > li > a {
-    color: #a7b1c2;
+    color: white;
     font-weight: 400;
     padding: 7px 10px 7px 10px;
     font-family: 'Roboto', sans-serif;

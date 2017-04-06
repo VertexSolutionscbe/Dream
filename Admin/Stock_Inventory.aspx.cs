@@ -22,12 +22,12 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            BindData();
             getinvoiceno();
             show_category();
             showrating();
-            BindData();
-
+           
+            show_company();
             active();
             created();
             TextBox6.Text = "";
@@ -149,6 +149,26 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
                 return customers;
             }
         }
+    }
+    private void show_company()
+    {
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("Select * from Company_detail ORDER BY com_id asc", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
+
+
+
+
+        DropDownList1.DataSource = ds;
+        DropDownList1.DataTextField = "company_name";
+        DropDownList1.DataValueField = "com_id";
+        DropDownList1.DataBind();
+        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
+        con.Close();
     }
     private void show_category()
     {
@@ -341,5 +361,16 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
         GridView1.DataSource = dt1;
         GridView1.DataBind();
         TextBox6.Text = "Filter by Barcode";
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
     }
 }

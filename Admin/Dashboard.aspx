@@ -223,7 +223,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                            <div class="page-title">
-                                <h2>Dashboard  <small></small></h2>
+                                <h2 style=" color:white">Dashboard  <small></small></h2>
                              
   
 

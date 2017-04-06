@@ -174,11 +174,16 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     private void getinvoiceno()
     {
+
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         int a;
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(category_id) from category";
+        string query = "Select Max(category_id) from category where Com_Id='" + company_id + "' ";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -198,9 +203,12 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     private void show_category()
     {
-       
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from category ORDER BY categoryname asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from category where Com_Id='" + company_id + "' ORDER BY categoryname  asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);

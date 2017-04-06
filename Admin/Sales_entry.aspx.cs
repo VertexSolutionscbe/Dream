@@ -252,18 +252,11 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
 
-        foreach (GridViewRow row in this.Gridview2.Rows)
-        {
-            if (row.RowType == DataControlRowType.DataRow)
-            {
-                this.SaveDetail(row);
-            }
-
-        }
+        
         string ststus="Sales";
         float value=0;
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into sales_entry values(@invoice_no,@date,@customer_name,@customer_Address,@Mobile_no,@staff_namee,@total_qty,@total_amount,@grand_total,@paid_amount,@Pending_amount,@status,@value)", CON);
+        SqlCommand cmd = new SqlCommand("insert into sales_entry values(@invoice_no,@date,@customer_name,@customer_Address,@Mobile_no,@staff_name,@total_qty,@total_amount,@grand_total,@paid_amount,@Pending_amount,@status,@value)", CON);
         cmd.Parameters.AddWithValue("@invoice_no", Label1.Text);
         cmd.Parameters.AddWithValue("@date", TextBox8.Text);
         cmd.Parameters.AddWithValue("@customer_name", TextBox13.Text);
@@ -282,6 +275,71 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         CON.Close();
 
 
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[1].FindControl("TextBox1");
+                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[2].FindControl("TextBox2");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox12");
+
+                    TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox5");
+                    TextBox box5 = (TextBox)Gridview2.Rows[rowIndex].Cells[5].FindControl("TextBox3");
+
+                    TextBox box6 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox4");
+                    TextBox box7 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox16");
+                    TextBox box8 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox17");
+                    TextBox box9 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox18");
+                    TextBox box10 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
+
+                    SqlConnection CON11 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand cmd11 = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@size,@color,@qty,@dis_per,@dis_amount,@total_amount)", CON11);
+                    cmd11.Parameters.AddWithValue("@invoice_no", Label1.Text);
+                    cmd11.Parameters.AddWithValue("@barcode", box1.Text);
+                    cmd11.Parameters.AddWithValue("@Product_code", box2.Text);
+                    cmd11.Parameters.AddWithValue("@product_name", box3.Text);
+
+                    cmd11.Parameters.AddWithValue("@mrp", box4.Text);
+                    cmd11.Parameters.AddWithValue("@size", box5.Text);
+                    cmd11.Parameters.AddWithValue("@color", box6.Text);
+                    cmd11.Parameters.AddWithValue("@qty", box7.Text);
+                    cmd11.Parameters.AddWithValue("@dis_per", box8.Text);
+                    cmd11.Parameters.AddWithValue("@dis_amount", box9.Text);
+                    cmd11.Parameters.AddWithValue("@total_amount", box10.Text);
+
+
+                    CON11.Open();
+                    cmd11.ExecuteNonQuery();
+                    CON11.Close();
+
+
+                    SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + box1.Text + "'", CON1);
+
+
+
+
+
+                    cmd1.Parameters.AddWithValue("@qty", box7.Text);
+
+                    CON1.Open();
+                    cmd1.ExecuteNonQuery();
+                    CON1.Close();
+
+
+
+
+                    rowIndex++;
+                }
+
+            }
+        }
 
 
 
@@ -311,43 +369,8 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     private void SaveDetail(GridViewRow row)
     {
 
-
-
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@size,@color,@qty,@dis_per,@dis_amount,@total_amount)", CON);
-        cmd.Parameters.AddWithValue("@invoice_no", Label1.Text);
-        cmd.Parameters.AddWithValue("@barcode", row.Cells[1].Text);
-        cmd.Parameters.AddWithValue("@Product_code", row.Cells[3].Text);
-        cmd.Parameters.AddWithValue("@product_name", row.Cells[2].Text);
-
-        cmd.Parameters.AddWithValue("@mrp", row.Cells[4].Text);
-        cmd.Parameters.AddWithValue("@size", row.Cells[5].Text);
-        cmd.Parameters.AddWithValue("@color", row.Cells[6].Text);
-        cmd.Parameters.AddWithValue("@qty", row.Cells[7].Text);
-        cmd.Parameters.AddWithValue("@dis_per", row.Cells[8].Text);
-        cmd.Parameters.AddWithValue("@dis_amount", row.Cells[9].Text);
-        cmd.Parameters.AddWithValue("@total_amount", row.Cells[10].Text);
-      
-      
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-
         
-            SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + row.Cells[1].Text + "'", CON1);
-
-
-       
-
-
-            cmd1.Parameters.AddWithValue("@qty", row.Cells[7].Text);
-          
-            CON1.Open();
-            cmd1.ExecuteNonQuery();
-            CON1.Close();
         
-       
 
 
     }

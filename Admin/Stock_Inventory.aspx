@@ -271,6 +271,23 @@
   <div class="panel-body">
    <div class="col-md-6">
 
+    <br /> <div class="form-group"><label class="col-lg-3 control-label">Company Name</label>
+
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+   <ContentTemplate>
+   <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true"
+           class="form-control input-x2 dropbox" onselectedindexchanged="DropDownList1_SelectedIndexChanged" 
+           ></asp:DropDownList>
+           
+
+        
+                                    
+                                      </ContentTemplate>
+                                      </asp:UpdatePanel></div></div>
+                                      </div>
+                                         <div class="col-md-6">
+
                              <br /> <div class="form-group"><label class="col-lg-3 control-label">Category</label>
 
                                     <div class="col-lg-9">
@@ -527,6 +544,7 @@
                        <asp:AsyncPostBackTrigger ControlID="TextBox6" EventName="TextChanged"  />
                         <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
                     <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
+                     <asp:AsyncPostBackTrigger ControlID="DropDownList1" EventName="SelectedIndexChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="DropDownList4" EventName="SelectedIndexChanged"  />
                   </Triggers>
               

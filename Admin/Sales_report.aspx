@@ -20,7 +20,7 @@
             WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="712px">
             <LocalReport ReportPath="Admin\Report2.rdlc">
                 <DataSources>
-                    <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="DataSet1" />
+                    <rsweb:ReportDataSource DataSourceId="ObjectDataSource1" Name="DataSet1" />
                 </DataSources>
             </LocalReport>
         </rsweb:ReportViewer>

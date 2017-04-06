@@ -554,7 +554,7 @@
                
                     <asp:TemplateField HeaderText="MRP">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="150px" ></asp:TextBox>
+                    <asp:TextBox ID="TextBox5" runat="server" Width="70px" ></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                   
