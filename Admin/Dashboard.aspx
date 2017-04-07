@@ -107,8 +107,10 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
+            
         </nav>
-        <section class="page">
+        
+      
 
             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
@@ -135,6 +137,11 @@
                            </ul>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Tax_Entry.aspx">Tax entry</a></li>
+
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Cutomer_type.aspx">Customer Type entry</a></li>
+
                            </ul>
                                
                             </li>
@@ -176,7 +183,7 @@
                                     <li><a href="Customer-Entry.aspx">Retail</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Wholesale</a></li>
+                                    <li><a href="Customer Wholesale.aspx">Wholesale</a></li>
                            </ul>
                           
                                
@@ -191,14 +198,6 @@
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                             <li>
                                 <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Department-Entry.aspx">Entry</a></li>
@@ -207,9 +206,32 @@
                                
                             </li>
                              <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
+                                     
+                           </ul>
+                          
+                               
+                            </li>
+                            
+                             <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                  
+                                     <li><a href="Daily_sales.aspx">day sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                      <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
+                                    <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
+                                     
                            </ul>
                           
                                
@@ -219,18 +241,21 @@
 
                     </div>
                 </div>
+                
+                
             </nav>
-           
+          
+         
             <div id="wrapper">
                 <div class="content-wrapper container">
                     <div class="row">
                         <div class="col-sm-12">
                            <div class="page-title">
-                                <h2 style=" color:white">Dashboard  <small></small></h2>
+                                <h2 style=" color:black">Dashboard  <small></small></h2>
                              
   
 
-
+  
 
                                 
                             </div>
@@ -269,13 +294,22 @@
 <a href="">
 
 <button type="button" class="btn btn-see btn-circle btn-xl"><i class="fa fa-plus" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</a></div>
-</div>            
-<br />
-<br />
 
-<div>
+
 <br />
-<asp:Chart ID="Chart1"  runat=server><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
+<br />
+<div style="width:100%">
+     <div style="float:left; width:50%">
+             <h3 style="clear:both">Purchase Report</h3>
+            <asp:Chart ID="Chart2" width="400px"   runat="server" Palette="Chocolate"><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
+     </div>
+     <div style="float:left; width:50%;">
+                 <h3>Sales report</h3>
+
+              <asp:Chart ID="Chart1" width="400px"   runat="server"><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
+      </div>
+</div>
+
 </div>
 
 <h2 style="margin-top:20px">Product Stock</h2>
@@ -318,7 +352,10 @@
       
                         
                     </div><!--end .row-->
+                   </div>            
 
+
+                    <div>
                     
                   </div>
                   </div>
@@ -326,7 +363,7 @@
                   
                    
                            
-        </section>
+        
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

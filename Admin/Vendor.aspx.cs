@@ -18,7 +18,7 @@ using System.Drawing;
 
 public partial class Admin_Vendor : System.Web.UI.Page
 {
-    int company_id = 0;
+    public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -39,7 +39,10 @@ public partial class Admin_Vendor : System.Web.UI.Page
             created();
             show_vendor();
 
-
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
 
         }
 
@@ -103,6 +106,10 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button14_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         foreach (GridViewRow gvrow in GridView1.Rows)
         {
             //Finiding checkbox control in gridview for particular row
@@ -115,7 +122,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code=" + usrid, con);
+                SqlCommand cmd = new SqlCommand("delete from Vendor where Vendor_Code='"+ usrid+"' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -127,9 +134,12 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     private void show_product()
     {
-
+          if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from product_entry ORDER BY code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from product_entry where Com_Id='" + company_id + "' ORDER BY code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -155,9 +165,12 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
     private void show_vendor()
     {
-
+         if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Vendor ORDER BY Vendor_Code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Vendor where Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -244,9 +257,10 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Mobile_no from Vendor where " +
+                cmd.CommandText = "select Mobile_no from Vendor where Com_Id=@Com_Id and " +
                 "Mobile_no like @Mobile_no + '%'";
                 cmd.Parameters.AddWithValue("@Mobile_no", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id",company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -265,7 +279,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     protected void TextBox15_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Vendor where Mobile_no='" + TextBox15.Text + "'", con1);
+        SqlCommand CMD = new SqlCommand("select * from Vendor where Mobile_no='" + TextBox15.Text + "' and Com_Id='" + company_id + "' ", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -282,7 +296,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' and and Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from Vendor where Vendor_Code='" + DropDownList2.SelectedItem.Value + "' and  Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -351,7 +365,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(Vendor_Code) from Vendor";
+        string query = "Select Max(Vendor_Code) from Vendor where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -373,7 +387,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
     {
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Vendor ORDER BY Vendor_Code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Vendor where Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);

@@ -15,15 +15,16 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
-public partial class Admin_Tax_Entry : System.Web.UI.Page
+public partial class Admin_Staff_wise_report : System.Web.UI.Page
 {
     public static int company_id = 0;
+    float m = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            TextBox3.Focus();
-            this.Form.DefaultButton = Button1.UniqueID;
+            
+
 
             getinvoiceno();
             show_category();
@@ -32,90 +33,38 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
 
             active();
             created();
-
-
             if (Session["company_id"] != null)
             {
                 company_id = Convert.ToInt32(Session["company_id"].ToString());
             }
 
-        }
 
+
+        }
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        ImageButton IMG = (ImageButton)sender;
-        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
-        Label16.Text = ROW.Cells[1].Text;
-        TextBox11.Text = ROW.Cells[2].Text;
-        this.ModalPopupExtender2.Show();
+        
 
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Tax set tax_per='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "'  and Com_Id='" + company_id + "' ", CON);
-
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        Label18.Text = "updated successfuly";
-        this.ModalPopupExtender2.Show();
-        showcustomertype();
-        show_category();
-        BindData();
-        getinvoiceno();
-
+        
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + Label16.Text + "' and Com_Id='" + company_id + "' ", con);
-        con.Open();
-        cmd.ExecuteNonQuery();
-        con.Close();
-        Label18.Text = "Deleted successfuly";
-        BindData();
-
-        getinvoiceno();
-
+       
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+       
 
 
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox3.Text = "";
+       
         getinvoiceno();
         show_category();
     }
@@ -146,14 +95,15 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Tax where Com_Id='" + company_id + "' ORDER BY tax_id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Sales_entry where Com_Id='" + company_id + "' ORDER BY no asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
+
+       
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
@@ -162,15 +112,14 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
         ImageButton img = (ImageButton)sender;
         GridViewRow row = (GridViewRow)img.NamingContainer;
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category deleted successfully')", true);
 
         BindData();
         show_category();
@@ -180,31 +129,8 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     private void getinvoiceno()
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        int a;
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select Max(tax_id) from Tax where Com_Id='" + company_id + "'";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
-        {
-            string val = dr[0].ToString();
-            if (val == "")
-            {
-                Label1.Text = "1";
-            }
-            else
-            {
-                a = Convert.ToInt32(dr[0].ToString());
-                a = a + 1;
-                Label1.Text = a.ToString();
-            }
-        }
+       
     }
     private void show_category()
     {
@@ -213,7 +139,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Tax where Com_Id='" + company_id + "' ORDER BY tax_id asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Staff_entry where Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -221,8 +147,8 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
 
 
         DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "tax_per";
-        DropDownList2.DataValueField = "tax_id";
+        DropDownList2.DataTextField = "Emp_Name";
+        DropDownList2.DataValueField = "Emp_Code";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
@@ -242,6 +168,10 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button11_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         foreach (GridViewRow gvrow in GridView1.Rows)
         {
             //Finiding checkbox control in gridview for particular row
@@ -254,7 +184,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Tax where tax_id='" + usrid+"' and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from category where category_id='" + usrid + "' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -272,10 +202,45 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     {
 
     }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+
+    public static List<string> SearchCustomers2(string prefixText, int count)
+    {
+
+
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+
+
+                cmd.CommandText = "select categoryname from category where  Com_Id=@Com_Id and  " +
+                "categoryname like @categoryname + '%' ";
+                cmd.Parameters.AddWithValue("@categoryname", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["categoryname"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
+    }
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
         BindData();
+
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -283,6 +248,19 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         {
             e.Row.Cells[0].Text = "Page " + (GridView1.PageIndex + 1) + " of " + GridView1.PageCount;
         }
+
+         if (e.Row.RowType == DataControlRowType.DataRow)
+    {
+         Label Salary = (Label)e.Row.FindControl("lblSalary");
+        
+        m = m + float.Parse(Salary.Text);
+       
+    } 
+    if (e.Row.RowType == DataControlRowType.Footer)
+    {
+        Label lblTotalPrice = (Label)e.Row.FindControl("Salary");
+        lblTotalPrice.Text = m.ToString();
+    }
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
@@ -291,5 +269,33 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
 
+    }
+    
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        getstaffwise();
+    }
+
+    private void getstaffwise()
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from sales_entry where staff_name='" + DropDownList2.SelectedItem.Text + "' and date between '" + TextBox1.Text + "' and '"+TextBox2.Text+"' and Com_Id='" + company_id + "' ORDER BY no asc", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+
+       
+    }
+
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+        show_category();
     }
 }

@@ -17,7 +17,7 @@ using System.Drawing;
 
 public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
 {
-    int company_id = 0;
+    public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -31,6 +31,10 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
             active();
             created();
 
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
 
 
 
@@ -68,9 +72,10 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select product_name from product_entry where " +
+                cmd.CommandText = "select product_name from product_entry where Com_Id=@Com_Id and " +
                 "product_name like @product_name + '%'";
                 cmd.Parameters.AddWithValue("@product_name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -98,9 +103,10 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Vendor_Name from Vendor where " +
+                cmd.CommandText = "select Vendor_Name from Vendor where  Com_Id=@Com_Id and " +
                 "Vendor_Name like @Vendor_Name + '%'";
                 cmd.Parameters.AddWithValue("@Vendor_Name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -128,9 +134,10 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select barcode from product_stock where " +
+                cmd.CommandText = "select barcode from product_stock where  Com_Id=@Com_Id and  " +
                 "barcode like @barcode + '%'";
                 cmd.Parameters.AddWithValue("@barcode", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -148,9 +155,13 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
     }
     private void show_category()
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from pay_amount_status ", con1);
+        SqlCommand CMD = new SqlCommand("select * from pay_amount_status where Com_Id='" + company_id + "' ", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -171,17 +182,7 @@ public partial class Admin_Purchase_payment_outstanding : System.Web.UI.Page
     }
     private void getinvoiceno()
     {
-        int a;
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select Max(Emp_Code) from Staff_Entry";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
-        {
-
-        }
+        
     }
 
 

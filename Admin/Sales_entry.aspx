@@ -58,6 +58,7 @@
       .red
             {
                 text-align:center;
+                font-size:15px;
             }
             .goo
             {
@@ -248,18 +249,18 @@
         </nav>
         <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
 
-                            <li>
+                            <li class="active">
                                 <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                           <li>
+                            <li>
                                 <a href=""><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
@@ -273,6 +274,11 @@
                            </ul>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Tax_Entry.aspx">Tax entry</a></li>
+
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Cutomer_type.aspx">Customer Type entry</a></li>
+
                            </ul>
                                
                             </li>
@@ -285,7 +291,7 @@
                                 <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
-                                     <li><a href="">Report</a></li>
+                                     <li><a href="Purchase_report.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -311,7 +317,10 @@
                               <li>
                                 <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Retail</a></li>
+                           </ul>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer Wholesale.aspx">Wholesale</a></li>
                            </ul>
                           
                                
@@ -326,14 +335,6 @@
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                             <li>
                                 <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Department-Entry.aspx">Entry</a></li>
@@ -341,10 +342,32 @@
                           
                                
                             </li>
-                             <li class="active">
+                             <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
+                             <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            <li>
+                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                  
+                                     <li><a href="Daily_sales.aspx">day sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                      <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
+                                    <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
+                                     
                            </ul>
                           
                                
@@ -354,6 +377,7 @@
 
                     </div>
                 </div>
+                
             </nav>
             <div id="wrapper">
                 <div class="content-wrapper container">
@@ -528,8 +552,8 @@
                               BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
                               CellSpacing="2" onload="Gridview2_Load" onprerender="Gridview2_PreRender">
             <Columns>
-            <asp:BoundField DataField="RowNumber" HeaderText="Row Number"  />
-            <asp:TemplateField HeaderText="Barcode"  >
+            <asp:BoundField DataField="RowNumber" HeaderText="S No" HeaderStyle-CssClass="red"  />
+            <asp:TemplateField HeaderText="Barcode" HeaderStyle-CssClass="red"  >
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" Width="200px" ontextchanged="TextBox1_TextChanged" 
                         ></asp:TextBox>
@@ -539,55 +563,55 @@
       </asp:AutoCompleteExtender>
                 </ItemTemplate>
             </asp:TemplateField>
-            
-            <asp:TemplateField HeaderText="Product Name" >
+             
+            <asp:TemplateField HeaderText="Product Name" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="200px" 
                         ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Product Code" >
+             <asp:TemplateField HeaderText="Product Code" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                    <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
                
-                    <asp:TemplateField HeaderText="MRP">
+                    <asp:TemplateField HeaderText="MRP" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Width="70px" ></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                   
-                   <asp:TemplateField HeaderText="Size">
+                   <asp:TemplateField HeaderText="Size" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                    <asp:TextBox ID="TextBox3" runat="server" Width="80px"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
 
-                   <asp:TemplateField HeaderText="Color">
+                   <asp:TemplateField HeaderText="Color" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Width="80px"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                  
-                  <asp:TemplateField HeaderText="Qty">
+                  <asp:TemplateField HeaderText="Qty" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                 <asp:TextBox ID="TextBox16" runat="server" Width="40px" AutoPostBack="true" ontextchanged="TextBox16_TextChanged" 
                         ></asp:TextBox>
                 </ItemTemplate>
                 </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Dis %">
+                  <asp:TemplateField HeaderText="Dis %" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                <asp:TextBox ID="TextBox17" runat="server" Width="80px" 
                          AutoPostBack="true" ontextchanged="TextBox17_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Dis Amt">
+                  <asp:TemplateField HeaderText="Dis Amt" HeaderStyle-CssClass="red">
                 <ItemTemplate>
              <asp:TextBox ID="TextBox18" runat="server" Width="80px"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Total Amt">
+                  <asp:TemplateField HeaderText="Total Amt" HeaderStyle-CssClass="red">
                 <ItemTemplate>
            <asp:TextBox ID="TextBox19" runat="server"  Width="100px" 
                          AutoPostBack="true"></asp:TextBox>

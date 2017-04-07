@@ -18,12 +18,15 @@ using System.Drawing;
 
 public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 {
-    int company_id = 0;
+    public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
             getinvoiceno();
             show_category();
             showrating();
@@ -38,7 +41,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
             }
 
             SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd = new SqlCommand("select * from pay_amount_status where Buyer='" + supplier + "'", con);
+            SqlCommand cmd = new SqlCommand("select * from pay_amount_status where Buyer='" + supplier + "' and Com_Id='" + company_id + "' ", con);
             SqlDataReader dr;
             con.Open();
             dr = cmd.ExecuteReader();
@@ -84,9 +87,10 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select product_name from product_entry where " +
+                cmd.CommandText = "select product_name from product_entry where Com_Id=@Com_Id and " +
                 "product_name like @product_name + '%'";
                 cmd.Parameters.AddWithValue("@product_name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -114,9 +118,10 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Vendor_Name from Vendor where " +
+                cmd.CommandText = "select Vendor_Name from Vendor where Com_Id=@Com_Id and " +
                 "Vendor_Name like @Vendor_Name + '%'";
                 cmd.Parameters.AddWithValue("@Vendor_Name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -144,9 +149,10 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select barcode from product_stock where " +
+                cmd.CommandText = "select barcode from product_stock where Com_Id=@Com_Id and " +
                 "barcode like @barcode + '%'";
                 cmd.Parameters.AddWithValue("@barcode", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -164,9 +170,13 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     private void show_category()
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from pay_amount", con1);
+        SqlCommand CMD = new SqlCommand("select * from pay_amount where Com_Id='" + company_id + "'", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -187,17 +197,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     private void getinvoiceno()
     {
-        int a;
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select Max(Emp_Code) from Staff_Entry";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
-        {
-
-        }
+        
     }
 
 
@@ -262,8 +262,13 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' group by date,status,Grand__total,value", con1);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,Grand__total,value", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -273,8 +278,13 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' group by date,status,Grand__total,value", con1);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(Grand__total) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' and Com_Id='" + company_id + "' group by date,status,Grand__total,value", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -304,11 +314,16 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
         
             string return_by = "";
             int value1 = 0;
             SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
-            SqlCommand cmd23 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@Address,@Total_amount,@pay_amount,@pending_amount,@outstanding,@estimate_no)", con23);
+            SqlCommand cmd23 = new SqlCommand("insert into pay_amount values(@Buyer,@Pay_date,@Estimate_value,@Address,@Total_amount,@pay_amount,@pending_amount,@outstanding,@estimate_no,@Com_Id)", con23);
             cmd23.Parameters.AddWithValue("@Buyer", TextBox3.Text);
             cmd23.Parameters.AddWithValue("@Pay_date", TextBox4.Text);
             cmd23.Parameters.AddWithValue("@Estimate_value", DBNull.Value);
@@ -325,6 +340,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
             cmd23.Parameters.AddWithValue("@outstanding", c1);
             cmd23.Parameters.AddWithValue("@pending_amount", c1);
             cmd23.Parameters.AddWithValue("@estimate_no", DBNull.Value);
+            cmd23.Parameters.AddWithValue("@Com_Id", company_id);
           
             con23.Open();
             cmd23.ExecuteNonQuery();
@@ -333,13 +349,13 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
             SqlConnection con22 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
-            SqlCommand cmd22 = new SqlCommand("update pay_amount_status set Buyer=@Buyer,address=@address,total_amount=@total_amount,pending_amount=@pending_amount,paid_amount=@paid_amount where Buyer='" + TextBox3.Text + "' ", con22);
+            SqlCommand cmd22 = new SqlCommand("update pay_amount_status set Buyer=@Buyer,address=@address,total_amount=@total_amount,pending_amount=@pending_amount,paid_amount=@paid_amount,Com_Id=@Com_Id where Buyer='" + TextBox3.Text + "' ", con22);
 
 
             cmd22.Parameters.AddWithValue("@Buyer", TextBox3.Text);
 
             cmd22.Parameters.AddWithValue("@address",TextBox1.Text);
-
+           
 
 
 
@@ -350,6 +366,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
             cmd22.Parameters.AddWithValue("@total_amount", c);
             cmd22.Parameters.AddWithValue("@pending_amount", c);
             cmd22.Parameters.AddWithValue("@paid_amount", TextBox5.Text);
+            cmd23.Parameters.AddWithValue("@Com_Id", company_id);
             con22.Open();
             cmd22.ExecuteNonQuery();
             con22.Close();
@@ -358,11 +375,12 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
         string status="Purchase";
         int value=0;
             SqlConnection con26= new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
-            SqlCommand cmd26 = new SqlCommand("insert into purchase_amount values(@date,@status,@amount,@value)", con26);
+            SqlCommand cmd26 = new SqlCommand("insert into purchase_amount values(@date,@status,@amount,@value,@Com_Id)", con26);
             cmd26.Parameters.AddWithValue("@date", TextBox4.Text);
         cmd26.Parameters.AddWithValue("@status",status);
         cmd26.Parameters.AddWithValue("@amount", TextBox5.Text);
         cmd26.Parameters.AddWithValue("value", value);
+        cmd26.Parameters.AddWithValue("@Com_Id", company_id);
         con26.Open();
         cmd26.ExecuteNonQuery();
         con26.Close();

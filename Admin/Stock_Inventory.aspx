@@ -133,7 +133,7 @@
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
 
-                            <li>
+                            <li class="active">
                                 <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
@@ -153,6 +153,11 @@
                            </ul>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Tax_Entry.aspx">Tax entry</a></li>
+
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Cutomer_type.aspx">Customer Type entry</a></li>
+
                            </ul>
                                
                             </li>
@@ -165,7 +170,7 @@
                                 <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Purchase_entry.aspx">Entry</a></li>
-                                     <li><a href="">Report</a></li>
+                                     <li><a href="Purchase_report.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -180,7 +185,7 @@
                           
                                
                             </li>
-                             <li  class="active">
+                             <li>
                                 <a href="Stock_Inventory.aspx"><i class="fa fa-clone fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
@@ -191,7 +196,10 @@
                               <li>
                                 <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Entry</a></li>
+                                    <li><a href="Customer-Entry.aspx">Retail</a></li>
+                           </ul>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Customer Wholesale.aspx">Wholesale</a></li>
                            </ul>
                           
                                
@@ -206,14 +214,6 @@
                                
                             </li>
                              <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                             <li>
                                 <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Department-Entry.aspx">Entry</a></li>
@@ -222,6 +222,15 @@
                                
                             </li>
                              <li>
+                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
+                             <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
@@ -229,10 +238,25 @@
                           
                                
                             </li>
+                            <li>
+                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                  
+                                     <li><a href="Daily_sales.aspx">day sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                      <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
+                                    <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
+                                     
+                           </ul>
+                          
+                               
+                            </li>
+                                            
                         </ul>
 
                     </div>
                 </div>
+                
             </nav>
             <div id="wrapper">
                 <div class="content-wrapper container">
@@ -298,6 +322,10 @@
            onselectedindexchanged="DropDownList3_SelectedIndexChanged" ></asp:DropDownList>
                                     
                                       </ContentTemplate>
+                                      <Triggers>
+              
+                  <asp:AsyncPostBackTrigger ControlID="DropDownList1" EventName="SelectedIndexChanged"  />
+                </Triggers>
                                       </asp:UpdatePanel></div></div></div>
 
 
@@ -368,7 +396,7 @@
    <ContentTemplate>
   <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
            ontextchanged="TextBox2_TextChanged"></asp:TextBox>
-             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Supplier Name" ></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox2"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -443,7 +471,7 @@
 <div class="panel-body">
    <div class="col-md-6">
 
-                             <div class="form-group"><label class="col-lg-3 control-label">purchase Invoice No</label>
+                             <div class="form-group"><label class="col-lg-3 control-label">Purchase Invoice No</label>
 
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel8" runat="server">
@@ -465,15 +493,15 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
-  <asp:TextBox ID="TextBox6" runat="server" class="form-control input-x2 dropbox" 
-           AutoPostBack="true" ontextchanged="TextBox6_TextChanged" 
-           ></asp:TextBox>
-                  <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="TextBox6" WatermarkText="Filter by barcode" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers11" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox6"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>                    
+  <asp:DropDownList ID="DropDownList2" runat="server"  class="form-control input-x2 dropbox"></asp:DropDownList>
+                              
                                       </ContentTemplate>
+                                      <Triggers>
+              
+               
+                     <asp:AsyncPostBackTrigger ControlID="DropDownList1" EventName="SelectedIndexChanged"  />
+                 
+                  </Triggers>
                                       </asp:UpdatePanel></div></div></div>
 
 
@@ -541,7 +569,7 @@
               
                   <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="TextBox2" EventName="TextChanged"  />
-                       <asp:AsyncPostBackTrigger ControlID="TextBox6" EventName="TextChanged"  />
+                    
                         <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
                     <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="DropDownList1" EventName="SelectedIndexChanged"  />

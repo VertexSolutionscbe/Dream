@@ -15,113 +15,62 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
-public partial class Admin_Main : System.Web.UI.Page
+public partial class Admin_Day_and_month_wise_report : System.Web.UI.Page
 {
-    
     public static int company_id = 0;
+    float m = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            TextBox3.Focus();
-           
-          
+
+
+
             getinvoiceno();
             show_category();
             showrating();
             BindData();
-           
+
             active();
             created();
             if (Session["company_id"] != null)
             {
                 company_id = Convert.ToInt32(Session["company_id"].ToString());
             }
-           
 
-          
+
+
         }
-
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        ImageButton IMG = (ImageButton)sender;
-        GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
-        Label16.Text = ROW.Cells[1].Text;
-        TextBox11.Text = ROW.Cells[2].Text;
-        this.ModalPopupExtender2.Show();
+
 
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update category set categoryname='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where category_id='" + HttpUtility.HtmlDecode(Label16.Text) + "' and Com_Id='" + company_id + "'  ", CON);
-
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        Label18.Text = "updated successfuly";
-        this.ModalPopupExtender2.Show();
-        showcustomertype();
-        show_category();
-        BindData();
-        getinvoiceno();
-       
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from category where category_id='" + Label16.Text + "' and Com_Id='" + company_id + "' ", con);
-        con.Open();
-        cmd.ExecuteNonQuery();
-        con.Close();
-        Label18.Text = "Deleted successfuly";
-        BindData();
-
-        getinvoiceno();
 
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into category values(@category_id,@categoryname,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@category_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@categoryname", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+
 
 
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox3.Text = "";
+
         getinvoiceno();
         show_category();
     }
     private void active()
     {
-       
+
     }
     protected void lnkView_Click(object sender, EventArgs e)
     {
@@ -138,22 +87,14 @@ public partial class Admin_Main : System.Web.UI.Page
 
     private void created()
     {
-       
+
     }
     protected void BindData()
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from category where Com_Id='"+company_id+"' ORDER BY category_id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
-      
+
+
+
+
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
@@ -174,36 +115,12 @@ public partial class Admin_Main : System.Web.UI.Page
         show_category();
         getinvoiceno();
 
-       
+
     }
     private void getinvoiceno()
     {
 
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        int a;
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select Max(category_id) from category where Com_Id='" + company_id + "' ";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
-        {
-            string val = dr[0].ToString();
-            if (val == "")
-            {
-                Label1.Text = "1";
-            }
-            else
-            {
-                a = Convert.ToInt32(dr[0].ToString());
-                a = a + 1;
-                Label1.Text = a.ToString();
-            }
-        }
     }
     private void show_category()
     {
@@ -212,7 +129,7 @@ public partial class Admin_Main : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from category where Com_Id='" + company_id + "' ORDER BY categoryname  asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Staff_entry where Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -220,8 +137,8 @@ public partial class Admin_Main : System.Web.UI.Page
 
 
         DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "categoryname";
-        DropDownList2.DataValueField = "category_id";
+        DropDownList2.DataTextField = "Emp_Name";
+        DropDownList2.DataValueField = "Emp_Code";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
@@ -233,7 +150,7 @@ public partial class Admin_Main : System.Web.UI.Page
         Response.Redirect("~/login.aspx");
 
     }
-   
+
     protected void btnRandom_Click(object sender, EventArgs e)
     {
         Session["name1"] = "";
@@ -257,7 +174,7 @@ public partial class Admin_Main : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from category where category_id='"+ usrid+"' and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from category where category_id='" + usrid + "' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -269,19 +186,19 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     private void showcustomertype()
     {
-       
+
     }
     private void showrating()
     {
-       
+
     }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]
-    
+
     public static List<string> SearchCustomers2(string prefixText, int count)
     {
 
-        
+
         using (SqlConnection conn = new SqlConnection())
         {
             conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
@@ -293,7 +210,7 @@ public partial class Admin_Main : System.Web.UI.Page
                 cmd.CommandText = "select categoryname from category where  Com_Id=@Com_Id and  " +
                 "categoryname like @categoryname + '%' ";
                 cmd.Parameters.AddWithValue("@categoryname", prefixText);
-                cmd.Parameters.AddWithValue("@Com_Id",company_id);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -313,7 +230,7 @@ public partial class Admin_Main : System.Web.UI.Page
     {
         GridView1.PageIndex = e.NewPageIndex;
         BindData();
-       
+
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -321,26 +238,98 @@ public partial class Admin_Main : System.Web.UI.Page
         {
             e.Row.Cells[0].Text = "Page " + (GridView1.PageIndex + 1) + " of " + GridView1.PageCount;
         }
+
+
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
-       
+
     }
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
-       
+
     }
+
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        getstaffwise();
+    }
+
+    private void getstaffwise()
+    {
+
+
+
+    }
+
+
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
         if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from category where categoryname='" + TextBox1.Text + "' and Com_Id='" + company_id + "' ", con1);
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT CONVERT(VARCHAR(10),date,101)  as Date,sum(grand_total) as Amount FROM sales_entry as a where date='" + TextBox1.Text + "' and Com_Id='" + company_id + "' group by date", con);
         DataTable dt1 = new DataTable();
-        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
+
+    protected void TextBox2_TextChanged(object sender, EventArgs e)
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT CONVERT(VARCHAR(10),date,101)  as Date,sum(grand_total) as Amount FROM sales_entry as a where date between '" + TextBox1.Text + "' and '" + TextBox2.Text + "' and  Com_Id='" + company_id + "' group by date", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
+    protected void TextBox3_TextChanged1(object sender, EventArgs e)
+    {
+
+    }
+    protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        int year = Convert.ToInt32(DropDownList1.SelectedValue);
+
+        int month = Convert.ToInt32(DropDownList3.SelectedValue);
+
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT CONVERT(VARCHAR(10),month(date),101)  as Month,sum(grand_total) as Amount FROM sales_entry as a where month(date)='" + month + "' and year(date)='" + year + "' and  Com_Id='" + company_id + "' group by month(date)", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        int year = Convert.ToInt32(DropDownList1.SelectedValue);
+
+
+
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("SELECT DISTINCT CONVERT(VARCHAR(10),year(date),101)  as Year,sum(grand_total) as Amount FROM sales_entry as a where year(date)='" + year + "' and  Com_Id='" + company_id + "' group by year(date)", con);
+        DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;

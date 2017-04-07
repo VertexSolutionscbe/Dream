@@ -13,12 +13,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+
+using System.Drawing;
+using System.Data.SqlClient;
+using System.Configuration;
 #endregion
 
 
 public partial class Admin_Staff_Entry : System.Web.UI.Page
 {
-    int company_id = 0;
+     public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -28,11 +32,14 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
             show_category();
             showrating();
             BindData();
-
+            show_department();
             active();
             created();
 
-
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
 
 
         }
@@ -40,8 +47,14 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
+
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Emp_Code='" + DropDownList2.SelectedItem.Value + "' ORDER BY Emp_Code asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Emp_Code='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -56,11 +69,12 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         Label29.Text = ROW.Cells[1].Text;
         TextBox16.Text = ROW.Cells[2].Text;
         TextBox8.Text = ROW.Cells[3].Text;
-        TextBox9.Text = ROW.Cells[4].Text;
+        DropDownList3.SelectedItem.Text = ROW.Cells[4].Text;
         TextBox10.Text = ROW.Cells[5].Text;
         TextBox11.Text = ROW.Cells[6].Text;
         TextBox12.Text = ROW.Cells[7].Text;
         TextBox13.Text = ROW.Cells[8].Text;
+        TextBox15.Text = ROW.Cells[9].Text;
         this.ModalPopupExtender3.Show();
     }
     protected void Button16_Click(object sender, EventArgs e)
@@ -72,7 +86,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Staff_Entry set Emp_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Emp_Add='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Department='" + HttpUtility.HtmlDecode(TextBox9.Text) + "',Branch='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Super_Visor='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',Target='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Emp_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Staff_Entry set Emp_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Emp_Add='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Department='" + HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Text) + "',Branch='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Super_Visor='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',Target='" + HttpUtility.HtmlDecode(TextBox12.Text) + "',salary='" + HttpUtility.HtmlDecode(TextBox15.Text) + "' where Emp_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -120,7 +134,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Staff_Entry where Emp_Code=" + usrid, con);
+                SqlCommand cmd = new SqlCommand("delete from Staff_Entry where Emp_Code='" + usrid + "' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -139,16 +153,17 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id,@Mob_No)", CON);
+        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id,@Mob_No,@salary)", CON);
         cmd.Parameters.AddWithValue("@Emp_Code", Label1.Text);
         cmd.Parameters.AddWithValue("@Emp_Name", HttpUtility.HtmlDecode(TextBox3.Text));
         cmd.Parameters.AddWithValue("@Emp_Add", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Department", HttpUtility.HtmlDecode(TextBox4.Text));
+        cmd.Parameters.AddWithValue("@Department", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
         cmd.Parameters.AddWithValue("@Branch", HttpUtility.HtmlDecode(TextBox5.Text));
         cmd.Parameters.AddWithValue("@Super_Visor", HttpUtility.HtmlDecode(TextBox6.Text));
         cmd.Parameters.AddWithValue("@Target", HttpUtility.HtmlDecode(TextBox7.Text));
         cmd.Parameters.AddWithValue("@Com_Id", company_id);
         cmd.Parameters.AddWithValue("@Mob_No", HttpUtility.HtmlDecode(TextBox13.Text));
+        cmd.Parameters.AddWithValue("@salary", TextBox14.Text);
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
@@ -158,7 +173,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         getinvoiceno();
         TextBox3.Text = "";
         TextBox2.Text = "";
-        TextBox4.Text = "";
+        show_department();
         TextBox5.Text = "";
         TextBox6.Text = "";
         TextBox7.Text = "";
@@ -171,7 +186,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     {
         TextBox3.Text = "";
         TextBox2.Text = "";
-        TextBox4.Text = "";
+        show_department();
         TextBox5.Text = "";
         TextBox6.Text = "";
         TextBox7.Text = "";
@@ -245,7 +260,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(Emp_Code) from Staff_Entry";
+        string query = "Select Max(Emp_Code) from Staff_Entry where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -265,9 +280,14 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     private void show_category()
     {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Staff_Entry ORDER BY Emp_Code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Staff_Entry where Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -279,6 +299,36 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         DropDownList2.DataValueField = "Emp_Code";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
+
+        con.Close();
+    }
+    private void show_department()
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("Select * from Department where Com_Id='" + company_id + "' ORDER BY Depart_Code asc", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
+
+
+        DropDownList1.DataSource = ds;
+        DropDownList1.DataTextField = "Depart_Name";
+        DropDownList1.DataValueField = "Depart_Code";
+        DropDownList1.DataBind();
+        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
+
+        DropDownList3.DataSource = ds;
+        DropDownList3.DataTextField = "Depart_Name";
+        DropDownList3.DataValueField = "Depart_Code";
+        DropDownList3.DataBind();
+        DropDownList3.Items.Insert(0, new ListItem("All", "0"));
 
         con.Close();
     }
@@ -338,5 +388,9 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         GridView1.RenderControl(htw);
         Response.Write(sw.ToString());
         Response.End();
+    }
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /* Verifies that the control is rendered */
     }
 }
