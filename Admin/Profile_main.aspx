@@ -543,9 +543,10 @@
                             <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                  
-                                     <li><a href="Daily_sales.aspx">day sales</a></li>
-                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                   <li><a href="Day_wise_purchase.aspx">Days wise Purchase</a></li>
+                                    <li><a href="Day_and_month_wise_purchase.aspx">Days and month wise purchase</a></li>
+                                     <li><a href="Daily_sales.aspx">Days wise sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">Days and month sales</a></li>
                                       <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
                                     <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
                                      

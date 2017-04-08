@@ -251,12 +251,13 @@
                           
                                
                             </li>
-                            <li>
+                             <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                  
-                                     <li><a href="Daily_sales.aspx">day sales</a></li>
-                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                   <li><a href="Day_wise_purchase.aspx">Days wise Purchase</a></li>
+                                    <li><a href="Day_and_month_wise_purchase.aspx">Days and month wise purchase</a></li>
+                                     <li><a href="Daily_sales.aspx">Days wise sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">Days and month sales</a></li>
                                       <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
                                     <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
                                      
@@ -307,38 +308,7 @@
    <div class="row">
     <div class="col-md-1" ><h3>Filters</h3>
  </div>
-
-
-  <div class="col-md-2"><h3>From Date:</h3>
-
-     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-   <ContentTemplate>
- <asp:TextBox ID="TextBox1" runat="server"  AutoPostBack="true" ontextchanged="TextBox1_TextChanged" 
-           ></asp:TextBox>
- <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox1"></asp:CalendarExtender>
-   </ContentTemplate>
-   
-    </asp:UpdatePanel>
-   
-   </div>
-
-
-   <div class="col-md-2"><h3>From Date:</h3>
-
-     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-   <ContentTemplate>
- <asp:TextBox ID="TextBox2" runat="server"  AutoPostBack="true" ontextchanged="TextBox2_TextChanged"  
-           ></asp:TextBox>
- <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox2"></asp:CalendarExtender>
-   </ContentTemplate>
-   
-    </asp:UpdatePanel>
-   
-   </div>
-
-     <div class="row">
-
-                     <div style="border-top:solid 	#DCDCDC 1px; margin-left:10px; margin-top:-10px">
+ <div style="border-top:solid 	#DCDCDC 1px; margin-left:10px; margin-top:-10px">
                      <div class="col-md-3">
         <asp:Label ID="Label6" runat="server" Text="Select Year"></asp:Label><br />
    
@@ -367,9 +337,39 @@
      <asp:ListItem Value="11">Nov</asp:ListItem>
      <asp:ListItem Value="12">Dec</asp:ListItem>
      </asp:DropDownList>
-          
-</div></div>
+          </div>
    
+
+  <div class="col-md-2"><h3>From Date:</h3>
+
+     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+   <ContentTemplate>
+ <asp:TextBox ID="TextBox1" runat="server"  AutoPostBack="true" ontextchanged="TextBox1_TextChanged" 
+           ></asp:TextBox>
+ <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox1"></asp:CalendarExtender>
+   </ContentTemplate>
+   
+    </asp:UpdatePanel>
+   
+   </div>
+
+
+   <div class="col-md-2"><h3>To Date:</h3>
+
+     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+   <ContentTemplate>
+ <asp:TextBox ID="TextBox2" runat="server"  AutoPostBack="true" ontextchanged="TextBox2_TextChanged"  
+           ></asp:TextBox>
+ <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox2"></asp:CalendarExtender>
+   </ContentTemplate>
+   
+    </asp:UpdatePanel>
+   
+   </div>
+
+     <div class="row">
+
+                     
    </div>
   
    <div class="col-md-2"><h3>Staff:</h3>

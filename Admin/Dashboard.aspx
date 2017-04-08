@@ -25,8 +25,119 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+    <style>
     
+      .red
+            {
+                text-align:center;
+                font-size:15px;
+            }
+            .goo
+            {
+               color:#13c4a5;
+            }
+            .goo:hover
+            {
+                color:#3a5a7a;
+            }
+            .color
+            {
+                color:#555555;
+                height:30px;
+            }
+             .completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+        .dropbox
+        {
+            width:100%;
+            height:30px;
+        display: block;
+        font-size:16px;
+        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
+   
+ }
+        .gvwCasesPager
+        {
+           
+          color:black;
+          margin-right:20px;
+          text-align:right;
+          padding:20px;
+        }
+        .gvwCasesPager a
+            {
+               
+                margin-left:10px;
+                margin-right:10px;
+                font-size:20px;
+                
+                 padding:10px;
+                
+              
+              
+            }
+
+         .dropbox1
+        {
+            width:10%;
+            height:30px;
+           
+           
+            
+        }
+        
+        .see
+        {
+           height:400px; 
+           margin-top:-60px;
+        }
+        .see1
+        {
+            margin-top:-20px;
+        }
+         .see2
+        {
+          
+            margin-left:-15px;
+            margin-bottom:30px;
+        }
+        
+          @media (max-width: 767px)
+        {
+             .see
+        {
+           height:400px; 
+           margin-top:-10px;
+        }
+         .see1
+        {
+            margin-top:-40px;
+        }
+         .see2
+        {
+            margin-top:50px;
+            
+        }
+      
+        }
+        
+    
+    
+    </style>
     </head>
+   
     <body>
         <!-- Static navbar -->
  <form id="form1" runat="server">
@@ -57,7 +168,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                            
-                         <li class="dropdown">
+                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
@@ -92,7 +203,7 @@
 
                             
                         <li class="dropdown profile-dropdown">
-                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../img1/default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
+                            <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
                             <ul class="dropdown-menu">
                                 <li><a href="Profile_main.aspx"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="Seetings.aspx"><i class="fa fa-calendar"></i>Settings</a></li>                         
@@ -107,12 +218,10 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
-            
         </nav>
-        
-      
+        <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -141,6 +250,10 @@
                            </ul>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Cutomer_type.aspx">Customer Type entry</a></li>
+
+                           </ul>
+                            <ul class="nav nav-second-level collapse">
+                                    <li><a href="Barcode_creation.aspx">Barcode Creation</a></li>
 
                            </ul>
                                
@@ -209,7 +322,6 @@
                                 <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Staff-Entry.aspx">Entry</a></li>
-                                     
                            </ul>
                           
                                
@@ -223,12 +335,13 @@
                           
                                
                             </li>
-                             <li>
+                            <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                  
-                                     <li><a href="Daily_sales.aspx">day sales</a></li>
-                                      <li><a href="Day_and_month_wise_report.aspx">day and month sales</a></li>
+                                   <li><a href="Day_wise_purchase.aspx">Days wise Purchase</a></li>
+                                    <li><a href="Day_and_month_wise_purchase.aspx">Days and month wise purchase</a></li>
+                                     <li><a href="Daily_sales.aspx">Days wise sales</a></li>
+                                      <li><a href="Day_and_month_wise_report.aspx">Days and month sales</a></li>
                                       <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
                                     <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
                                      
@@ -242,10 +355,9 @@
                     </div>
                 </div>
                 
-                
             </nav>
           
-         
+      
             <div id="wrapper">
                 <div class="content-wrapper container">
                     <div class="row">
