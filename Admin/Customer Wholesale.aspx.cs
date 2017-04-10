@@ -178,6 +178,8 @@ public partial class Admin_Customer_Wholesale : System.Web.UI.Page
             show_type();
             TextBox9.Text = "";
             show_category();
+            TextBox5.Text = "";
+            TextBox11.Text = "";
         }
 
     }
@@ -192,6 +194,8 @@ public partial class Admin_Customer_Wholesale : System.Web.UI.Page
         getinvoiceno();
         show_category();
         show_type();
+        TextBox5.Text = "";
+        TextBox11.Text = "";
     }
     private void active()
     {

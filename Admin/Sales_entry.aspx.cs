@@ -47,7 +47,8 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            DateTime date = DateTime.Now;
+            TextBox8.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
             TextBox8.Attributes.Add("onkeypress", "return controlEnter('" + TextBox13.ClientID + "', event)");
             TextBox13.Attributes.Add("onkeypress", "return controlEnter('" + TextBox14.ClientID + "', event)");
             TextBox14.Attributes.Add("onkeypress", "return controlEnter('" + DropDownList3.ClientID + "', event)");
@@ -77,6 +78,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
             SetInitialRow();
         }
     }
+   
     private void SetInitialRow()
     {
         DataTable dt = new DataTable();
@@ -216,10 +218,6 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     protected void ButtonAdd_Click(object sender, EventArgs e)
     {
         AddNewRowToGrid();
-
-
-
-
     }
 
     //A method that returns a string which calls the connection string from the web.config
@@ -302,51 +300,68 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     //extract the TextBox values
                     TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[1].FindControl("TextBox1");
                     TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[2].FindControl("TextBox2");
-                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox12");
+                
 
-                    TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox5");
-                    TextBox box5 = (TextBox)Gridview2.Rows[rowIndex].Cells[5].FindControl("TextBox3");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox5");
+                    TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox3");
 
-                    TextBox box6 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox4");
-                    TextBox box7 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox16");
-                    TextBox box8 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox17");
-                    TextBox box9 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox18");
-                    TextBox box10 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
+                    TextBox box5 = (TextBox)Gridview2.Rows[rowIndex].Cells[5].FindControl("TextBox4");
+                    TextBox box6 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox16");
+                    TextBox box7 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
+                    TextBox box8 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
+                    TextBox box9 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
 
-                    SqlConnection CON11 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd11 = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@size,@color,@qty,@dis_per,@dis_amount,@total_amount,@Com_Id)", CON11);
-                    cmd11.Parameters.AddWithValue("@invoice_no", Label1.Text);
-                    cmd11.Parameters.AddWithValue("@barcode", box1.Text);
-                    cmd11.Parameters.AddWithValue("@Product_code", box2.Text);
-                    cmd11.Parameters.AddWithValue("@product_name", box3.Text);
+                      SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
-                    cmd11.Parameters.AddWithValue("@mrp", box4.Text);
-                    cmd11.Parameters.AddWithValue("@size", box5.Text);
-                    cmd11.Parameters.AddWithValue("@color", box6.Text);
-                    cmd11.Parameters.AddWithValue("@qty", box7.Text);
-                    cmd11.Parameters.AddWithValue("@dis_per", box8.Text);
-                    cmd11.Parameters.AddWithValue("@dis_amount", box9.Text);
-                    cmd11.Parameters.AddWithValue("@total_amount", box10.Text);
-                    cmd11.Parameters.AddWithValue("@Com_Id", company_id);
+                    con.Open();
 
-                    CON11.Open();
-                    cmd11.ExecuteNonQuery();
-                    CON11.Close();
+                    SqlCommand cmd2 = new SqlCommand("select * from product_entry where product_name='" + box2.Text + "'", con);
+                    SqlDataReader dr1;
+                    dr1 = cmd2.ExecuteReader();
+                    if (dr1.Read())
+                    {
 
-
-                    SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + box1.Text + "' and Com_Id='" + company_id + "'", CON1);
+                        int cat_id = Convert.ToInt32(dr1["category_id"].ToString());
+                        int sub_id = Convert.ToInt32(dr1["subcategory_id"].ToString());
+                        string product_code = dr1["code"].ToString();
 
 
 
 
+                        SqlConnection CON11 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                        SqlCommand cmd11 = new SqlCommand("insert into sales_entry_details values(@invoice_no,@barcode,@Product_code,@product_name,@mrp,@size,@color,@qty,@dis_per,@dis_amount,@total_amount,@Com_Id)", CON11);
+                        cmd11.Parameters.AddWithValue("@invoice_no", Label1.Text);
+                        cmd11.Parameters.AddWithValue("@barcode", box1.Text);
+                        cmd11.Parameters.AddWithValue("@Product_code", product_code);
+                        cmd11.Parameters.AddWithValue("@product_name", box2.Text);
 
-                    cmd1.Parameters.AddWithValue("@qty", box7.Text);
+                        cmd11.Parameters.AddWithValue("@mrp", box3.Text);
+                        cmd11.Parameters.AddWithValue("@size", box4.Text);
+                        cmd11.Parameters.AddWithValue("@color", box5.Text);
+                        cmd11.Parameters.AddWithValue("@qty", box6.Text);
+                        cmd11.Parameters.AddWithValue("@dis_per", box7.Text);
+                        cmd11.Parameters.AddWithValue("@dis_amount", box8.Text);
+                        cmd11.Parameters.AddWithValue("@total_amount", box9.Text);
+                        cmd11.Parameters.AddWithValue("@Com_Id", company_id);
 
-                    CON1.Open();
-                    cmd1.ExecuteNonQuery();
-                    CON1.Close();
+                        CON11.Open();
+                        cmd11.ExecuteNonQuery();
+                        CON11.Close();
 
+
+                        SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                        SqlCommand cmd1 = new SqlCommand("update product_stock set qty=qty-@qty where barcode='" + box1.Text + "' and Com_Id='" + company_id + "'", CON1);
+
+
+
+
+
+                        cmd1.Parameters.AddWithValue("@qty", box6.Text);
+
+                        CON1.Open();
+                        cmd1.ExecuteNonQuery();
+                        CON1.Close();
+                    }
 
 
 
@@ -370,6 +385,8 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         s.Close();
         readStream.Close();
 
+
+        
 
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sales entry created successfully')", true);
         BindData();
@@ -525,6 +542,37 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
             }
         }
     }
+
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+
+    public static List<string> SearchCustomers2(string prefixText, int count)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select Mobile_no from Customer_Entry where Com_Id=@Com_Id and  " +
+                "Mobile_no like @Mobile_no + '%'";
+                cmd.Parameters.AddWithValue("@Mobile_no", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["Mobile_no"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
+    }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
         
@@ -622,7 +670,21 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     
     protected void TextBox6_TextChanged(object sender, EventArgs e)
     {
-       
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+                    con.Open();
+
+                    SqlCommand cmd2 = new SqlCommand("select * from Customer_entry where Mobile_no='" + TextBox6.Text + "'", con);
+                    SqlDataReader dr1;
+                    dr1 = cmd2.ExecuteReader();
+                    if (dr1.Read())
+                    {
+
+
+                        TextBox13.Text = dr1["Custom_Name"].ToString();
+                        TextBox14.Text = dr1["Custom_Add"].ToString();
+                    }
+                    con.Close();
 
 
        
@@ -683,8 +745,15 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     //extract the TextBox values
                     TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[1].FindControl("TextBox1");
                     TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[2].FindControl("TextBox2");
-                    TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox12");
-                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox5");
+                 
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[3].FindControl("TextBox5");
+                    TextBox box5= (TextBox)Gridview2.Rows[rowIndex].Cells[4].FindControl("TextBox3");
+                    TextBox box6 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox16");
+                    TextBox box7 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
+
+
+                    TextBox box8 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
+                    TextBox box9 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
                     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
                   
                     con.Open();
@@ -701,25 +770,93 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     SqlDataReader dr;
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
-                    {
+                    { int a=1;
                         box2.Text = dr["Product_name"].ToString();
-                        box4.Text = dr["Product_code"].ToString();
+                     
                         float Mop = float.Parse(dr["mrp"].ToString());
                         
                         float tax = 105;
                         float A = float.Parse(string.Format("{0:0.00}", (Mop / tax)).ToString());
                         float a1 = float.Parse(string.Format("{0:0.00}", (A * 100)).ToString());
                         box3.Text = a1.ToString();
+                        box6.Text = a.ToString();
+
+                        int a11 = Convert.ToInt32(box3.Text) * Convert.ToInt32(box6.Text);
+                        box7.Text = a11.ToString();
+                        box8.Text = "0";
+                        box9.Text = "0.00";
+                        Control control = null;
+                        if (Gridview2.FooterRow != null)
+                        {
+                            control = Gridview2.FooterRow;
+                        }
+                        else
+                        {
+                            control = Gridview2.Controls[0].Controls[0];
+                        }
                     }
                     con.Close();
 
                     rowIndex++;
-                    box2.Focus();
+                    box5.Focus();
                 }
 
             }
         }
     }
+    protected void TextBox3_TextChanged(object sender, System.EventArgs e)
+    {
+
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox4");
+
+
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+
+
+    }
+    protected void TextBox4_TextChanged(object sender, System.EventArgs e)
+    {
+
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox16");
+
+
+
+                    rowIndex++;
+                    box1.Focus();
+                }
+
+            }
+        }
+
+
+    }
+    
     protected void Gridview2_PreRender(object sender, System.EventArgs e)
     {
 
@@ -740,7 +877,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[6].FindControl("TextBox16");
                     TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
                     TextBox box4 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
-
+                    TextBox box5 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
                     int a = Convert.ToInt32(box1.Text) * Convert.ToInt32(box2.Text);
                     box3.Text = a.ToString();
 
@@ -767,9 +904,9 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
                     //extract the TextBox values
-                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[10].FindControl("TextBox19");
-                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox17");
-                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox18");
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
+                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
 
                     float tax = float.Parse(box2.Text);
                     float total = float.Parse(box1.Text);
@@ -778,7 +915,35 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                     box1.Text = string.Format("{0:0.00}", (total - A)).ToString();
 
                     rowIndex++;
+                    box3.Focus();
+                    AddNewRowToGrid();
+                }
 
+            }
+        }
+    }
+
+    protected void TextBox18_TextChanged(object sender, System.EventArgs e)
+    {
+        int rowIndex = 0;
+        StringCollection sc = new StringCollection();
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview2.Rows[rowIndex].Cells[9].FindControl("TextBox19");
+                    TextBox box2 = (TextBox)Gridview2.Rows[rowIndex].Cells[7].FindControl("TextBox17");
+                    TextBox box3 = (TextBox)Gridview2.Rows[rowIndex].Cells[8].FindControl("TextBox18");
+
+                  
+
+                    rowIndex++;
+                    box1.Focus();
+                   
                 }
 
             }
@@ -834,5 +999,14 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
         }
         catch (Exception er)
         { }
+    }
+
+    protected void Gridview2_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    {
+        if ((e.Row.RowType == DataControlRowType.DataRow) && !(e.Row.RowType == DataControlRowType.Header) && !(e.Row.RowType == DataControlRowType.Footer))
+        {
+            int Rownumber = e.Row.RowIndex + 1;
+            e.Row.Attributes.Add("KeyPress", "javascript:ShowSerializedObject(" + Rownumber + ")");
+        }
     }
 }

@@ -18,6 +18,7 @@ using System.Drawing;
 public partial class Admin_Stock_Inventory : System.Web.UI.Page
 {
     public static int company_id = 0;
+    public static int company_id1 = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -37,6 +38,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             {
                 company_id = Convert.ToInt32(Session["company_id"].ToString());
             }
+           
         }
 
     }
@@ -75,10 +77,10 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select product_name from product_entry where Com_Id=@Com_Id and " +
-                "product_name like @product_name + '%'";
-                cmd.Parameters.AddWithValue("@product_name", prefixText);
-                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.CommandText = "select distinct Product_name from product_stock where Com_Id=@Com_Id and " +
+                "Product_name like @Product_name + '%'";
+                cmd.Parameters.AddWithValue("@Product_name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id1);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -86,7 +88,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["product_name"].ToString());
+                        customers.Add(sdr["Product_name"].ToString());
                     }
                 }
                 conn.Close();
@@ -94,7 +96,36 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             }
         }
     }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
 
+    public static List<string> SearchCustomers10(string prefixText, int count)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select distinct purchase_invoice from product_stock where Com_Id=@Com_Id and " +
+                "purchase_invoice like @purchase_invoice + '%'";
+                cmd.Parameters.AddWithValue("@purchase_invoice", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id1);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["purchase_invoice"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
+    }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]
 
@@ -106,10 +137,10 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Vendor_Name from Vendor where Com_Id=@Com_Id and " +
-                "Vendor_Name like @Vendor_Name + '%'";
-                cmd.Parameters.AddWithValue("@Vendor_Name", prefixText);
-                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.CommandText = "select distinct Supplier from product_stock where Com_Id=@Com_Id and " +
+                "Supplier like @Supplier + '%'";
+                cmd.Parameters.AddWithValue("@Supplier", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id1);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -117,7 +148,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["Vendor_Name"].ToString());
+                        customers.Add(sdr["Supplier"].ToString());
                     }
                 }
                 conn.Close();
@@ -137,10 +168,10 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select barcode from product_stock where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select distinct barcode from product_stock where Com_Id=@Com_Id and " +
                 "barcode like @barcode + '%'";
                 cmd.Parameters.AddWithValue("@barcode", prefixText);
-                cmd.Parameters.AddWithValue("@Com_Id",company_id);
+                cmd.Parameters.AddWithValue("@Com_Id",company_id1);
                 cmd.Connection = conn;
                 conn.Open();
                 List<string> customers = new List<string>();
@@ -182,26 +213,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
 
     private void show_barcode()
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from product_stock where Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY no asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-
-
-
-        DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "barcode";
-        DropDownList2.DataValueField= "no";
-        DropDownList2.DataBind();
-        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
-        con.Close();
+        
     }
     private void show_category()
     {
@@ -228,17 +240,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
     }
     protected void BindData()
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where Com_Id='" + company_id + "' ORDER BY Product_code asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+       
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
@@ -313,7 +315,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where product_name='" + TextBox1.Text + "' and Com_Id='" + company_id + "' ORDER BY Product_code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where product_name='" + TextBox1.Text + "' and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY Product_code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -327,7 +329,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where supplier='" + TextBox2.Text + "' and Com_Id='" + company_id + "' ORDER BY Product_code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where supplier='" + TextBox2.Text + "' and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY Product_code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -357,9 +359,12 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
 
 
         con.Close();
-
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where Category='" + DropDownList3.SelectedItem.Value + "'  and Com_Id='" + company_id + "' ORDER BY purchase_invoice asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where Category='" + DropDownList3.SelectedItem.Value + "'  and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -375,7 +380,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where subcategory='" + DropDownList4.SelectedItem.Value + "'  and Com_Id='" + company_id + "' ORDER BY purchase_invoice asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where subcategory='" + DropDownList4.SelectedItem.Value + "'  and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -436,7 +441,7 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from product_stock where Com_Id='" + DropDownList1.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY purchase_invoice asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from product_stock where Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -465,5 +470,67 @@ public partial class Admin_Stock_Inventory : System.Web.UI.Page
         DropDownList3.DataBind();
         DropDownList3.Items.Insert(0, new ListItem("All", "0"));
         con.Close();
+
+
+
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("Select * from product_stock where Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY no asc", con2);
+        con2.Open();
+        DataSet ds1 = new DataSet();
+        SqlDataAdapter da2 = new SqlDataAdapter(cmd1);
+        da2.Fill(ds1);
+
+
+
+
+        DropDownList2.DataSource = ds1;
+        DropDownList2.DataTextField = "barcode";
+        DropDownList2.DataValueField = "no";
+        DropDownList2.DataBind();
+        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
+        con2.Close();
+
+        company_id1 = Convert.ToInt32(DropDownList1.SelectedItem.Value);
+    }
+    protected void TextBox5_TextChanged(object sender, EventArgs e)
+    {
+       
+
+
+
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("Select * from product_stock where purchase_invoice='" + TextBox5.Text + "' and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("Select * from product_stock where barcode='" + DropDownList2.SelectedItem.Text + "' and Com_Id='" + DropDownList1.SelectedItem.Value + "' ORDER BY purchase_invoice asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+
+
     }
 }

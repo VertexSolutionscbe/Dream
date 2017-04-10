@@ -11,7 +11,27 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Dream Garments</title>
       
-
+      <script type="text/javascript">
+          function clickEnter(obj, event) {
+              var keyCode;
+              if (event.keyCode > 0) {
+                  keyCode = event.keyCode;
+              }
+              else if (event.which > 0) {
+                  keyCode = event.which;
+              }
+              else {
+                  keycode = event.charCode;
+              }
+              if (keyCode == 13) {
+                  document.getElementById(obj).focus();
+                  return false;
+              }
+              else {
+                  return true;
+              }
+          }
+    </script>
               <script type="text/javascript">
 
                   $(document).ready(function () {
@@ -420,28 +440,7 @@
     <div class="col-md-1" ><h3>Filters</h3>
  </div>
   
-   <div class="col-md-2"><h3>Category:</h3>
-
-    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-   <ContentTemplate>
-   <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-control"  data-width="100%" AutoPostBack="true"  onselectedindexchanged="DropDownList2_SelectedIndexChanged"  ></asp:DropDownList>
-       </ContentTemplate>
-                               
-     </asp:UpdatePanel>
    
-   </div>
-     <div class="col-md-2"><h3>Sub Category:</h3>
-
-      <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-   <ContentTemplate>
-   <asp:DropDownList ID="DropDownList1" runat="server"  CssClass="form-control"  data-width="100%" AutoPostBack="true" ></asp:DropDownList>
-    
-     </ContentTemplate>
-       <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  />   
-              </Triggers>                
-     </asp:UpdatePanel>
-   </div>
     
 
 
@@ -509,6 +508,7 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
+  
                                   <asp:DropDownList ID="DropDownList3" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" onselectedindexchanged="DropDownList3_SelectedIndexChanged"></asp:DropDownList>
                                     </ContentTemplate>
                                      <Triggers>
@@ -541,6 +541,7 @@
                                 </div>
 
                                <h4>Product Details</h4>
+                              <asp:UpProduct Details</h4>
                               <asp:UpdatePanel ID="UpdatePanel10" runat="server">
    <ContentTemplate>
    <div style="width:100%">
@@ -594,7 +595,9 @@
                         ontextchanged="TextBox17_TextChanged" AutoPostBack="true" Height="40px"></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
+                    
                   <asp:TemplateField HeaderText="Tax Amt" HeaderStyle-CssClass="red">
+               
                 <ItemTemplate>
              <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" Height="40px" ontextchanged="TextBox18_TextChanged"></asp:TextBox>
                 </ItemTemplate>
@@ -610,7 +613,7 @@
                         onclick="ButtonAdd_Click" />
                 </FooterTemplate>
             </asp:TemplateField>
-                
+              
             </Columns>
      <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
@@ -637,7 +640,7 @@
     <br />
       <asp:UpdatePanel ID="UpdatePanel4" runat="server">
    <ContentTemplate>
-    <asp:Button ID="Button3" runat="server" Text="Total" onclick="Button3_Click" ></asp:Button>
+   
      </ContentTemplate>
                 <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Gridview1"  />
@@ -653,19 +656,14 @@
                            <div class="form-horizontal">
                          
 
-                         <div class="form-group"><label class="col-lg-3 control-label">Total Qty</label>
-                              
-                                    <div class="col-lg-9">
+                         <div class="form-group"><label class="col-lg-3 control-label">Total Qty </label>                  <div class="col-lg-9">
                                   <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
                                     <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox" 
                                           ></asp:TextBox>
                                     
               </ContentTemplate>
-                <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
-                
-                </Triggers>
+               
                            </asp:UpdatePanel>
                           
                                     
@@ -685,7 +683,7 @@
                                     
               </ContentTemplate>
                 <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+             
                 
                 </Triggers>
                            </asp:UpdatePanel>
@@ -706,7 +704,7 @@
                                     
                                      </ContentTemplate>
                 <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+               
                 
                 </Triggers>
                            </asp:UpdatePanel>
@@ -726,7 +724,7 @@
                                     
                                      </ContentTemplate>
                 <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+            
                 
                 </Triggers>
                            </asp:UpdatePanel>
@@ -744,7 +742,7 @@
                                     
                                      </ContentTemplate>
                 <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+             
                   <asp:AsyncPostBackTrigger ControlID="TextBox7"  EventName="TextChanged" />
                 </Triggers>
                            </asp:UpdatePanel>

@@ -41,6 +41,13 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+
+            for (int i = 0; i < Gridview1.Rows.Count - 1; i++)
+            {
+                TextBox curTexbox = Gridview1.Rows[i].Cells[7].FindControl("TextBox18") as TextBox;
+                Button nexTextbox = Gridview1.Rows[i].Cells[8].FindControl("ButtonAdd") as Button;
+                curTexbox.Attributes.Add("onkeypress", "return clickEnter('" + nexTextbox.ClientID + "', event)");
+            }
             DateTime date = DateTime.Now;
             TextBox8.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
             getinvoiceno();
@@ -57,7 +64,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         }
         if (!Page.IsPostBack)
         {
-
+            
 
             SetInitialRow();
         }
@@ -202,8 +209,41 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     protected void ButtonAdd_Click(object sender, EventArgs e)
     {
         AddNewRowToGrid();
-       
 
+        try
+        {
+            int rowIndex = 0;
+            StringCollection sc = new StringCollection();
+            if (ViewState["CurrentTable"] != null)
+            {
+                DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+                if (dtCurrentTable.Rows.Count > 0)
+                {
+                    for (int i = 0; i <= dtCurrentTable.Rows.Count; i++)
+                    {
+                        //extract the TextBox values
+                        TextBox box0 = (TextBox)Gridview1.Rows[rowIndex].Cells[5].FindControl("TextBox16");
+                        TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[8].FindControl("TextBox19");
+                        tot1 = tot1 + float.Parse(box0.Text);
+                        TextBox4.Text = tot1.ToString();
+                        tot = tot + float.Parse(box1.Text);
+
+                        TextBox10.Text = tot.ToString();
+                        TextBox11.Text = tot.ToString();
+
+
+
+
+
+
+                        rowIndex++;
+                    }
+
+                }
+            }
+        }
+        catch (Exception er)
+        { }
 
         
     }
@@ -719,27 +759,7 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from subcategory where category_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "'", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-
-        DropDownList1.DataSource = ds;
-        DropDownList1.DataTextField = "subcategoryname";
-        DropDownList1.DataValueField = "subcategory_id";
-        DropDownList1.DataBind();
-        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
-
-
-
-        con.Close();
+        
 
 
 
@@ -755,39 +775,15 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
 
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from category where  Com_Id='" + company_id + "' ORDER BY category_id asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd1 = new SqlCommand("Select * from Vendor where  Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con1);
+        con1.Open();
+        DataSet ds11 = new DataSet();
+        SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+        da1.Fill(ds11);
 
 
-        DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "categoryname";
-        DropDownList2.DataValueField = "category_id";
-        DropDownList2.DataBind();
-        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
-
-
-
-        con.Close();
-    }
-    private void show_supplier()
-    {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Vendor where Com_Id='" + company_id + "' ORDER BY Vendor_Code asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-
-        DropDownList3.DataSource = ds;
+        DropDownList3.DataSource = ds11;
         DropDownList3.DataTextField = "Vendor_Name";
         DropDownList3.DataValueField = "Vendor_Code";
         DropDownList3.DataBind();
@@ -795,7 +791,11 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
 
 
-        con.Close();
+        con1.Close();
+    }
+    private void show_supplier()
+    {
+       
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
@@ -915,6 +915,8 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
 
                     rowIndex++;
                     box3.Focus();
+                   
+                   
                 }
 
             }
@@ -923,10 +925,61 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
    
     protected void TextBox19_TextChanged(object sender, System.EventArgs e)
     {
-                    
-     AddNewRowToGrid();
-            
-       
+
+        int rowIndex = 0;
+
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+            DataRow drCurrentRow = null;
+            if (dtCurrentTable.Rows.Count > 0)
+            {
+                for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
+                {
+                    //extract the TextBox values
+                    TextBox box1 = (TextBox)Gridview1.Rows[rowIndex].Cells[1].FindControl("TextBox1");
+
+                    TextBox box2 = (TextBox)Gridview1.Rows[rowIndex].Cells[2].FindControl("TextBox3");
+
+                    TextBox box3 = (TextBox)Gridview1.Rows[rowIndex].Cells[3].FindControl("TextBox5");
+                    TextBox box4 = (TextBox)Gridview1.Rows[rowIndex].Cells[4].FindControl("TextBox6");
+
+                    TextBox box5 = (TextBox)Gridview1.Rows[rowIndex].Cells[5].FindControl("TextBox16");
+                    TextBox box6 = (TextBox)Gridview1.Rows[rowIndex].Cells[6].FindControl("TextBox17");
+                    TextBox box7 = (TextBox)Gridview1.Rows[rowIndex].Cells[7].FindControl("TextBox18");
+                    TextBox box8 = (TextBox)Gridview1.Rows[rowIndex].Cells[8].FindControl("TextBox19");
+
+
+
+                    drCurrentRow = dtCurrentTable.NewRow();
+                    drCurrentRow["RowNumber"] = i + 1;
+                    drCurrentRow["Column1"] = box1.Text;
+                    drCurrentRow["Column2"] = box2.Text;
+                    drCurrentRow["Column3"] = box3.Text;
+                    drCurrentRow["Column4"] = box4.Text;
+                    drCurrentRow["Column5"] = box5.Text;
+                    drCurrentRow["Column6"] = box6.Text;
+                    drCurrentRow["Column7"] = box7.Text;
+                    drCurrentRow["Column8"] = box8.Text;
+
+
+
+                    rowIndex++;
+                }
+                dtCurrentTable.Rows.Add(drCurrentRow);
+                ViewState["CurrentTable"] = dtCurrentTable;
+
+                Gridview1.DataSource = dtCurrentTable;
+                Gridview1.DataBind();
+            }
+        }
+        else
+        {
+            Response.Write("ViewState is null");
+        }
+
+        //Set Previous Data on Postbacks
+        SetPreviousData();
     }
 
     protected void Button3_Click(object sender, System.EventArgs e)
@@ -1074,7 +1127,8 @@ public partial class Admin_Purchase_entry : System.Web.UI.Page
         }
     }
     protected void TextBox18_TextChanged(object sender, System.EventArgs e)
-    {
+    
+{
         int rowIndex = 0;
         StringCollection sc = new StringCollection();
         if (ViewState["CurrentTable"] != null)

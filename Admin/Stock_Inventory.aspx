@@ -478,9 +478,14 @@
                                      <asp:UpdatePanel ID="UpdatePanel8" runat="server">
    <ContentTemplate>
   
-                                    <asp:TextBox ID="TextBox5" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
+                                    <asp:TextBox ID="TextBox5" runat="server" 
+                                        class="form-control input-x2 dropbox"  AutoPostBack="true" ontextchanged="TextBox5_TextChanged"
                                         ></asp:TextBox>
-                                     
+                                      <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" TargetControlID="TextBox5" WatermarkText="Enter Purchase Invoice No" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers10" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox5"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -494,7 +499,9 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
-  <asp:DropDownList ID="DropDownList2" runat="server"  class="form-control input-x2 dropbox"></asp:DropDownList>
+  <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="true"  
+           class="form-control input-x2 dropbox" 
+           onselectedindexchanged="DropDownList2_SelectedIndexChanged"></asp:DropDownList>
                               
                                       </ContentTemplate>
                                       <Triggers>
@@ -548,7 +555,7 @@
               <asp:BoundField HeaderText="MRP" DataField="mrp" />
                <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" />
                 <asp:BoundField HeaderText="Qty" DataField="qty" />
-                 
+                  <asp:BoundField HeaderText="Supplier" DataField="Supplier" />
        </Columns>
        <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
@@ -570,8 +577,9 @@
               
                   <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="TextBox2" EventName="TextChanged"  />
-                    
+                     <asp:AsyncPostBackTrigger ControlID="TextBox5" EventName="TextChanged"  />
                         <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
+                          <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  />
                     <asp:AsyncPostBackTrigger ControlID="DropDownList3" EventName="SelectedIndexChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="DropDownList1" EventName="SelectedIndexChanged"  />
                      <asp:AsyncPostBackTrigger ControlID="DropDownList4" EventName="SelectedIndexChanged"  />

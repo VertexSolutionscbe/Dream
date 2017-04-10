@@ -461,8 +461,13 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox6" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
-                                  
+                                    <asp:TextBox ID="TextBox6" runat="server" AutoPostBack="true" class="form-control input-x2 dropbox" 
+                                        ontextchanged="TextBox6_TextChanged"></asp:TextBox>
+                                    <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox6" WatermarkText="Enter mobile no" ></asp:TextBoxWatermarkExtender>
+                           <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers2" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox6"  CompletionListCssClass="completionList"
+     CompletionListItemCssClass="listItem"
+     CompletionListHighlightedItemCssClass="itemHighlighted">
+      </asp:AutoCompleteExtender>
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
@@ -553,7 +558,8 @@
                           <asp:gridview ID="Gridview2" runat="server" ShowFooter="True" Width="100%"
             AutoGenerateColumns="False"    BackColor="#DEBA84" 
                               BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-                              CellSpacing="2" onload="Gridview2_Load" onprerender="Gridview2_PreRender">
+                              CellSpacing="2" onload="Gridview2_Load" onprerender="Gridview2_PreRender" 
+                              onrowdatabound="Gridview2_RowDataBound">
             <Columns>
             <asp:BoundField DataField="RowNumber" HeaderText="S No" HeaderStyle-CssClass="red"  />
             <asp:TemplateField HeaderText="Barcode" HeaderStyle-CssClass="red"  >
@@ -573,11 +579,7 @@
                         ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Product Code" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                   <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
+            
                
                     <asp:TemplateField HeaderText="MRP" HeaderStyle-CssClass="red">
                 <ItemTemplate>
@@ -587,13 +589,13 @@
                   
                    <asp:TemplateField HeaderText="Size" HeaderStyle-CssClass="red">
                 <ItemTemplate>
-                   <asp:TextBox ID="TextBox3" runat="server" Width="80px"></asp:TextBox>
+                   <asp:TextBox ID="TextBox3" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
 
                    <asp:TemplateField HeaderText="Color" HeaderStyle-CssClass="red">
                 <ItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox4_TextChanged"></asp:TextBox>
                 </ItemTemplate>
                   </asp:TemplateField>
                  
@@ -611,7 +613,7 @@
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Dis Amt" HeaderStyle-CssClass="red">
                 <ItemTemplate>
-             <asp:TextBox ID="TextBox18" runat="server" Width="80px"></asp:TextBox>
+             <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox18_TextChanged" ></asp:TextBox>
                 </ItemTemplate>
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Total Amt" HeaderStyle-CssClass="red">
@@ -627,7 +629,7 @@
             </asp:TemplateField>
                 
             </Columns>
-                           <EditRowStyle BackColor="#999999" />
+       <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
        <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
        <PagerSettings FirstPageText="First" LastPageText="Last" />
@@ -661,7 +663,22 @@
 
                         
                           
-                           
+                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $("[id*=Gridview2] input[type=text]").on("keypress", function (e) {
+        if (e.keyCode == 13) {
+            var next = $(this).closest("tr").next().find("input[type=text]"); ;
+            if (next.length > 0) {
+                next.focus();
+
+            } else {
+                next = $("[id*=Gridview2] input[type=text]").eq(0);
+                next.focus();
+            }
+            return false;
+        }
+    })
+</script>           
 
      <div class="container" >
  
@@ -784,6 +801,9 @@
  <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" ></asp:Button>
                           </ContentTemplate>
                            </asp:UpdatePanel>
+
+
+
 
     </div>
                                         <!-- End .form-group  -->

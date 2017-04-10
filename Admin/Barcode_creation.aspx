@@ -311,7 +311,7 @@
 <asp:Button ID="btnGenerate" runat="server" Text="Generate" onclick="btnGenerate_Click" />
 <hr />
 <asp:PlaceHolder ID="plBarCode" runat="server" />
-   
+ 
      </div>
 
 

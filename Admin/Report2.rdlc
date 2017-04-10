@@ -512,7 +512,6 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Top>0cm</Top>
         <Height>1.2cm</Height>
         <Width>9.36188cm</Width>
         <Style>
@@ -577,7 +576,6 @@
         </Style>
       </Line>
       <Line Name="Line2">
-        <Top>0cm</Top>
         <Height>0cm</Height>
         <Width>9.36188cm</Width>
         <ZIndex>6</ZIndex>
@@ -626,7 +624,7 @@
     <Height>2.48625in</Height>
     <Style />
   </Body>
-  <Width>3.91133in</Width>
+  <Width>3.74466in</Width>
   <Page>
     <PageHeader>
       <Height>6.11188cm</Height>
@@ -716,7 +714,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>customer_name</rd:DefaultName>
-          <Top>2.18758cm</Top>
+          <Top>1.73778cm</Top>
           <Left>1.63195cm</Left>
           <Height>0.6cm</Height>
           <Width>4.32562cm</Width>
@@ -746,7 +744,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>customer_Address</rd:DefaultName>
-          <Top>2.96396cm</Top>
+          <Top>2.51417cm</Top>
           <Left>1.63195cm</Left>
           <Height>0.6cm</Height>
           <Width>6.3541cm</Width>
@@ -846,8 +844,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>3.96028cm</Top>
-          <Left>3.33473cm</Left>
+          <Top>4.91278cm</Top>
+          <Left>3.63022cm</Left>
           <Height>0.6cm</Height>
           <Width>2.11257cm</Width>
           <ZIndex>6</ZIndex>
@@ -888,7 +886,7 @@
           <Top>4.91278cm</Top>
           <Left>5.91918cm</Left>
           <Height>0.6cm</Height>
-          <Width>1.60826cm</Width>
+          <Width>1.44951cm</Width>
           <ZIndex>7</ZIndex>
           <Style>
             <Border>
@@ -916,9 +914,9 @@
           </Paragraphs>
           <rd:DefaultName>date</rd:DefaultName>
           <Top>4.91278cm</Top>
-          <Left>7.70383cm</Left>
+          <Left>7.54508cm</Left>
           <Height>0.6cm</Height>
-          <Width>1.61147cm</Width>
+          <Width>1.77022cm</Width>
           <ZIndex>8</ZIndex>
           <Style>
             <Border>
@@ -938,7 +936,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.03729cm</Height>
+      <Height>1.79917cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>

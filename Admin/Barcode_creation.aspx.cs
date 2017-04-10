@@ -66,6 +66,7 @@ public partial class Admin_Barcode_creation : System.Web.UI.Page
                 imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
             }
             plBarCode.Controls.Add(imgBarCode);
+           
         }
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)

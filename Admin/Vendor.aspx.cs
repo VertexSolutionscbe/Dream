@@ -365,7 +365,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(Vendor_Code) from Vendor where Com_Id='" + company_id + "'";
+        string query = "Select max(convert(int,SubString(Vendor_Code,PATINDEX('%[0-9]%',Vendor_Code),Len(Vendor_Code)))) from Vendor where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())

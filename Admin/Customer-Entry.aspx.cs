@@ -159,6 +159,8 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
             TextBox4.Text = "";
             show_type();
             TextBox9.Text = "";
+            TextBox5.Text = "";
+            TextBox11.Text = "";
         }
 
     }
@@ -174,6 +176,8 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         show_category();
         TextBox12.Text = "";
         TextBox13.Text = "";
+        TextBox5.Text = "";
+        TextBox11.Text = "";
     }
     private void active()
     {
