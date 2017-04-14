@@ -330,7 +330,8 @@
                              <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Sales_entry.aspx">Sales</a></li>
+                                    <li><a href="Sales_entry.aspx">Entry</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -379,44 +380,44 @@
 
  
    <div class="top">
-<a href="Main.aspx"><button type="button" class="btn btn-default2 btn-circle btn-xl"><i class="fa fa-product-hunt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Category Entry</a></div>
+<a href="Main.aspx" ><button type="button" class="btn btn-default2 btn-circle btn-xl"><i class="fa fa-product-hunt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label" >Category Entry</span></a></div>
   <div class="top">
-<a href="Sub_category.aspx"><button type="button" class="btn btn-default1 btn-circle btn-xl"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Brand Entry</a></div>
+<a href="Sub_category.aspx" ><button type="button" class="btn btn-default1 btn-circle btn-xl"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label">Brand Entry</span></a></div>
 
    <div class="top">
-<a href="Product_entry.aspx"><button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Product Entry</a></div>
+<a href="Product_entry.aspx" ><button type="button" class="btn btn-default btn-circle btn-xl"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label">Product Entry</span></a></div>
  <div class="top" >
-<a href="Purchase_entry.aspx"><button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button><br />Purchase Entry</a></div>
+<a href="Purchase_entry.aspx" ><button type="button" class="btn btn-primary btn-circle btn-xl"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button><br /><span class="col-lg-3 control-label">Purchase Entry</span></a></div>
 <div class="top" >
-<a href="Customer-Entry.aspx">
-<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check-square-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;Customer Entry</a></div>
+<a href="Customer-Entry.aspx" >
+<button type="button" class="btn btn-success btn-circle btn-xl"><i class="fa fa-check-square-o" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label">Customer Entry</span> </a></div>
 <div class="top" >
-<a href="Vendor.aspx">
+<a href="Vendor.aspx" >
 
-<button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square" aria-hidden="true"></i></button><br />&nbsp;&nbsp;Vendor Entry</a></div>
+<button type="button" class="btn btn-info btn-circle btn-xl"><i class="fa fa-pencil-square" aria-hidden="true"></i></button><br />&nbsp;&nbsp;<span class="col-lg-3 control-label">Vendor Entry</span></a></div>
 <div class="top">
-<a href="Staff-Entry.aspx">
+<a href="Staff-Entry.aspx" >
 
-<button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-briefcase" aria-hidden="true"></i></button><br />Staff entry</a></div>
+<button type="button" class="btn btn-warning btn-circle btn-xl"><i class="fa fa-briefcase" aria-hidden="true"></i></button><br /><span class="col-lg-3 control-label">Staff entry</span></a></div>
 <div class="top" >
-<a href="Sales_entry.aspx">
+<a href="Sales_entry.aspx" >
 
-<button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-ticket" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;Sales entry</a></div>
+<button type="button" class="btn btn-danger btn-circle btn-xl"><i class="fa fa-ticket" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label">Sales entry</span></a></div>
 <div class="top" >
 <a href="">
 
-<button type="button" class="btn btn-see btn-circle btn-xl"><i class="fa fa-plus" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</a></div>
+<button type="button" class="btn btn-see btn-circle btn-xl"><i class="fa fa-plus" aria-hidden="true"></i></button><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="col-lg-3 control-label">Add</span></a></div>
 
 
 <br />
 <br />
 <div style="width:100%">
      <div style="float:left; width:50%">
-             <h3 style="clear:both">Purchase Report</h3>
+             <h3 style="clear:both" class="col-lg-3 control-label">Purchase Report</h3>
             <asp:Chart ID="Chart2" width="400px"   runat="server" Palette="Chocolate"><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
      </div>
      <div style="float:left; width:50%;">
-                 <h3>Sales report</h3>
+                 <h3 class="col-lg-3 control-label">Sales report</h3>
 
               <asp:Chart ID="Chart1" width="400px"   runat="server"><Series><asp:Series Name="Series1"></asp:Series></Series><ChartAreas><asp:ChartArea Name="ChartArea1"></asp:ChartArea></ChartAreas></asp:Chart>
       </div>
@@ -424,7 +425,7 @@
 
 </div>
 
-<h2 style="margin-top:20px">Product Stock</h2>
+<h1 style="margin-top:20px" class="col-lg-3 control-label">Product Stock</h1>
                         
                     <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
          Font-Size="16px" 
@@ -435,13 +436,13 @@
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
        <Columns>
       
-            <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
-           <asp:BoundField HeaderText="Product Code" DataField="Product_code"  />
-           <asp:BoundField HeaderText="Product Name" DataField="product_name" />
-             <asp:BoundField HeaderText="Barcode" DataField="barcode" />
-              <asp:BoundField HeaderText="MRP" DataField="mrp" />
-               <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" />
-                <asp:BoundField HeaderText="Qty" DataField="qty" />
+            <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice" HeaderStyle-CssClass="col-lg-3 control-label"  />
+           <asp:BoundField HeaderText="Product Code" DataField="Product_code" HeaderStyle-CssClass="col-lg-3 control-label"    />
+           <asp:BoundField HeaderText="Product Name" DataField="product_name" HeaderStyle-CssClass="col-lg-3 control-label"   />
+             <asp:BoundField HeaderText="Barcode" DataField="barcode" HeaderStyle-CssClass="col-lg-3 control-label"  />
+              <asp:BoundField HeaderText="MRP" DataField="mrp" HeaderStyle-CssClass="col-lg-3 control-label"  />
+               <asp:BoundField HeaderText="Purchase Price" DataField="purchase_price" HeaderStyle-CssClass="col-lg-3 control-label"  />
+                <asp:BoundField HeaderText="Qty" DataField="qty" HeaderStyle-CssClass="col-lg-3 control-label"  />
               
        </Columns>
        <EditRowStyle BackColor="#999999" />

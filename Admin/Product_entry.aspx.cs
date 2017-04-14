@@ -37,19 +37,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
             created();
 
 
-            if (!IsPostBack)
-            {
-                if (ViewState["Details"] == null)
-                {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Columns.Add("Code");
-                    dataTable.Columns.Add("Category Id");
-                    dataTable.Columns.Add("Subcategory Id");
-                    dataTable.Columns.Add("Product Name");
-                   
-                    ViewState["Details"] = dataTable;
-                }
-            }
+           
 
         }
     }
@@ -58,7 +46,9 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         ImageButton IMG = (ImageButton)sender;
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
         Label29.Text = ROW.Cells[1].Text;
-        TextBox16.Text = ROW.Cells[2].Text;
+        DropDownList4.SelectedItem.Text = ROW.Cells[2].Text;
+    
+        TextBox16.Text = ROW.Cells[4].Text;
 
         this.ModalPopupExtender3.Show();
     }
@@ -70,7 +60,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update product_entry set product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update product_entry set category_id='"+DropDownList4.SelectedItem.Value+"',subcategory_id='"+DropDownList6.SelectedItem.Value+"', category_name='" + DropDownList4.SelectedItem.Text + "',subcategory_name='" + DropDownList6.SelectedItem.Text + "', product_name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -96,11 +86,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         cmd1.ExecuteNonQuery();
         con1.Close();
 
-        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd2 = new SqlCommand("delete from code where code='" + Label29.Text + "' and Com_Id='" + company_id + "' ", con2);
-        con2.Open();
-        cmd2.ExecuteNonQuery();
-        con2.Close();
+       
 
         Label31.Text = "Deleted successfuly";
 
@@ -127,15 +113,11 @@ public partial class Admin_Product_entry : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + usrid+"' and and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from product_entry where code='" + usrid+"'  and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd2 = new SqlCommand("delete from code where code='" + usrid + "' and Com_Id='" + company_id + "' ", con2);
-                con2.Open();
-                cmd2.ExecuteNonQuery();
-                con2.Close();
+               
 
             }
         }
@@ -145,48 +127,75 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-
-        foreach (GridViewRow row in this.GridView2.Rows)
+        if (DropDownList3.SelectedItem.Text == "All")
         {
-            if (row.RowType == DataControlRowType.DataRow)
-            {
-                this.SaveDetail(row);
-            }
-
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select valid category')", true);
         }
+        else if (DropDownList5.SelectedItem.Text =="All")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select valid brand')", true);
+        }
+        else if (TextBox4.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter valid product')", true);
+        }
+        else
+        {
+
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1=new SqlCommand("select * from product_entry where product_name='"+TextBox4.Text+"' ",con1);
+            con1.Open();
+            SqlDataReader dr1;
+            dr1=cmd1.ExecuteReader();
+            if (dr1.HasRows)
+            {
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('product already exist')", true);
+                TextBox4.Text = "";
+            }
+            else
+            {
+
+
+                if (Session["company_id"] != null)
+                {
+                    company_id = Convert.ToInt32(Session["company_id"].ToString());
+                }
+
+                SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd = new SqlCommand("insert into product_entry values(@code,@category_id,@subcategory_id,@product_name,@Com_Id,@category_name,@subcategory_name)", CON);
+                cmd.Parameters.AddWithValue("@code", Label1.Text);
+                cmd.Parameters.AddWithValue("@category_id", DropDownList3.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@subcategory_id", DropDownList5.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@product_name", TextBox4.Text);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Parameters.AddWithValue("@category_name", DropDownList3.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@subcategory_name", DropDownList5.SelectedItem.Text);
+                CON.Open();
+                cmd.ExecuteNonQuery();
+                CON.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Product Added successfully')", true);
+                BindData();
+
+                getinvoiceno();
+
+                TextBox4.Text = "";
+            }
+        }
+
 
     }
     private void SaveDetail(GridViewRow row)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into product_entry values(@code,@category_id,@subcategory_id,@product_name,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@code", row.Cells[0].Text);
-        cmd.Parameters.AddWithValue("@category_id", row.Cells[1].Text);
-        cmd.Parameters.AddWithValue("@subcategory_id", row.Cells[2].Text);
-        cmd.Parameters.AddWithValue("@product_name", row.Cells[3].Text);
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category created successfully')", true);
-        BindData();
-        show_category();
-       
-        TextBox1.Text = "";
-
+        
 
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox1.Text = "";
+        TextBox4.Text = "";
+        getinvoiceno();
        
-        show_category();
     }
     private void active()
     {
@@ -240,11 +249,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         con.Close();
 
-        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd2 = new SqlCommand("delete from code where code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con2);
-        con2.Open();
-        cmd2.ExecuteNonQuery();
-        con2.Close();
+       
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Product entry deleted successfully')", true);
 
         BindData();
@@ -265,9 +270,9 @@ public partial class Admin_Product_entry : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select subcategoryname from subcategory where Com_Id=@Com_Id and " +
-                "subcategoryname like @subcategoryname + '%'";
-                cmd.Parameters.AddWithValue("@subcategoryname", prefixText);
+                cmd.CommandText = "select product_name from product_entry where Com_Id=@Com_Id and " +
+                "product_name like @product_name + '%'";
+                cmd.Parameters.AddWithValue("@product_name", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Connection = conn;
                 conn.Open();
@@ -276,7 +281,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["subcategoryname"].ToString());
+                        customers.Add(sdr["product_name"].ToString());
                     }
                 }
                 conn.Close();
@@ -309,8 +314,43 @@ public partial class Admin_Product_entry : System.Web.UI.Page
 
         con.Close();
 
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from product_entry where category_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+
 
        
+    }
+    protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("Select * from subcategory where category_id='" + DropDownList4.SelectedItem.Value + "' and Com_Id='" + company_id + "'", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
+
+
+        DropDownList6.DataSource = ds;
+        DropDownList6.DataTextField = "subcategoryname";
+        DropDownList6.DataValueField = "subcategory_id";
+        DropDownList6.DataBind();
+        DropDownList6.Items.Insert(0, new ListItem("All", "0"));
+
+
+
+        con.Close();
+        ModalPopupExtender3.Show();
     }
     private void show_category()
     {
@@ -339,6 +379,12 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         DropDownList3.DataValueField = "category_id";
         DropDownList3.DataBind();
         DropDownList3.Items.Insert(0, new ListItem("All", "0"));
+
+        DropDownList4.DataSource = ds;
+        DropDownList4.DataTextField = "categoryname";
+        DropDownList4.DataValueField = "category_id";
+        DropDownList4.DataBind();
+        DropDownList4.Items.Insert(0, new ListItem("All", "0"));
         con.Close();
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
@@ -411,7 +457,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
         }
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from subcategory where subcategoryname='" + TextBox1.Text + "' and Com_Id='" + company_id + "'", con1);
+        SqlCommand CMD = new SqlCommand("select * from product_entry where product_name='" + TextBox1.Text + "' and Com_Id='" + company_id + "'", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -429,7 +475,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(code) from code where Com_Id='" + company_id + "'";
+        string query = "Select Max(code) from product_entry where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -449,58 +495,30 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
-        string str = Label1.Text;
-        string str2 = DropDownList3.SelectedItem.Value;
-        string str3 = DropDownList5.SelectedItem.Value;
-        string str4 = TextBox4.Text;
        
-        dt = (DataTable)ViewState["Details"];
-        dt.Rows.Add(str,str2, str3, str4);
-        ViewState["Details"] = dt;
-        GridView2.DataSource = dt;
-        GridView2.EmptyDataText = "Code";
-        GridView2.EmptyDataText = "Category Id";
-        GridView2.EmptyDataText = "Subcategory Id";
-        GridView2.EmptyDataText = "Product Name";
-      
-        GridView2.DataBind();
-
 
        
-        TextBox4.Text = "";
-
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into code values(@code,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@code",Label1.Text);
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-      
-
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
        
       
 
-        TextBox1.Text = "";
-
-        getinvoiceno();
+        
 
 
       
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
-        Response.ContentType = "application/excel";
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        HtmlTextWriter htw = new HtmlTextWriter(sw);
-        GridView1.RenderControl(htw);
-        Response.Write(sw.ToString());
-        Response.End();
+       
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from product_entry where category_id='" + DropDownList2.SelectedItem.Value + "' and subcategory_id='"+DropDownList1.SelectedItem.Value+"' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
     }
 }

@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
-public partial class Admin_Account_ledger : System.Web.UI.Page
+public partial class Admin_View_product_details : System.Web.UI.Page
 {
     public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
@@ -36,8 +36,6 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
             {
                 company_id = Convert.ToInt32(Session["company_id"].ToString());
             }
-
-
         }
     }
     private void active()
@@ -72,7 +70,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select distinct product_name from product_entry where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select product_name from product_entry where Com_Id=@Com_Id and " +
                 "product_name like @product_name + '%'";
                 cmd.Parameters.AddWithValue("@product_name", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -103,7 +101,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select distinct Vendor_Name from Vendor where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select Vendor_Name from Vendor where Com_Id=@Com_Id and " +
                 "Vendor_Name like @Vendor_Name + '%'";
                 cmd.Parameters.AddWithValue("@Vendor_Name", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -134,7 +132,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select distinct barcode from product_stock where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select barcode from product_stock where Com_Id=@Com_Id and " +
                 "barcode like @barcode + '%'";
                 cmd.Parameters.AddWithValue("@barcode", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -155,23 +153,23 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     }
     private void show_category()
     {
+
+
+    }
+    protected void BindData()
+    {
         if (Session["company_id"] != null)
         {
             company_id = Convert.ToInt32(Session["company_id"].ToString());
         }
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM sales_entry as a where Com_Id='" + company_id + "'  group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry where Com_Id='" + company_id + "'  group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount where Com_Id='" + company_id + "'  group by date,status,amount,value", con1);
+        string purchase_no = Session["purchase_invoice"].ToString();
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from purchase_entry_details where purchase_invoice='"+purchase_no+"' and  Com_Id='" + company_id + "' ORDER BY purchase_invoice asc", con);
         DataTable dt1 = new DataTable();
-        con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
-    }
-    protected void BindData()
-    {
-        
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
@@ -182,7 +180,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     }
     private void getinvoiceno()
     {
-        
+
     }
 
 
@@ -228,7 +226,7 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
 
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
-       
+
     }
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
@@ -236,63 +234,39 @@ public partial class Admin_Account_ledger : System.Web.UI.Page
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
+
 
 
 
     }
     protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
+
     }
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM sales_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,amount,value", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+       
     }
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM sales_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' and Com_Id='" + company_id + "'   group by date,status,amount,value", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        
     }
     protected void TextBox6_TextChanged(object sender, EventArgs e)
     {
-       
+
     }
-    protected void Button1_Click(object sender, EventArgs e)
+
+
+    protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
     {
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
-        Response.ContentType = "application/excel";
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        HtmlTextWriter htw = new HtmlTextWriter(sw);
-        GridView1.RenderControl(htw);
-        Response.Write(sw.ToString());
-        Response.End();
+
+        
+
     }
-    public override void VerifyRenderingInServerForm(Control control)
+
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        /*Tell the compiler that the control is rendered
-         * explicitly by overriding the VerifyRenderingInServerForm event.*/
+        
+
     }
 }

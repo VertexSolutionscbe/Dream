@@ -147,37 +147,49 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id,@Mob_No,@salary)", CON);
-        cmd.Parameters.AddWithValue("@Emp_Code", Label1.Text);
-        cmd.Parameters.AddWithValue("@Emp_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Emp_Add", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Department", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
-        cmd.Parameters.AddWithValue("@Branch", HttpUtility.HtmlDecode(TextBox5.Text));
-        cmd.Parameters.AddWithValue("@Super_Visor", HttpUtility.HtmlDecode(TextBox6.Text));
-        cmd.Parameters.AddWithValue("@Target", HttpUtility.HtmlDecode(TextBox7.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        cmd.Parameters.AddWithValue("@Mob_No", HttpUtility.HtmlDecode(TextBox13.Text));
-        cmd.Parameters.AddWithValue("@salary", TextBox14.Text);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Staff Entry created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
-        TextBox2.Text = "";
-        show_department();
-        TextBox5.Text = "";
-        TextBox6.Text = "";
-        TextBox7.Text = "";
-        TextBox13.Text = "";
+        if (TextBox3.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter employee name')", true);
+        }
+        else if (TextBox13.Text=="")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
+        }
+        else
+        {
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
+
+            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("insert into Staff_Entry values(@Emp_Code,@Emp_Name,@Emp_Add,@Department,@Branch,@Super_Visor,@Target,@Com_Id,@Mob_No,@salary)", CON);
+            cmd.Parameters.AddWithValue("@Emp_Code", Label1.Text);
+            cmd.Parameters.AddWithValue("@Emp_Name", HttpUtility.HtmlDecode(TextBox3.Text));
+            cmd.Parameters.AddWithValue("@Emp_Add", HttpUtility.HtmlDecode(TextBox2.Text));
+            cmd.Parameters.AddWithValue("@Department", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
+            cmd.Parameters.AddWithValue("@Branch", HttpUtility.HtmlDecode(TextBox5.Text));
+            cmd.Parameters.AddWithValue("@Super_Visor", HttpUtility.HtmlDecode(TextBox6.Text));
+            cmd.Parameters.AddWithValue("@Target", HttpUtility.HtmlDecode(TextBox7.Text));
+            cmd.Parameters.AddWithValue("@Com_Id", company_id);
+            cmd.Parameters.AddWithValue("@Mob_No", HttpUtility.HtmlDecode(TextBox13.Text));
+            cmd.Parameters.AddWithValue("@salary", TextBox14.Text);
+            CON.Open();
+            cmd.ExecuteNonQuery();
+            CON.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Staff Entry created successfully')", true);
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox3.Text = "";
+            TextBox2.Text = "";
+            show_department();
+            TextBox5.Text = "";
+            TextBox6.Text = "";
+            TextBox7.Text = "";
+            TextBox13.Text = "";
+        }
 
 
     }

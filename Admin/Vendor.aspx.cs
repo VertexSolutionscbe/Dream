@@ -191,40 +191,55 @@ public partial class Admin_Vendor : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (TextBox3.Text == "")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter supplier name')", true);
         }
+        else if (TextBox2.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter address')", true);
+        }
+        else if (TextBox4.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
+        }
+        else
+        {
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Vendor values(@Vendor_Code,@Vendor_Name,@Vendor_Address,@Mobile_no,@Bank_name,@Account_no,@Account_Name,@IFSC_code,@Product,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@Vendor_Code", Label1.Text);
-        cmd.Parameters.AddWithValue("@Vendor_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Vendor_Address", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox4.Text));
-        cmd.Parameters.AddWithValue("@Bank_name", HttpUtility.HtmlDecode(TextBox11.Text));
-        cmd.Parameters.AddWithValue("@Account_no", HttpUtility.HtmlDecode(TextBox12.Text));
-        cmd.Parameters.AddWithValue("@Account_Name", HttpUtility.HtmlDecode(TextBox13.Text));
-        cmd.Parameters.AddWithValue("@IFSC_code", HttpUtility.HtmlDecode(TextBox14.Text));
-        cmd.Parameters.AddWithValue("@Product", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
+            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("insert into Vendor values(@Vendor_Code,@Vendor_Name,@Vendor_Address,@Mobile_no,@Bank_name,@Account_no,@Account_Name,@IFSC_code,@Product,@Com_Id)", CON);
+            cmd.Parameters.AddWithValue("@Vendor_Code", Label1.Text);
+            cmd.Parameters.AddWithValue("@Vendor_Name", HttpUtility.HtmlDecode(TextBox3.Text));
+            cmd.Parameters.AddWithValue("@Vendor_Address", HttpUtility.HtmlDecode(TextBox2.Text));
+            cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox4.Text));
+            cmd.Parameters.AddWithValue("@Bank_name", HttpUtility.HtmlDecode(TextBox11.Text));
+            cmd.Parameters.AddWithValue("@Account_no", HttpUtility.HtmlDecode(TextBox12.Text));
+            cmd.Parameters.AddWithValue("@Account_Name", HttpUtility.HtmlDecode(TextBox13.Text));
+            cmd.Parameters.AddWithValue("@IFSC_code", HttpUtility.HtmlDecode(TextBox14.Text));
+            cmd.Parameters.AddWithValue("@Product", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
+            cmd.Parameters.AddWithValue("@Com_Id", company_id);
 
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Vendor created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox11.Text = "";
-        TextBox12.Text = "";
-        TextBox13.Text = "";
-        TextBox14.Text = "";
-        show_product();
-        show_vendor();
+            CON.Open();
+            cmd.ExecuteNonQuery();
+            CON.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Supplier created successfully')", true);
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox3.Text = "";
+            TextBox2.Text = "";
+            TextBox4.Text = "";
+            TextBox11.Text = "";
+            TextBox12.Text = "";
+            TextBox13.Text = "";
+            TextBox14.Text = "";
+            show_product();
+            show_vendor();
+        }
 
     }
 
@@ -257,7 +272,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select Mobile_no from Vendor where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select distinct Mobile_no from Vendor where Com_Id=@Com_Id and " +
                 "Mobile_no like @Mobile_no + '%'";
                 cmd.Parameters.AddWithValue("@Mobile_no", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id",company_id);

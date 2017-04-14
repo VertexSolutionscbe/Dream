@@ -55,12 +55,7 @@ public partial class Admin_Staff_wise_report : System.Web.UI.Page
     {
        
     }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-       
-
-
-    }
+   
 
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -297,5 +292,21 @@ public partial class Admin_Staff_wise_report : System.Web.UI.Page
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
         show_category();
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
+    }
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /*Tell the compiler that the control is rendered
+         * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
 }

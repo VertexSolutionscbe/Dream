@@ -20,6 +20,12 @@
                   });
 
                  </script>
+                 <style>
+                 .tablestyles table tr td
+                 {
+                     padding:5px;
+                 }
+                 </style>
 
 
         <!-- Bootstrap -->
@@ -233,6 +239,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -593,64 +600,66 @@
    <ContentTemplate>
 
     <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>  
-       <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
-           onclick="Button5_Click"></asp:Button>  
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   
     <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
-                         HorizontalAlign="Left" ScrollBars="Both" >
+                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="400px" >
     
        
-        <div style="background-color:#4169E1; width:100%; height:30px;" >
+        <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
+                     <h3 style="font-size:20px; " class="control-label"> Update Deaprtment entry  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
   
-            <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="20px" height="20px" style="float:right" />
+
+  
+           
         </div>
+        <div class="tablestyles">
         <table>
        
         <tr>
         <td>
-            <asp:Label ID="Label28" runat="server" Text="Department Code"></asp:Label></td>
+            <asp:Label ID="Label28" runat="server" Text="Department Code" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+            <asp:Label ID="Label29" runat="server" Text="" ></asp:Label></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label30" runat="server" Text="Department Name"></asp:Label></td>
+            <asp:Label ID="Label30" runat="server" Text="Department Name" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox16" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
 
         <tr>
         <td>
-            <asp:Label ID="Label4" runat="server" Text="Floor No"></asp:Label></td>
+            <asp:Label ID="Label4" runat="server" Text="Floor No" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox9" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox9" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label2" runat="server" Text="Incharge"></asp:Label></td>
+            <asp:Label ID="Label2" runat="server" Text="Incharge" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox5" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox5" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label3" runat="server" Text="Branch Location"></asp:Label></td>
+            <asp:Label ID="Label3" runat="server" Text="Branch Location" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox6" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox6" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label5" runat="server" Text="Team members"></asp:Label></td>
+            <asp:Label ID="Label5" runat="server" Text="Team members" class="col-lg-3 control-label" Width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox10" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox10" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
      <tr>
         <td>
             <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
             
-            <asp:Button ID="Button16" runat="server" Text="Update" onclick="Button16_Click" 
+            <asp:Button ID="Button16" runat="server" Text="Update" CssClass="btn-primary" Width="70px" Height="20px" onclick="Button16_Click" 
                     style="height: 26px" />
             </ContentTemplate>
             </asp:UpdatePanel>
@@ -658,7 +667,7 @@
         <td>
          <asp:UpdatePanel ID="UpdatePanel11" runat="server">
       <ContentTemplate>
-            <asp:Button ID="Button17" runat="server" Text="Delete" 
+            <asp:Button ID="Button17" runat="server" Text="Delete" Visible="false" 
                 onclick="Button17_Click" />&nbsp;&nbsp;&nbsp;
                  </ContentTemplate>
         
@@ -669,6 +678,7 @@
        
         </tr>
         </table>
+        </div>
        
 
         </asp:Panel>

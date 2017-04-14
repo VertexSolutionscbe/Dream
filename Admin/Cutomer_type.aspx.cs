@@ -91,24 +91,46 @@ public partial class Admin_Cutomer_type : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (TextBox3.Text == "")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter customer type')", true);
         }
+        else
+        {
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Customer_type values(@type_id,@type_name,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@type_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@type_name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+             SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+             SqlCommand cmd1 = new SqlCommand("select * from Customer_type where type_name='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+            con1.Open();
+            SqlDataReader dr1;
+            dr1=cmd1.ExecuteReader();
+            if (dr1.HasRows)
+            {
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('customer type already exist')", true);
+                TextBox3.Text = "";
+            }
+            else
+            {
+                if (Session["company_id"] != null)
+                {
+                    company_id = Convert.ToInt32(Session["company_id"].ToString());
+                }
+
+                SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd = new SqlCommand("insert into Customer_type values(@type_id,@type_name,@Com_Id)", CON);
+                cmd.Parameters.AddWithValue("@type_id", Label1.Text);
+                cmd.Parameters.AddWithValue("@type_name", HttpUtility.HtmlDecode(TextBox3.Text));
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                CON.Open();
+                cmd.ExecuteNonQuery();
+                CON.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
+                BindData();
+                show_category();
+                getinvoiceno();
+                TextBox3.Text = "";
+            }
+        }
 
 
     }

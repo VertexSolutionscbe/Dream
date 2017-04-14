@@ -39,27 +39,38 @@
             </SelectParameters>
         </asp:ObjectDataSource>
     </div>
-    <asp:Button ID="Button1" runat="server" Text="Print" OnClientClick="printdiv()" 
+    <asp:Button ID="Button1" runat="server" Text="Print" OnClientClick="Print()" 
         onclick="Button1_Click"/>
     <asp:Button ID="Button2" runat="server" Text="Back" onclick="Button2_Click" />
-    <script>
-    function printdiv() {
-   //Code for adding HTML content to report viwer
-    var headstr = "<html><head><title></title></head><body>";
-    //End of body tag
-    var footstr = "</body></html>";
-    //This the main content to get the all the html content inside the report viewer control
-    //"ReportViewer1_ctl10" is the main div inside the report viewer
-    //controls who helds all the tables and divs where our report contents or data is available
-    var newstr = $("#ReportViewer1_ctl10").html();
-    //open blank html for printing
-    var popupWin = window.open('', '_blank');
-    //paste data of printing in blank html page
-    popupWin.document.write(headstr + newstr + footstr);
-    //print the page and see is what you see is what you get
-    popupWin.print(); 
-    return false;
-}
+    <script type="text/javascript">
+        function Print() {
+            var report = document.getElementById("<%=ReportViewer1.ClientID %>");
+            var div = report.getElementsByTagName("DIV");
+            var reportContents;
+            for (var i = 0; i < div.length; i++) {
+                if (div[i].id.indexOf("VisibleReportContent") != -1) {
+                    reportContents = div[i].innerHTML;
+                    break;
+                }
+            }
+            var frame1 = document.createElement('iframe');
+            frame1.name = "frame1";
+            frame1.style.position = "absolute";
+            frame1.style.top = "-1000000px";
+            document.body.appendChild(frame1);
+            var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument;
+            frameDoc.document.open();
+            frameDoc.document.write('<html><head><title>RDLC Report</title>');
+            frameDoc.document.write('</head><body style = "font-family:arial;font-size:10pt;">');
+            frameDoc.document.write(reportContents);
+            frameDoc.document.write('</body></html>');
+            frameDoc.document.close();
+            setTimeout(function () {
+                window.frames["frame1"].focus();
+                window.frames["frame1"].print();
+                document.body.removeChild(frame1);
+            }, 500);
+        }
 </script>
     </form>
 </body>

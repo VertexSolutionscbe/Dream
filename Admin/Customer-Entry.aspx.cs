@@ -15,6 +15,7 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
 
+
 public partial class Admin_Customer_Entry : System.Web.UI.Page
 {
     public static int company_id = 0;
@@ -127,15 +128,23 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
+
         if (TextBox3.Text == "")
         {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter customer name')", true);
+
+        }
+        else if (TextBox9.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
         }
         else
         {
+
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
             SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
             SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Profession,@Customer_Type,@Com_Id,@friend_name,@Friend_mobile_No)", CON);
             cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
@@ -374,55 +383,20 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
-        Response.Clear();
-        Response.Buffer = true;
-        Response.AddHeader("content-disposition", "attachment;filename=GridViewExport.xls");
-        Response.Charset = "";
-        Response.ContentType = "application/vnd.ms-excel";
-        using (StringWriter sw = new StringWriter())
-        {
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-
-            //To Export all pages
-            GridView1.AllowPaging = false;
-            this.BindData();
-
-            GridView1.HeaderRow.BackColor = Color.White;
-            foreach (TableCell cell in GridView1.HeaderRow.Cells)
-            {
-                cell.BackColor = GridView1.HeaderStyle.BackColor;
-            }
-            foreach (GridViewRow row in GridView1.Rows)
-            {
-                row.BackColor = Color.White;
-                foreach (TableCell cell in row.Cells)
-                {
-                    if (row.RowIndex % 2 == 0)
-                    {
-                        cell.BackColor = GridView1.AlternatingRowStyle.BackColor;
-                    }
-                    else
-                    {
-                        cell.BackColor = GridView1.RowStyle.BackColor;
-                    }
-                    cell.CssClass = "textmode";
-                }
-            }
-
-            GridView1.RenderControl(hw);
-
-            //style to format numbers to string
-            string style = @"<style> .textmode { } </style>";
-            Response.Write(style);
-            Response.Output.Write(sw.ToString());
-            Response.Flush();
-            Response.End();
-        }
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
 
     }
     public override void VerifyRenderingInServerForm(Control control)
     {
-        /* Verifies that the control is rendered */
+        /*Tell the compiler that the control is rendered
+         * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
     protected void TextBox9_TextChanged(object sender, EventArgs e)
     {

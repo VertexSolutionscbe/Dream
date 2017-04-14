@@ -14,7 +14,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 #endregion
-
 public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
 {
     public static int company_id = 0;
@@ -55,12 +54,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     {
 
     }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-
-
-
-    }
+    
 
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -334,5 +328,25 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
+    }
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.ClearContent();
+        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
+        Response.ContentType = "application/excel";
+        System.IO.StringWriter sw = new System.IO.StringWriter();
+        HtmlTextWriter htw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(htw);
+        Response.Write(sw.ToString());
+        Response.End();
+    }
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /*Tell the compiler that the control is rendered
+         * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
 }

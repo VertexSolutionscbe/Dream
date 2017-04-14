@@ -247,6 +247,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -437,7 +438,8 @@
                <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged"  />
                 </Triggers>
     </asp:UpdatePanel>
-  
+  <asp:Button ID="Button1" runat="server" Text="Export to excel" 
+        onclick="Button1_Click"></asp:Button>
 </div>
            
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">

@@ -145,15 +145,22 @@ public partial class Admin_Customer_Wholesale : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
-        {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
-        }
+
         if (TextBox3.Text == "")
         {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter customer name')", true);
+
+        }
+        else if (TextBox9.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
         }
         else
         {
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
             SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
             SqlCommand cmd = new SqlCommand("insert into customer_wholesale values(@WSCustomer_code,@WSCustomer_Name,@WSCustomer_Add,@Mobile_no,@Profession,@Customer_Type,@Com_Id,@friend_name,@Friend_mobile_No)", CON);
             cmd.Parameters.AddWithValue("@WSCustomer_code", Label1.Text);

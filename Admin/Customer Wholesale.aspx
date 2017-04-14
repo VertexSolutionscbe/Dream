@@ -22,7 +22,13 @@
 
                  </script>
 
-
+                  <style>
+                 .tablestyles table tr td
+                 {
+                     padding:5px;
+                 }
+                 
+                 </style>
 
                   <script type="text/javascript" language="javascript">
                       document.getElementById("TextBox5")
@@ -344,6 +350,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -747,63 +754,67 @@
   
   
     <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
-                         HorizontalAlign="Left" ScrollBars="Both" >
+                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="300px" >
     
        
-        <div style="background-color:#4169E1; width:100%; height:30px;" >
+          <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
+                     <h3 style="font-size:20px; " class="control-label"> Update category  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
   
-            <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="20px" height="20px" style="float:right" />
+
+  
+           
         </div>
+        <div class="tablestyles">
         <table>
        
         <tr>
         <td>
-            <asp:Label ID="Label28" runat="server" Text="Customer Code"></asp:Label></td>
+            <asp:Label ID="Label28" runat="server" Text="Customer Code" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+            <asp:Label ID="Label29" runat="server" Text="" ></asp:Label></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label30" runat="server" Text="Customer Name"></asp:Label></td>
+            <asp:Label ID="Label30" runat="server" Text="Customer Name" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox16" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
       <tr>
         <td>
-            <asp:Label ID="Label2" runat="server" Text="Customer Address"></asp:Label></td>
+            <asp:Label ID="Label2" runat="server" Text="Customer Address" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox6" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox6" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label5" runat="server" Text="Mobile No"></asp:Label></td>
+            <asp:Label ID="Label5" runat="server" Text="Mobile No" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox10" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox10" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
        
          <tr>
         <td>
-            <asp:Label ID="Label3" runat="server" Text="Profession"></asp:Label></td>
+            <asp:Label ID="Label3" runat="server" Text="Profession" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox7" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox7" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label4" runat="server" Text="Customer Type"></asp:Label></td>
+            <asp:Label ID="Label4" runat="server" Text="Customer Type" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox8" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox8" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
                 <tr>
         <td>
-            <asp:Label ID="Label6" runat="server" Text="Friend or Referral name"></asp:Label></td>
+            <asp:Label ID="Label6" runat="server" Text="Friend or Referral name" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox12" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox12" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>    
                <tr>
         <td>
-            <asp:Label ID="Label7" runat="server" Text="Mobile No"></asp:Label></td>
+            <asp:Label ID="Label7" runat="server" Text="Mobile No" class="col-lg-3 control-label" width="200px"></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox13" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox13" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>      
         
                     
@@ -813,7 +824,7 @@
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:Button ID="Button16" runat="server" onclick="Button16_Click" 
+                            <asp:Button ID="Button16" runat="server" onclick="Button16_Click" CssClass="btn-primary" 
                                 style="height: 26px" Text="Update" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -821,7 +832,7 @@
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                         <ContentTemplate>
-                            <asp:Button ID="Button17" runat="server" onclick="Button17_Click" 
+                            <asp:Button ID="Button17" runat="server" onclick="Button17_Click" Visible="false" 
                                 Text="Delete" />
                             &nbsp;&nbsp;&nbsp;
                         </ContentTemplate>
@@ -830,7 +841,7 @@
                 </td>
             </tr>
         </table>
-       
+       </div>
 
         </asp:Panel>
        <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">

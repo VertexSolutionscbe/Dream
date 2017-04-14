@@ -21,6 +21,13 @@
                   });
 
                  </script>
+                 <style>
+                 .tablestyles table tr td
+                 {
+                    padding:5px; 
+                 }
+                 
+                 </style>
 
 
         <!-- Bootstrap -->
@@ -234,6 +241,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -457,7 +465,7 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel14" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox14" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox14" runat="server" CssClass="form-control input-x2 dropbox"></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
@@ -552,27 +560,7 @@
   <div class="panel-body">
                         <div class="col-md-12" >
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Show &nbsp;<asp:DropDownList ID="DropDownList4" runat="server" class="dropbox1" style="margin-top:10px;">
-                                    <asp:ListItem>5</asp:ListItem>
-                                        <asp:ListItem>10</asp:ListItem>
-                                        <asp:ListItem>25</asp:ListItem>
-                                        <asp:ListItem>50</asp:ListItem>
-                                        <asp:ListItem>100</asp:ListItem>
-                                        <asp:ListItem>200</asp:ListItem>
-                                        <asp:ListItem>300</asp:ListItem>
-                                        <asp:ListItem>400</asp:ListItem>
-                                        <asp:ListItem>500</asp:ListItem>
-                                        <asp:ListItem>700</asp:ListItem>
-                                        <asp:ListItem>1000</asp:ListItem>
-                                        <asp:ListItem></asp:ListItem>
                                     
-                                    
-                                    </asp:DropDownList>&nbsp; Entries </h3>
-                                    <hr />
-                                    <div class="panel-actions">
-                                        <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
-                                        <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
-                                    </div>
                                 </div>
 
                                 <div class="panel-body">
@@ -642,7 +630,7 @@
     <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                  <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
-                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+              
                    <asp:AsyncPostBackTrigger ControlID="Button16" EventName="Click"  />
                      <asp:AsyncPostBackTrigger ControlID="Button17" EventName="Click"  />
                        <asp:AsyncPostBackTrigger ControlID="Button14" EventName="Click"  />
@@ -659,76 +647,76 @@
 
     <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
         
-        <asp:Button ID="Button5" runat="server" Text="Export To Excel" 
-           onclick="Button5_Click"></asp:Button>
-        
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   
   
     <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
-                         HorizontalAlign="Left" ScrollBars="Both" >
+                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="300px" >
     
        
-        <div style="background-color:#4169E1; width:100%; height:30px;" >
+        <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
+                     <h3 style="font-size:20px; " class="control-label"> Update staff entry  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
   
-            <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="20px" height="20px" style="float:right" />
+  
+           
         </div>
+        <div class="tablestyles">
         <table>
        
         <tr>
         <td>
-            <asp:Label ID="Label28" runat="server" Text="Employee code"></asp:Label></td>
+            <asp:Label ID="Label28" runat="server" Text="Employee code" Width="200px" class="col-lg-3 control-label"  ></asp:Label></td>
         <td>
             <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label30" runat="server" Text="Employee Name"></asp:Label></td>
+            <asp:Label ID="Label30" runat="server" Text="Employee Name" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox16" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox16" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label2" runat="server" Text="Employee Address"></asp:Label></td>
+            <asp:Label ID="Label2" runat="server" Text="Employee Address" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox8" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox8" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label3" runat="server" Text="Department"></asp:Label></td>
+            <asp:Label ID="Label3" runat="server" Text="Department" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-       <asp:DropDownList ID="DropDownList3" runat="server" CssClass="paneltext"></asp:DropDownList></td>
+       <asp:DropDownList ID="DropDownList3" runat="server" class="form-control input-x2 dropbox"></asp:DropDownList></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label4" runat="server" Text="Branch"></asp:Label></td>
+            <asp:Label ID="Label4" runat="server" Text="Branch" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox10" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox10" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label5" runat="server" Text="Super_Visor"></asp:Label></td>
+            <asp:Label ID="Label5" runat="server" Text="Super Visor" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox11" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox11" runat="server" class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label6" runat="server" Text="Target"></asp:Label></td>
+            <asp:Label ID="Label6" runat="server" Text="Target" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox12" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox12" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
          <tr>
         <td>
-            <asp:Label ID="Label7" runat="server" Text="salary"></asp:Label></td>
+            <asp:Label ID="Label7" runat="server" Text="salary" Width="200px" class="col-lg-3 control-label" ></asp:Label></td>
         <td>
-            <asp:TextBox ID="TextBox15" runat="server"  CssClass="paneltext"></asp:TextBox></td>
+            <asp:TextBox ID="TextBox15" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
      <tr>
         <td>
             <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
             
-            <asp:Button ID="Button16" runat="server" Text="Update" onclick="Button16_Click" 
+            <asp:Button ID="Button16" runat="server" Text="Update" CssClass="btn-primary" onclick="Button16_Click" 
                     style="height: 26px" />
             </ContentTemplate>
             </asp:UpdatePanel>
@@ -736,7 +724,7 @@
         <td>
          <asp:UpdatePanel ID="UpdatePanel11" runat="server">
       <ContentTemplate>
-            <asp:Button ID="Button17" runat="server" Text="Delete" 
+            <asp:Button ID="Button17" runat="server" Text="Delete" Visible="false" 
                 onclick="Button17_Click" />&nbsp;&nbsp;&nbsp;
                  </ContentTemplate>
         
@@ -747,7 +735,7 @@
        
         </tr>
         </table>
-       
+       </div>
 
         </asp:Panel>
        <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using Microsoft.Reporting.WebForms;
-using DataSet2TableAdapters;
+
 
 
 public partial class Admin_Sales_report : System.Web.UI.Page
@@ -28,7 +28,7 @@ public partial class Admin_Sales_report : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        
+        Response.Redirect("~/Admin/Sales_entry.aspx");
 
 
     }

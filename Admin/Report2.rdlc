@@ -344,7 +344,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox39</rd:DefaultName>
@@ -376,7 +378,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>product_name</rd:DefaultName>
@@ -408,7 +412,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>qty</rd:DefaultName>
@@ -440,7 +446,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>mrp</rd:DefaultName>
@@ -472,7 +480,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Expr2</rd:DefaultName>
@@ -520,44 +530,11 @@
           </Border>
         </Style>
       </Tablix>
-      <Line Name="Line3">
-        <Left>5.15428cm</Left>
-        <Height>6.16515cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
       <Line Name="Line5">
         <Top>6.16515cm</Top>
         <Height>0cm</Height>
         <Width>9.36188cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Line Name="Line6">
-        <Left>3.91653cm</Left>
-        <Height>6.16515cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Line Name="Line7">
-        <Left>6.51774cm</Left>
-        <Height>6.16515cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -567,8 +544,8 @@
       <Line Name="Line1">
         <Top>0.6cm</Top>
         <Height>0cm</Height>
-        <Width>8.48529cm</Width>
-        <ZIndex>5</ZIndex>
+        <Width>9.36188cm</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -578,7 +555,7 @@
       <Line Name="Line2">
         <Height>0cm</Height>
         <Width>9.36188cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -590,30 +567,7 @@
         <Left>9.36188cm</Left>
         <Height>6.12987cm</Height>
         <Width>0cm</Width>
-        <ZIndex>7</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Line Name="Line10">
-        <Top>0.03528cm</Top>
-        <Left>1.38804cm</Left>
-        <Height>6.12987cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>8</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Line Name="Line11">
-        <Top>0.03528cm</Top>
-        <Height>6.12987cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -622,12 +576,14 @@
       </Line>
     </ReportItems>
     <Height>2.48625in</Height>
-    <Style />
+    <Style>
+      <Border />
+    </Style>
   </Body>
   <Width>3.74466in</Width>
   <Page>
     <PageHeader>
-      <Height>6.11188cm</Height>
+      <Height>2.40625in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <ReportItems>
         <Textbox Name="Textbox12">
@@ -936,9 +892,8 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.79917cm</Height>
+      <Height>2.28314in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Textbox Name="total_amount1">
           <CanGrow>true</CanGrow>
@@ -948,7 +903,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!total_amount.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -979,7 +936,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!grand_total.Value, "DataSet1")</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1107,7 +1066,9 @@
                   </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>total_qty</rd:DefaultName>
@@ -1133,15 +1094,11 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>21cm</PageHeight>
-    <PageWidth>14.8cm</PageWidth>
-    <LeftMargin>0cm</LeftMargin>
-    <RightMargin>0cm</RightMargin>
-    <TopMargin>0cm</TopMargin>
-    <BottomMargin>0cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <PageHeight>9.84252in</PageHeight>
+    <PageWidth>4in</PageWidth>
+    <ColumnSpacing>0.05118in</ColumnSpacing>
     <Style />
   </Page>
   <rd:ReportID>a2569aff-14ff-48bf-b5a5-5702fd1ba922</rd:ReportID>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
 </Report>

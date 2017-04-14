@@ -91,24 +91,46 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (TextBox3.Text == "")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter tax name')", true);
         }
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1=new SqlCommand("select * from Tax where tax_per='"+TextBox3.Text+"' and Com_Id='" + company_id + "' ",con1);
+            con1.Open();
+            SqlDataReader dr1;
+            dr1=cmd1.ExecuteReader();
+            if (dr1.HasRows)
+            {
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('product already exist')", true);
+                TextBox3.Text = "";
+            }
+            else
+            {
+
+                if (Session["company_id"] != null)
+                {
+                    company_id = Convert.ToInt32(Session["company_id"].ToString());
+                }
+
+                SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per,@Com_Id)", CON);
+                cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
+                cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                CON.Open();
+                cmd.ExecuteNonQuery();
+                CON.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Tax created successfully')", true);
+                BindData();
+                show_category();
+                getinvoiceno();
+                TextBox3.Text = "";
+            }
+        }
 
 
     }

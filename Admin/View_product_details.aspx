@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="Purchase_pay_amount.aspx.cs" Inherits="Admin_Purchase_pay_amount" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="View_product_details.aspx.cs" Inherits="Admin_View_product_details" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -35,6 +35,7 @@
         <!--        <link rel="stylesheet" href="css/nanoscroller.css">-->
         <link href="css/menu.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
+        <link href="css1/Stock_Inventorycss.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,113 +44,6 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <style>
-            .completionList {
-        border:solid 1px Gray;
-        margin:0px;
-        padding:3px;
-        height: 120px;
-        overflow:auto;
-        background-color:#FAEBD7;     
-        } 
-        .listItem {
-        color: #191919;
-        } 
-        .itemHighlighted {
-        background-color: #ADD6FF;       
-        }
-            .red
-            {
-                text-align:center;
-            }
-            .goo
-            {
-               color:#13c4a5;
-            }
-            .goo:hover
-            {
-                color:#3a5a7a;
-            }
-            .color
-            {
-                color:#555555;
-                height:30px;
-            }
-        .dropbox
-        {
-            width:100%;
-            height:30px;
-        display: block;
-        font-size:16px;
-        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
-   
- }
-        .gvwCasesPager
-        {
-           
-          color:black;
-          margin-right:20px;
-          text-align:right;
-          padding:20px;
-        }
-        .gvwCasesPager a
-            {
-               
-                margin-left:10px;
-                margin-right:10px;
-                font-size:20px;
-                
-                 padding:10px;
-                
-              
-              
-            }
-
-         .dropbox1
-        {
-            width:10%;
-            height:30px;
-           
-           
-            
-        }
-        
-        .see
-        {
-           height:400px; 
-           margin-top:-60px;
-        }
-        .see1
-        {
-            margin-top:-20px;
-        }
-         .see2
-        {
-          
-            margin-left:-15px;
-            margin-bottom:30px;
-        }
-        
-          @media (max-width: 767px)
-        {
-             .see
-        {
-           height:400px; 
-           margin-top:-10px;
-        }
-         .see1
-        {
-            margin-top:-40px;
-        }
-         .see2
-        {
-            margin-top:50px;
-            
-        }
-      
-        }
-        
-        </style>
     </head>
     <body>
         <!-- Static navbar -->
@@ -181,7 +75,7 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                            
-                          <li class="dropdown">
+                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
@@ -234,7 +128,7 @@
         </nav>
         <section class="page">
 
-              <nav class="navbar-aside navbar-static-side" role="navigation">
+            <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -371,7 +265,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h2>Purchase payment check
+                                <h2>Product details
                                  </h2>
                              
                              
@@ -400,114 +294,47 @@
                         
  
   <div class="panel panel-default">
- 
-
-
-
-  
-<div class="col-lg-12">
-
-
-<hr />
-</div>
-
-
-<div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">Supplier name</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-   <ContentTemplate>
-  
-                                    <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
-                                        ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                                    
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-   <div class="col-md-6">
-
-                        <div class="form-group"><label class="col-lg-3 control-label">Date</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-   <ContentTemplate>
-  <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" 
-           ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                                  <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox4"></asp:CalendarExtender>
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-</div>
-
-
-
-
-
-<div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">Customer Address</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-   <ContentTemplate>
-  
-                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
-                                        ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                                    
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-
-
-
-   <div class="col-md-6">
-
-                        <div class="form-group"><label class="col-lg-3 control-label">Total outstanding</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-   <ContentTemplate>
-  <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" 
-           ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                                  
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
-
-</div>
-
-
-<div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">Paid Amount</label>
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-   <ContentTemplate>
-  
-                                    <asp:TextBox ID="TextBox5" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
-                                        ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                                    
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
+  <div class="panel-body">
+   
 
 
 
 
    
 
+
+
+
+
+
+
+
+
+
+
 </div>
 
-<asp:Button ID="Button2" runat="server" Text="Save" Width="100px" 
-          onclick="Button2_Click"></asp:Button>
-</div>
+
+
+  <div class="panel-body">
+   <div class="col-md-6">
+
+                             
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
 
 </div>
 
@@ -515,9 +342,7 @@
 
 
 
-
-
-
+</div></div>
 
 <div class="container">
 
@@ -527,28 +352,27 @@
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
    
- <asp:GridView ID="GridView1" runat="server" Width="100%" AutoGenerateColumns="False" CellPadding="4" 
+ <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
          Font-Size="16px" 
-            AllowPaging="True" 
+           AutoGenerateColumns="False" AllowPaging="True" 
         onpageindexchanging="GridView1_PageIndexChanging" 
         onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
         GridLines="None" PageSize="4">
        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-      <Columns>
+       <Columns>
       
-      
-      
-         <asp:BoundField HeaderText="No" DataField="NO"  />
-       <asp:BoundField HeaderText="Supplier" DataField="Buyer"  />
-        <asp:BoundField HeaderText="Date" DataField="Pay_date" DataFormatString="{0:dd/MM/yyyy}"  />
-         <asp:BoundField HeaderText="Purchase value" DataField="Estimate_value"  />
-          <asp:BoundField HeaderText="Address" DataField="address"  />
-         <asp:BoundField HeaderText="Total Amount" DataField="total_amount"  />
-            <asp:BoundField HeaderText="Paid amount" DataField="pay_amount"  />
-              <asp:BoundField HeaderText="Pending amount" DataField="pending_amount"  />
-               <asp:BoundField HeaderText="Total Outstanding" DataField="outstanding"  />
-      
-      </Columns>
+               <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
+                 <asp:BoundField HeaderText="Product name" DataField="Product_name"  />
+           <asp:BoundField HeaderText="Barcode" DataField="barcode"  />
+           <asp:BoundField HeaderText="Mrp" DataField="mrp" />
+             <asp:BoundField HeaderText="Purchase price" DataField="Purchase_price" />
+            
+              <asp:BoundField HeaderText="Qty" DataField="qty" />
+               <asp:BoundField HeaderText="Tax" DataField="tax" />
+                <asp:BoundField HeaderText="Tax Amount" DataField="tax_amount" />
+                   <asp:BoundField HeaderText="Total Amount" DataField="total_amount" />
+                 
+       </Columns>
        <EditRowStyle BackColor="#999999" />
        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
        <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
@@ -567,8 +391,8 @@
         </ContentTemplate>
                                      <Triggers>
               
-              
-                    
+                  
+                   
                   
                   </Triggers>
               
@@ -576,20 +400,12 @@
                
               
                            </asp:UpdatePanel>
-                           <asp:Button ID="Button1" runat="server" 
-           Text="Export to excel" onclick="Button1_Click"></asp:Button>
+</div></div></div></div>
 
 
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
+
+</div></div></div></div></div></div>
+
                 
                    
                   
@@ -673,7 +489,3 @@
         </form>
     </body>
 </html>
-
-
-
-

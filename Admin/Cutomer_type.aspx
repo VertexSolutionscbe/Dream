@@ -36,6 +36,13 @@
                  }
              }
 </script>
+<style>
+.tablestyles table tr td
+{
+    padding:10px;
+}
+
+</style>
           <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 
           <script src="bootstrap/js/bootstrap-select.js"></script>
@@ -247,6 +254,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -518,30 +526,34 @@
                             <!-- End .form-group  -->
       <asp:Button ID="Button8" runat="server" Text="Button" style="display:none" />
         <asp:Panel ID="panelup" runat="server" class="panel0" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none" 
-                         HorizontalAlign="Left" ScrollBars="Both" Width="300px" Height="150px"  >
-        <div style="background-color:#4169E1; width:100%; height:30px;" >
+                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="220px"  >
+         <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
+                     <h3 style="font-size:20px; " class="control-label"> Update category  <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
   
-            <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" />
+  
+           
         </div>
+        <div class="tablestyles">
         <table>
        
         <tr>
         <td>
-            <asp:Label ID="Label15" runat="server" CssClass="labelstyle" Text="Category Id"></asp:Label></td>
+            <asp:Label ID="Label15" runat="server" class="col-lg-3 control-label" Text="Category Id"></asp:Label></td>
         <td>
             <asp:Label ID="Label16" runat="server" Text=""></asp:Label></td>
         </tr>
         <tr>
         <td>
-            <asp:Label ID="Label17" runat="server" CssClass="labelstyle" Text="Category Name"></asp:Label></td>
+            <asp:Label ID="Label17" runat="server" class="col-lg-3 control-label" Text="Category Name"></asp:Label></td>
         <td>
             <asp:TextBox ID="TextBox11" runat="server" CssClass="paneltext0"></asp:TextBox></td>
         </tr>
         <tr>
+        <td></td>
         <td>
           <asp:UpdatePanel ID="UpdatePanel6" runat="server">
       <ContentTemplate>
-            <asp:Button ID="Button9" runat="server"  Text="Update" onclick="Button9_Click" />
+            <asp:Button ID="Button9" runat="server" CssClass="btn-primary"  Text="Update" onclick="Button9_Click" />
               </ContentTemplate>
          
           </asp:UpdatePanel> 
@@ -551,7 +563,7 @@
          <asp:UpdatePanel ID="UpdatePanel10" runat="server">
       <ContentTemplate>
 
-            <asp:Button ID="Button10" runat="server" Text="Delete" 
+            <asp:Button ID="Button10" runat="server" Text="Delete" Visible="false" 
                 onclick="Button10_Click" />&nbsp;&nbsp;&nbsp;<asp:Label ID="Label18" runat="server" Text=""></asp:Label></td>
                 
                     </ContentTemplate>
@@ -560,6 +572,7 @@
        
         </tr>
         </table>
+        </div>
 
 
         </asp:Panel>

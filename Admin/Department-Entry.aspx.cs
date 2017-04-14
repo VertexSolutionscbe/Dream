@@ -125,32 +125,40 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (TextBox3.Text == "")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter department name')", true);
         }
+        else
+        {
 
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Department values(@Depart_Code,@Depart_Name,@Incharge,@Branch_Location,@Com_Id,@Team_Members,@floor_no)", CON);
-        cmd.Parameters.AddWithValue("@Depart_Code", Label1.Text);
-        cmd.Parameters.AddWithValue("@Depart_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Incharge", HttpUtility.HtmlDecode(TextBox2.Text));
-        cmd.Parameters.AddWithValue("@Branch_Location", HttpUtility.HtmlDecode(TextBox4.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        cmd.Parameters.AddWithValue("@Team_Members", HttpUtility.HtmlDecode(TextBox7.Text));
-        cmd.Parameters.AddWithValue("@floor_no", TextBox8.Text);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Department Details created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
-        TextBox7.Text = "";
-        TextBox8.Text = "";
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
+
+            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("insert into Department values(@Depart_Code,@Depart_Name,@Incharge,@Branch_Location,@Com_Id,@Team_Members,@floor_no)", CON);
+            cmd.Parameters.AddWithValue("@Depart_Code", Label1.Text);
+            cmd.Parameters.AddWithValue("@Depart_Name", HttpUtility.HtmlDecode(TextBox3.Text));
+            cmd.Parameters.AddWithValue("@Incharge", HttpUtility.HtmlDecode(TextBox2.Text));
+            cmd.Parameters.AddWithValue("@Branch_Location", HttpUtility.HtmlDecode(TextBox4.Text));
+            cmd.Parameters.AddWithValue("@Com_Id", company_id);
+            cmd.Parameters.AddWithValue("@Team_Members", HttpUtility.HtmlDecode(TextBox7.Text));
+            cmd.Parameters.AddWithValue("@floor_no", TextBox8.Text);
+            CON.Open();
+            cmd.ExecuteNonQuery();
+            CON.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Department Details created successfully')", true);
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox3.Text = "";
+            TextBox2.Text = "";
+            TextBox4.Text = "";
+            TextBox7.Text = "";
+            TextBox8.Text = "";
+        }
 
 
     }
@@ -216,7 +224,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         con.Close();
 
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Details deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Deaprtment Details deleted successfully')", true);
 
         BindData();
         show_category();
@@ -326,14 +334,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
-        Response.ClearContent();
-        Response.AddHeader("content-disposition", "attachment; filename=gvtoexcel.xls");
-        Response.ContentType = "application/excel";
-        System.IO.StringWriter sw = new System.IO.StringWriter();
-        HtmlTextWriter htw = new HtmlTextWriter(sw);
-        GridView1.RenderControl(htw);
-        Response.Write(sw.ToString());
-        Response.End();
+       
     }
 
 }

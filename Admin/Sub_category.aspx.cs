@@ -45,7 +45,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         ImageButton IMG = (ImageButton)sender;
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
         Label29.Text = ROW.Cells[1].Text;
-        Label3.Text = ROW.Cells[2].Text;
+        DropDownList4.SelectedItem.Text= ROW.Cells[2].Text;
         TextBox16.Text = ROW.Cells[3].Text;
        
         this.ModalPopupExtender3.Show();
@@ -58,12 +58,12 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         }
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update subcategory set category_name='" + HttpUtility.HtmlDecode(Label3.Text) + "', subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update subcategory set category_id='" + DropDownList4.SelectedItem.Value+ "', category_name='" + HttpUtility.HtmlDecode(DropDownList4.SelectedItem.Text) + "', subcategoryname='" + HttpUtility.HtmlDecode(TextBox16.Text) + "' where subcategory_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
         CON.Close();
-        Label31.Text = "updated successfuly";
+        Label31.Text = "Updated successfuly";
       
         this.ModalPopupExtender3.Hide();
         BindData();
@@ -84,7 +84,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         con1.Close();
 
        
-        Label31.Text = "deleted successfuly";
+        Label31.Text = "Deleted successfuly";
      
         this.ModalPopupExtender3.Hide();
         BindData();
@@ -115,31 +115,58 @@ public partial class Admin_Sub_category : System.Web.UI.Page
 
             }
         }
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Brand deleted successfully')", true);
         BindData();
         getinvoiceno();
 
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (DropDownList3.SelectedItem.Text == "All")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please Select valid category')", true);
         }
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id,@Com_Id,@category_name)", CON);
-        cmd.Parameters.AddWithValue("@subcategory_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@subcategoryname", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@category_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        cmd.Parameters.AddWithValue("@category_name", DropDownList3.SelectedItem.Text);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+        else if (TextBox3.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter brand name')", true);
+        }
+        else
+        {
+             SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+             SqlCommand cmd1 = new SqlCommand("select * from subcategory where subcategoryname='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+            con1.Open();
+            SqlDataReader dr1;
+            dr1=cmd1.ExecuteReader();
+            if (dr1.HasRows)
+            {
+
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Brand already exist')", true);
+                TextBox3.Text = "";
+            }
+            else
+            {
+
+                if (Session["company_id"] != null)
+                {
+                    company_id = Convert.ToInt32(Session["company_id"].ToString());
+                }
+                SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd = new SqlCommand("insert into subcategory values(@subcategory_id,@subcategoryname,@category_id,@Com_Id,@category_name)", CON);
+                cmd.Parameters.AddWithValue("@subcategory_id", Label1.Text);
+                cmd.Parameters.AddWithValue("@subcategoryname", HttpUtility.HtmlDecode(TextBox3.Text));
+                cmd.Parameters.AddWithValue("@category_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Parameters.AddWithValue("@category_name", DropDownList3.SelectedItem.Text);
+                CON.Open();
+                cmd.ExecuteNonQuery();
+                CON.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Brand created successfully')", true);
+                BindData();
+                show_category();
+                getinvoiceno();
+                TextBox3.Text = "";
+            }
+        }
 
 
     }
@@ -199,7 +226,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         con.Open();
         cmd.ExecuteNonQuery();
         con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Sub Category deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Brand deleted successfully')", true);
 
         BindData();
         show_category();
@@ -247,7 +274,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select subcategoryname from subcategory where Com_Id=@Com_Id and " +
+                cmd.CommandText = "select distinct subcategoryname from subcategory where Com_Id=@Com_Id and " +
                 "subcategoryname like @subcategoryname + '%'";
                 cmd.Parameters.AddWithValue("@subcategoryname", prefixText);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -327,6 +354,12 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         DropDownList3.DataValueField = "category_id";
         DropDownList3.DataBind();
         DropDownList3.Items.Insert(0, new ListItem("All", "0"));
+
+        DropDownList4.DataSource = ds;
+        DropDownList4.DataTextField = "categoryname";
+        DropDownList4.DataValueField = "category_id";
+        DropDownList4.DataBind();
+        DropDownList4.Items.Insert(0, new ListItem("All", "0"));
         con.Close();
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
@@ -369,6 +402,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
         TextBox3.Focus();
+       
     }
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
@@ -385,5 +419,13 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
         GridView1.DataBind();
+    }
+    protected void TextBox3_TextChanged(object sender, EventArgs e)
+    {
+       
+    }
+    protected void TextBox3_Load(object sender, EventArgs e)
+    {
+       
     }
 }

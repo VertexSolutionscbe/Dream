@@ -234,6 +234,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -316,26 +317,7 @@
 
 
   <div class="panel-body">
-   <div class="col-md-6">
-
-                             <div class="form-group"><label class="col-lg-3 control-label">Product</label>
-
-                                 
-
-                                    <div class="col-lg-9">
-                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-   <ContentTemplate>
    
-                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox" ontextchanged="TextBox1_TextChanged" AutoPostBack="true" 
-                                        ></asp:TextBox>
-                                     <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="TextBox1" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>
-
-                                      </ContentTemplate>
-                                      </asp:UpdatePanel></div></div></div>
 
 
 
@@ -348,7 +330,7 @@
    <ContentTemplate>
   <asp:TextBox ID="TextBox2" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
            ontextchanged="TextBox2_TextChanged"></asp:TextBox>
-             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Product Name" ></asp:TextBoxWatermarkExtender>
+             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox2" WatermarkText="Enter Supplier Name" ></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox2"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -476,7 +458,7 @@
        <Columns>
       
                <asp:BoundField HeaderText="Purchase Invoice" DataField="purchase_invoice"  />
-           <asp:BoundField HeaderText="Date" DataField="date"  />
+           <asp:BoundField HeaderText="Date" DataField="date" DataFormatString="{0:dd/MM/yyyy}"  />
            <asp:BoundField HeaderText="Supplier" DataField="Supplier" />
              <asp:BoundField HeaderText="Total amount" DataField="Grand__total" />
             
@@ -484,12 +466,20 @@
                <asp:BoundField HeaderText="Pending amount" DataField="pending_amount" />
               <asp:TemplateField>
               <ItemTemplate>
-              <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Width="20px" Height="20px"></asp:ImageButton>
+              <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" 
+                      Width="20px" Height="20px" onclick="ImageButton1_Click" ></asp:ImageButton>
               </ItemTemplate>
               </asp:TemplateField>
                <asp:TemplateField>
               <ItemTemplate>
-             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Admin/show1.png" Width="100px" Height="20px"></asp:ImageButton>
+             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Admin/show1.png" 
+                      Width="100px" Height="20px" onclick="ImageButton2_Click"></asp:ImageButton>
+              </ItemTemplate>
+              </asp:TemplateField>
+              <asp:TemplateField>
+              <ItemTemplate>
+              <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/delete3.png"  
+                      Width="20px" Height="20px" onclick="ImageButton3_Click" ></asp:ImageButton>
               </ItemTemplate>
               </asp:TemplateField>
                  
@@ -512,7 +502,7 @@
         </ContentTemplate>
                                      <Triggers>
               
-                  <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
+                
                      <asp:AsyncPostBackTrigger ControlID="TextBox2" EventName="TextChanged"  />
                      
                         <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />

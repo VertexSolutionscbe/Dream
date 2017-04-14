@@ -92,25 +92,47 @@ public partial class Admin_Main : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (Session["company_id"] != null)
+        if (TextBox3.Text == "")
         {
-            company_id = Convert.ToInt32(Session["company_id"].ToString());
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter category name')", true);
         }
-        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("insert into category values(@category_id,@categoryname,@Com_Id)", CON);
-        cmd.Parameters.AddWithValue("@category_id", Label1.Text);
-        cmd.Parameters.AddWithValue("@categoryname", HttpUtility.HtmlDecode(TextBox3.Text));
-        cmd.Parameters.AddWithValue("@Com_Id", company_id);
-        CON.Open();
-        cmd.ExecuteNonQuery();
-        CON.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category created successfully')", true);
-        BindData();
-        show_category();
-        getinvoiceno();
-        TextBox3.Text = "";
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1 = new SqlCommand("select * from category where categoryname='" + TextBox3.Text + "' AND Com_Id='" + company_id + "'  ", con1);
+            con1.Open();
+            SqlDataReader dr1;
+            dr1=cmd1.ExecuteReader();
+            if(dr1.HasRows)
+            {
 
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category already exist')", true);
+                TextBox3.Text = "";
+            }
+            else
+            {
 
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
+            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("insert into category values(@category_id,@categoryname,@Com_Id)", CON);
+            cmd.Parameters.AddWithValue("@category_id", Label1.Text);
+            cmd.Parameters.AddWithValue("@categoryname", HttpUtility.HtmlDecode(TextBox3.Text));
+            cmd.Parameters.AddWithValue("@Com_Id", company_id);
+            CON.Open();
+            cmd.ExecuteNonQuery();
+            CON.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category created successfully')", true);
+            BindData();
+            show_category();
+            getinvoiceno();
+            TextBox3.Text = "";
+            }
+            con1.Close();
+
+        }
     }
 
     protected void Button2_Click(object sender, EventArgs e)

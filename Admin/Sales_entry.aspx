@@ -355,6 +355,7 @@
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Sales_entry.aspx">Sales</a></li>
+                                      <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
                                
@@ -561,7 +562,10 @@
                               CellSpacing="2" onload="Gridview2_Load" onprerender="Gridview2_PreRender" 
                               onrowdatabound="Gridview2_RowDataBound">
             <Columns>
-            <asp:BoundField DataField="RowNumber" HeaderText="S No" HeaderStyle-CssClass="red"  />
+            <asp:BoundField DataField="RowNumber" HeaderText="S No" 
+                    HeaderStyle-CssClass="red"  >
+                <HeaderStyle CssClass="red" />
+                </asp:BoundField>
             <asp:TemplateField HeaderText="Barcode" HeaderStyle-CssClass="red"  >
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" Width="200px" ontextchanged="TextBox1_TextChanged" 
@@ -571,6 +575,7 @@
      CompletionListHighlightedItemCssClass="itemHighlighted">
       </asp:AutoCompleteExtender>
                 </ItemTemplate>
+                <HeaderStyle CssClass="red" />
             </asp:TemplateField>
              
             <asp:TemplateField HeaderText="Product Name" HeaderStyle-CssClass="red">
@@ -578,6 +583,7 @@
                     <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="200px" 
                         ontextchanged="TextBox2_TextChanged"></asp:TextBox>
                 </ItemTemplate>
+                <HeaderStyle CssClass="red" />
             </asp:TemplateField>
             
                
@@ -585,18 +591,21 @@
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Width="70px" ></asp:TextBox>
                 </ItemTemplate>
+                        <HeaderStyle CssClass="red" />
                   </asp:TemplateField>
                   
                    <asp:TemplateField HeaderText="Size" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                    <asp:TextBox ID="TextBox3" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
                 </ItemTemplate>
+                       <HeaderStyle CssClass="red" />
                   </asp:TemplateField>
 
                    <asp:TemplateField HeaderText="Color" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox4_TextChanged"></asp:TextBox>
                 </ItemTemplate>
+                       <HeaderStyle CssClass="red" />
                   </asp:TemplateField>
                  
                   <asp:TemplateField HeaderText="Qty" HeaderStyle-CssClass="red">
@@ -604,28 +613,39 @@
                 <asp:TextBox ID="TextBox16" runat="server" Width="40px" AutoPostBack="true" ontextchanged="TextBox16_TextChanged" 
                         ></asp:TextBox>
                 </ItemTemplate>
+                      <HeaderStyle CssClass="red" />
                 </asp:TemplateField>
                   <asp:TemplateField HeaderText="Dis %" HeaderStyle-CssClass="red">
                 <ItemTemplate>
                <asp:TextBox ID="TextBox17" runat="server" Width="80px" 
                          AutoPostBack="true" ontextchanged="TextBox17_TextChanged"></asp:TextBox>
                 </ItemTemplate>
+                      <HeaderStyle CssClass="red" />
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Dis Amt" HeaderStyle-CssClass="red">
                 <ItemTemplate>
-             <asp:TextBox ID="TextBox18" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox18_TextChanged" ></asp:TextBox>
+                 <asp:Panel ID="Panel2" DefaultButton="ButtonAdd" runat="server">
+             <asp:TextBox ID="TextBox18" runat="server" Width="80px" ontextchanged="TextBox18_TextChanged" ></asp:TextBox>
+                </asp:Panel>  
                 </ItemTemplate>
+                      <HeaderStyle CssClass="red" />
                  </asp:TemplateField>
                   <asp:TemplateField HeaderText="Total Amt" HeaderStyle-CssClass="red">
                 <ItemTemplate>
+                
            <asp:TextBox ID="TextBox19" runat="server"  Width="100px" 
                          AutoPostBack="true"></asp:TextBox>
+                         
                 </ItemTemplate>
-                <FooterStyle HorizontalAlign="Right" />
-                <FooterTemplate>
-                 <asp:Button ID="ButtonAdd" runat="server" ForeColor="Black" Text="Add New Row" 
+                
+                      <HeaderStyle CssClass="red" />
+            </asp:TemplateField>
+            <asp:TemplateField>
+            <ItemTemplate>
+             <asp:Button ID="ButtonAdd" runat="server" ForeColor="Black" Text="Add New Row" 
                         onclick="ButtonAdd_Click" />
-                </FooterTemplate>
+                        
+            </ItemTemplate>
             </asp:TemplateField>
                 
             </Columns>
@@ -648,8 +668,7 @@
        </ContentTemplate>
                            </asp:UpdatePanel>
                         
-                <asp:Button ID="Button3" runat="server" Text="Sum" 
-           onclick="Button3_Click1"></asp:Button>
+             
                           
 
 
@@ -698,7 +717,7 @@
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
-                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+             
                 </Triggers>
               
                            </asp:UpdatePanel>
@@ -718,7 +737,7 @@
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
-                    <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                
                 </Triggers>
               
                            </asp:UpdatePanel>
@@ -738,7 +757,7 @@
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
-                    <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                
                 </Triggers>
               
                            </asp:UpdatePanel>
@@ -759,7 +778,7 @@
                                     
                                      </ContentTemplate>
                 <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+              
                 
                 </Triggers>
                            </asp:UpdatePanel>
@@ -779,7 +798,7 @@
                 <Triggers>
                
                   <asp:AsyncPostBackTrigger ControlID="TextBox7"  EventName="TextChanged" />
-                     <asp:AsyncPostBackTrigger ControlID="Button3"  EventName="Click" />
+                  
                 </Triggers>
                            </asp:UpdatePanel>
                                     </div>
