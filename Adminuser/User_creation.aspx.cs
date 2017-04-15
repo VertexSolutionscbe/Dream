@@ -116,47 +116,101 @@ public partial class Adminuser_User_creation : System.Web.UI.Page
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["Connection"]);
-        SqlCommand cmd = new SqlCommand("insert into Company_detail values(@com_id,@company_name,@Address,@Mobile_number,@Tin_no,@Cst_no)", con);
-        cmd.Parameters.AddWithValue("@com_id", Label5.Text);
-        cmd.Parameters.AddWithValue("@company_name", TextBox2.Text);
-        cmd.Parameters.AddWithValue("@Address", TextBox3.Text);
-        cmd.Parameters.AddWithValue("@Mobile_number", TextBox5.Text);
-        cmd.Parameters.AddWithValue("@Tin_no", TextBox6.Text);
-        cmd.Parameters.AddWithValue("@Cst_no", TextBox7.Text);
-        con.Open();
-        cmd.ExecuteNonQuery();
-        con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Company details created successfully')", true);
-        getid();
-        company();
-        TextBox2.Text = "";
+        if (TextBox2.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter company name')", true);
+        }
+        else if (TextBox5.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
+        }
+        else
+        {
+
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["Connection"]);
+            SqlCommand cmd = new SqlCommand("insert into Company_detail values(@com_id,@company_name,@Address,@Mobile_number,@Tin_no,@Cst_no)", con);
+            cmd.Parameters.AddWithValue("@com_id", Label5.Text);
+            cmd.Parameters.AddWithValue("@company_name", TextBox2.Text);
+            cmd.Parameters.AddWithValue("@Address", TextBox3.Text);
+            cmd.Parameters.AddWithValue("@Mobile_number", TextBox5.Text);
+            cmd.Parameters.AddWithValue("@Tin_no", TextBox6.Text);
+            cmd.Parameters.AddWithValue("@Cst_no", TextBox7.Text);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Company details created successfully')", true);
+            getid();
+            company();
+            TextBox2.Text = "";
+        }
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["Connection"]);
-        SqlCommand cmd = new SqlCommand("insert into user_details values(@user_id,@user_name,@password,@com_id,@company_name,@Roleid,@rolename,@Name,@Email,@Mobile_no)", con);
-        cmd.Parameters.AddWithValue("@user_id",Label6.Text);
-        cmd.Parameters.AddWithValue("@user_name", TextBox1.Text);
-        cmd.Parameters.AddWithValue("@password", TextBox4.Text);
-        cmd.Parameters.AddWithValue("@com_id", DropDownList1.SelectedItem.Value);
-        cmd.Parameters.AddWithValue("@company_name", DropDownList1.SelectedItem.Text);
-        cmd.Parameters.AddWithValue("@Roleid", DropDownList2.SelectedItem.Value);
-        cmd.Parameters.AddWithValue("@rolename", DropDownList2.SelectedItem.Text);
-        cmd.Parameters.AddWithValue("@Name", TextBox8.Text);
-        cmd.Parameters.AddWithValue("@Email",TextBox9.Text);
-        cmd.Parameters.AddWithValue("@Mobile_no",TextBox10.Text);
-        con.Open();
-        cmd.ExecuteNonQuery();
-        con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('User details created successfully')", true);
-        getid();
-        getid1();
-        company();
-        role();
-        TextBox1.Text = "";
-        TextBox2.Text = "";
-        TextBox4.Text = "";
+        if (DropDownList1.SelectedItem.Text == "-- Select item --")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select valid Company name')", true);
+        }
+        
+        else if (TextBox8.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter login name')", true);
+        
+        }
+        else if (TextBox1.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter user name')", true);
+        }
+        else if (TextBox4.Text == "")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter user password')", true);
+        }
+        else if (DropDownList2.SelectedItem.Text == "-- Select item --")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select Valid role')", true);
+        }
+        else
+        {
+
+            SqlConnection con100 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd100 = new SqlCommand("SELECT * FROM user_details WHERE company_name = @company_name", con100);
+            cmd100.Parameters.AddWithValue("@company_name", DropDownList1.SelectedItem.Text);
+            con100.Open();
+            SqlDataReader reader1 = cmd100.ExecuteReader();
+            if (reader1.HasRows)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Dream already exist')", true);
+            }
+            else
+            {
+
+
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["Connection"]);
+                SqlCommand cmd = new SqlCommand("insert into user_details values(@user_id,@user_name,@password,@com_id,@company_name,@Roleid,@rolename,@Name,@Email,@Mobile_no)", con);
+                cmd.Parameters.AddWithValue("@user_id", Label6.Text);
+                cmd.Parameters.AddWithValue("@user_name", TextBox1.Text);
+                cmd.Parameters.AddWithValue("@password", TextBox4.Text);
+                cmd.Parameters.AddWithValue("@com_id", DropDownList1.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@company_name", DropDownList1.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@Roleid", DropDownList2.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@rolename", DropDownList2.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@Name", TextBox8.Text);
+                cmd.Parameters.AddWithValue("@Email", TextBox9.Text);
+                cmd.Parameters.AddWithValue("@Mobile_no", TextBox10.Text);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('User details created successfully')", true);
+                getid();
+                getid1();
+                company();
+                role();
+                TextBox1.Text = "";
+                TextBox2.Text = "";
+                TextBox4.Text = "";
+            }
+            con100.Close();
+        }
 
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
@@ -180,5 +234,19 @@ public partial class Adminuser_User_creation : System.Web.UI.Page
         TextBox4.Text = "";
         TextBox8.Text = "";
         TextBox9.Text = "";
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SqlConnection con100 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+            SqlCommand cmd100 = new SqlCommand("SELECT * FROM user_details WHERE company_name = @company_name", con100);
+            cmd100.Parameters.AddWithValue("@company_name", DropDownList1.SelectedItem.Text);
+            con100.Open();
+            SqlDataReader reader1 = cmd100.ExecuteReader();
+            if (reader1.HasRows)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Dream already created')", true);
+            }
+            con100.Close();
+
     }
 }

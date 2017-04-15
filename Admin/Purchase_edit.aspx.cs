@@ -80,8 +80,10 @@ public partial class Admin_Purchase_edit : System.Web.UI.Page
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
+
+               
                 Label1.Text = dr["purchase_invoice"].ToString();
-                TextBox8.Text = dr["date"].ToString();
+                TextBox8.Text =Convert.ToDateTime( dr["date"]).ToString("MM/dd/yyyy");
                 DropDownList3.SelectedItem.Text = dr["Supplier"].ToString();
 
                 SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -107,6 +109,154 @@ public partial class Admin_Purchase_edit : System.Web.UI.Page
         }
        
        
+    }
+    protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton img = (ImageButton)sender;
+        GridViewRow row = (GridViewRow)img.NamingContainer;
+        Label38.Text = Label1.Text;
+        Label41.Text = row.Cells[0].Text;
+        TextBox33.Text = row.Cells[1].Text;
+        TextBox26.Text = row.Cells[2].Text;
+        TextBox27.Text = row.Cells[3].Text;
+        TextBox28.Text = row.Cells[4].Text;
+        TextBox29.Text = row.Cells[5].Text;
+        TextBox30.Text = row.Cells[6].Text;
+        TextBox31.Text = row.Cells[7].Text;
+        TextBox32.Text = row.Cells[8].Text;
+        this.ModalPopupExtender5.Show();
+    }
+    protected void Button22_Click(object sender, System.EventArgs e)
+    {
+
+
+        if (Session["company_id"] != null)
+        {
+            company_id = Convert.ToInt32(Session["company_id"].ToString());
+        }
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+
+        con.Open();
+
+        SqlCommand cmd2 = new SqlCommand("select * from product_entry where product_name='" + TextBox33.Text + "' and Com_Id='" + company_id + "' ", con);
+        SqlDataReader dr1;
+        dr1 = cmd2.ExecuteReader();
+        if (dr1.Read())
+        {
+
+            int cat_id = Convert.ToInt32(dr1["category_id"].ToString());
+            int sub_id = Convert.ToInt32(dr1["subcategory_id"].ToString());
+            string product_code = dr1["code"].ToString();
+
+            SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1 = new SqlCommand("update purchase_entry_details set Category=@Category,subcategory=@subcategory,Product_code=@Product_code,Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty,tax=@tax,tax_amount=@tax_amount,total_amount=@total_amount,Com_Id=@Com_Id,date=@date,Supplier=@Supplier where purchase_invoice='" + Label38.Text + "' and RowNumber='" + Label41.Text + "' and Com_Id='" + company_id + "'", CON1);
+            cmd1.Parameters.AddWithValue("@Category", cat_id);
+            cmd1.Parameters.AddWithValue("@subcategory", sub_id);
+
+            cmd1.Parameters.AddWithValue("@Product_code", product_code);
+            cmd1.Parameters.AddWithValue("@Product_name", TextBox33.Text);
+            cmd1.Parameters.AddWithValue("@barcode", TextBox26.Text);
+
+            cmd1.Parameters.AddWithValue("@mrp", TextBox27.Text);
+            cmd1.Parameters.AddWithValue("@Purchase_price", TextBox28.Text);
+
+
+            cmd1.Parameters.AddWithValue("@qty", TextBox29.Text);
+            cmd1.Parameters.AddWithValue("@tax", TextBox30.Text);
+            cmd1.Parameters.AddWithValue("@tax_amount", TextBox31.Text);
+            cmd1.Parameters.AddWithValue("@total_amount", TextBox32.Text);
+            cmd1.Parameters.AddWithValue("@Com_Id", company_id);
+            cmd1.Parameters.AddWithValue("@date", TextBox8.Text);
+            cmd1.Parameters.AddWithValue("@Supplier", DropDownList3.SelectedItem.Text);
+
+            CON1.Open();
+            cmd1.ExecuteNonQuery();
+            CON1.Close();
+
+
+            if (Session["company_id"] != null)
+            {
+                company_id = Convert.ToInt32(Session["company_id"].ToString());
+            }
+
+            SqlConnection CON11 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd11 = new SqlCommand("update product_stock set Category=@Category,subcategory=@subcategory,Product_code=@Product_code,Product_name=@Product_name,barcode=@barcode,mrp=@mrp,Purchase_price=@Purchase_price,qty=@qty,tax=@tax,tax_amount=@tax_amount,total_amount=@total_amount,Com_Id=@Com_Id,date=@date,Supplier=@Supplier where purchase_invoice='" + Label38.Text + "' and row_number='" + Label41.Text + "' and Com_Id='" + company_id + "'", CON11);
+            cmd11.Parameters.AddWithValue("@Category", cat_id);
+            cmd11.Parameters.AddWithValue("@subcategory", sub_id);
+
+            cmd11.Parameters.AddWithValue("@Product_code", product_code);
+            cmd11.Parameters.AddWithValue("@Product_name", TextBox33.Text);
+            cmd11.Parameters.AddWithValue("@barcode", TextBox26.Text);
+
+            cmd11.Parameters.AddWithValue("@mrp", TextBox27.Text);
+            cmd11.Parameters.AddWithValue("@Purchase_price", TextBox28.Text);
+
+
+            cmd11.Parameters.AddWithValue("@qty", TextBox29.Text);
+            cmd11.Parameters.AddWithValue("@tax", TextBox30.Text);
+            cmd11.Parameters.AddWithValue("@tax_amount", TextBox31.Text);
+            cmd11.Parameters.AddWithValue("@total_amount", TextBox32.Text);
+            cmd11.Parameters.AddWithValue("@Com_Id", company_id);
+            cmd11.Parameters.AddWithValue("@date", TextBox8.Text);
+            cmd11.Parameters.AddWithValue("@Supplier", DropDownList3.SelectedItem.Text);
+
+            CON11.Open();
+            cmd11.ExecuteNonQuery();
+            CON11.Close();
+
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('product updated successfully')", true);
+
+            BindData();
+            getinvoiceno1();
+            TextBox33.Text = "";
+            TextBox26.Text = "";
+            TextBox27.Text = "";
+            TextBox28.Text = "";
+            TextBox29.Text = "";
+            TextBox30.Text = "";
+            TextBox31.Text = "";
+            TextBox32.Text = "";
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('product not valid')", true);
+        }
+        con.Close();
+
+
+
+
+
+
+    }
+    protected void TextBox29_TextChanged(object sender, System.EventArgs e)
+    {
+        try
+        {
+
+            float a = float.Parse(TextBox28.Text);
+            float b = float.Parse(TextBox29.Text);
+            TextBox32.Text = (a * b).ToString();
+            this.ModalPopupExtender5.Show();
+        }
+        catch (Exception we)
+        { }
+    }
+    protected void TextBox30_TextChanged(object sender, System.EventArgs e)
+    {
+        try
+        {
+
+            float tax = float.Parse(TextBox30.Text);
+            float total = float.Parse(TextBox32.Text);
+            TextBox31.Text = string.Format("{0:0.00}", (total * tax / 100)).ToString();
+            float A = float.Parse(TextBox31.Text);
+            TextBox32.Text = string.Format("{0:0.00}", (A + total)).ToString();
+            this.ModalPopupExtender5.Show();
+        }
+        catch (Exception er)
+        { }
+
     }
     private void BindData()
     {

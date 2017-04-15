@@ -178,7 +178,7 @@ public partial class Admin_Product_entry : System.Web.UI.Page
                 BindData();
 
                 getinvoiceno();
-
+             
                 TextBox4.Text = "";
             }
         }
@@ -195,6 +195,10 @@ public partial class Admin_Product_entry : System.Web.UI.Page
     {
         TextBox4.Text = "";
         getinvoiceno();
+        BindData();
+        show_category();
+
+        getsubcategory();
        
     }
     private void active()
@@ -425,6 +429,11 @@ public partial class Admin_Product_entry : System.Web.UI.Page
 
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        getsubcategory();
+    }
+
+    private void getsubcategory()
     {
         if (Session["company_id"] != null)
         {

@@ -264,7 +264,9 @@ arrow"></span></a>
                                
                                 <div class="form-group"><label class="col-lg-3 control-label">Company Name</label>
 
-                                    <div class="col-lg-9">  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox">
+                                    <div class="col-lg-9">  <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="true" 
+                                            class="form-control input-x2 dropbox" 
+                                            onselectedindexchanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList></div>
                                 </div>
 
@@ -275,38 +277,107 @@ arrow"></span></a>
                                     <div class="col-lg-9">  <asp:Label ID="Label6" runat="server" Text="" class="form-control input-x2 dropbox"></asp:Label></div>
                                 </div>
 
-                                 <div class="form-group"><label class="col-lg-3 control-label">Name</label>
+                                 <div class="form-group"><label class="col-lg-3 control-label">Login Name</label>
 
-                                    <div class="col-lg-9"> <asp:TextBox ID="TextBox8" runat="server" class="form-control input-x2 dropbox"></asp:TextBox></div>
+                                    <div class="col-lg-9"> 
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox8" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                     </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+                                    
+                                    </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-3 control-label">Email</label>
 
-                                    <div class="col-lg-9"> <asp:TextBox ID="TextBox9" runat="server" class="form-control input-x2 dropbox"></asp:TextBox></div>
+                                    <div class="col-lg-9">
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+   <ContentTemplate>
+                                     <asp:TextBox ID="TextBox9" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                      </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-lg-3 control-label">Mobile Number</label>
 
-                                    <div class="col-lg-9"> <asp:TextBox ID="TextBox10" runat="server" class="form-control input-x2 dropbox"></asp:TextBox></div>
+                                    <div class="col-lg-9"> 
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox10" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                     </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+                                    </div>
                                 </div>
 
                                   <div class="form-group"><label class="col-lg-3 control-label">User name</label>
 
-                                    <div class="col-lg-9">  <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox"> </asp:TextBox></div>
+                                    <div class="col-lg-9">  
+                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox"> </asp:TextBox>
+                                     </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+                                    </div>
                                 </div>
 
                                  <div class="form-group"><label class="col-lg-3 control-label">Password</label>
 
-                                    <div class="col-lg-9">  <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox"></asp:TextBox></div>
+                                    <div class="col-lg-9">  
+                                    <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                     </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+                                    </div>
                                 </div>
 
                                   <div class="form-group"><label class="col-lg-3 control-label">Role</label>
 
-                                    <div class="col-lg-9"> <asp:DropDownList ID="DropDownList2" runat="server" class="form-control input-x2 dropbox">
-       </asp:DropDownList></div>
+                                    <div class="col-lg-9"> 
+                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+   <ContentTemplate>
+                                    <asp:DropDownList ID="DropDownList2" runat="server" class="form-control input-x2 dropbox">
+       </asp:DropDownList>
+        </ContentTemplate>
+                                      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+ 
+    </asp:UpdatePanel>
+       
+       </div>
                                 </div>
                                
+<asp:UpdatePanel ID="UpdatePanel26" runat="server">
+   <ContentTemplate>
+
                                   <asp:Button ID="Button2" runat="server" Text="Save" CssClass="button" onclick="Button2_Click"  />
                                &nbsp;<asp:Button ID="Button5" runat="server" Text="Clear" CssClass="button" 
                                     onclick="Button5_Click"></asp:Button>
+
+                                     </ContentTemplate>
+ 
+    </asp:UpdatePanel>
                             </div>
                        </div>
                       

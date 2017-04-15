@@ -478,7 +478,7 @@
            </asp:TemplateField>
          
            <asp:BoundField HeaderText="Category ID" DataField="category_id"  />
-           <asp:BoundField HeaderText="category Name" DataField="categoryname" />
+           <asp:BoundField HeaderText="Category Name" DataField="categoryname" />
              <asp:TemplateField>
           <ItemTemplate>
             

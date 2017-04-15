@@ -357,6 +357,10 @@
                                         data-width="100%" AutoPostBack="true" 
                                        onselectedindexchanged="DropDownList3_SelectedIndexChanged" ></asp:DropDownList>
                               </ContentTemplate>
+                               <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
                                
      </asp:UpdatePanel>       
                                     </div>
@@ -386,6 +390,7 @@
                                   <div class="form-group"><label class="col-lg-3 control-label">Product Name</label>
                               
                                     <div class="col-lg-9">
+                                    <asp:Panel ID="Panel1" runat="server" DefaultButton="Button1">
                                      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
                                     <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
@@ -395,7 +400,7 @@
                   <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
                 </Triggers>
                            </asp:UpdatePanel>
-                                    
+                                    </asp:Panel>
                                     </div>
                                 
                                 

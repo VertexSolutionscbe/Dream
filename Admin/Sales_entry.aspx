@@ -34,6 +34,53 @@
                          }
                      }
 </script>
+<style>
+.tablestyle table
+{
+    text-align:center;
+}
+.tablestyle table  th
+{
+    padding:8px;
+   
+}
+.tablestyle table  td
+{
+    padding:8px;
+}
+</style>
+<style>
+.tablestyles table tr td
+{
+    padding:5px;
+}
+.tablestyles1 table tr td
+{
+    padding:10px;
+}
+</style>
+<script type="text/javascript" language="javascript">
+    document.getElementById("TextBox5")
+    .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode == 13) {
+            document.getElementById("Button1").click();
+        }
+    });
+
+
+    function controlEnter(obj, event) {
+        var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+        if (keyCode == 13) {
+            document.getElementById(obj).focus();
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+
         <!-- Bootstrap -->
           <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
 
@@ -554,119 +601,313 @@
                                
                        
    <div style="width:100%">
-   <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+   
+
+    <h4>Product Details</h4>
+                           
+                              
+   
+     <div class="tablestyle">
+    <table border="1">
+    <tr>
+      <th align="center">S.No</th>
+    <th align="center">Barcode</th>
+    <th align="center">Product Name</th>
+    <th align="center">Mrp</th>
+    <th align="center">Size</th>
+    <th align="center">Color</th>
+    <th>Qty</th>
+    <th>Dis %</th>
+    <th>Dis Amount</th>
+    <th>Total Amount</th>
+    </tr>
+    <tr>
+  
+    <td> 
+    
+    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
    <ContentTemplate>
-                          <asp:gridview ID="Gridview2" runat="server" ShowFooter="True" Width="100%"
-            AutoGenerateColumns="False"    BackColor="#DEBA84" 
-                              BorderColor="#DEBA84" BorderStyle="None" BorderWidth="1px" CellPadding="3" 
-                              CellSpacing="2" onload="Gridview2_Load" onprerender="Gridview2_PreRender" 
-                              onrowdatabound="Gridview2_RowDataBound">
-            <Columns>
-            <asp:BoundField DataField="RowNumber" HeaderText="S No" 
-                    HeaderStyle-CssClass="red"  >
-                <HeaderStyle CssClass="red" />
-                </asp:BoundField>
-            <asp:TemplateField HeaderText="Barcode" HeaderStyle-CssClass="red"  >
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" Width="200px" ontextchanged="TextBox1_TextChanged" 
-                        ></asp:TextBox>
-                     <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="-100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
+    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+    </ContentTemplate>
+  <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+               
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+  </asp:UpdatePanel>
+    
+    </td>
+     
+    <td>
+    <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+   <ContentTemplate>
+          <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" ontextchanged="TextBox1_TextChanged"  
+              ></asp:TextBox>
+           <asp:AutoCompleteExtender ID="AutoCompleteExtender2" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers1" FirstRowSelected = "false" CompletionInterval="0" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
       </asp:AutoCompleteExtender>
-                </ItemTemplate>
-                <HeaderStyle CssClass="red" />
-            </asp:TemplateField>
-             
-            <asp:TemplateField HeaderText="Product Name" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" AutoPostBack="true" Width="200px" 
-                        ontextchanged="TextBox2_TextChanged"></asp:TextBox>
-                </ItemTemplate>
-                <HeaderStyle CssClass="red" />
-            </asp:TemplateField>
-            
-               
-                    <asp:TemplateField HeaderText="MRP" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="70px" ></asp:TextBox>
-                </ItemTemplate>
-                        <HeaderStyle CssClass="red" />
-                  </asp:TemplateField>
-                  
-                   <asp:TemplateField HeaderText="Size" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                   <asp:TextBox ID="TextBox3" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                </ItemTemplate>
-                       <HeaderStyle CssClass="red" />
-                  </asp:TemplateField>
 
-                   <asp:TemplateField HeaderText="Color" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="80px" AutoPostBack="true" ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                </ItemTemplate>
-                       <HeaderStyle CssClass="red" />
-                  </asp:TemplateField>
-                 
-                  <asp:TemplateField HeaderText="Qty" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                <asp:TextBox ID="TextBox16" runat="server" Width="40px" AutoPostBack="true" ontextchanged="TextBox16_TextChanged" 
-                        ></asp:TextBox>
-                </ItemTemplate>
-                      <HeaderStyle CssClass="red" />
-                </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Dis %" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-               <asp:TextBox ID="TextBox17" runat="server" Width="80px" 
-                         AutoPostBack="true" ontextchanged="TextBox17_TextChanged"></asp:TextBox>
-                </ItemTemplate>
-                      <HeaderStyle CssClass="red" />
-                 </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Dis Amt" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                 <asp:Panel ID="Panel2" DefaultButton="ButtonAdd" runat="server">
-             <asp:TextBox ID="TextBox18" runat="server" Width="80px" ontextchanged="TextBox18_TextChanged" ></asp:TextBox>
-                </asp:Panel>  
-                </ItemTemplate>
-                      <HeaderStyle CssClass="red" />
-                 </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Total Amt" HeaderStyle-CssClass="red">
-                <ItemTemplate>
-                
-           <asp:TextBox ID="TextBox19" runat="server"  Width="100px" 
-                         AutoPostBack="true"></asp:TextBox>
-                         
-                </ItemTemplate>
-                
-                      <HeaderStyle CssClass="red" />
-            </asp:TemplateField>
-            <asp:TemplateField>
-            <ItemTemplate>
-             <asp:Button ID="ButtonAdd" runat="server" ForeColor="Black" Text="Add New Row" 
-                        onclick="ButtonAdd_Click" />
-                        
-            </ItemTemplate>
-            </asp:TemplateField>
-                
-            </Columns>
-       <EditRowStyle BackColor="#999999" />
-       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
-       <PagerSettings FirstPageText="First" LastPageText="Last" />
-       <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
-           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
-           HorizontalAlign="Center" />
-       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
-       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-       <SortedAscendingCellStyle BackColor="#E9E7E2" />
-       <SortedAscendingHeaderStyle BackColor="#506C8C" />
-       <SortedDescendingCellStyle BackColor="#FFFDF8" />
-       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-        </asp:gridview>
-        </div>
+  </ContentTemplate>
+  <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+               
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+  </asp:UpdatePanel>
+    
+    </td>
+   <td>
+    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+   <ContentTemplate>
+  <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
+   
+   </ContentTemplate>
+     <Triggers>
+                  <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />  
+             <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   </td>
+   <td>
+    <asp:UpdatePanel ID="UpdatePanel18" runat="server">
+   <ContentTemplate>
+   
+  <asp:TextBox ID="TextBox17" runat="server" width="100px"></asp:TextBox>
+   
+   </ContentTemplate>
+     <Triggers>
+       <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                   <asp:AsyncPostBackTrigger ControlID="TextBox5" EventName="TextChanged"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   
+   </td>
+   <td>
+    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+   <ContentTemplate>
+             <asp:TextBox ID="TextBox3" runat="server" Width="100px"></asp:TextBox>
+    </ContentTemplate>
+     <Triggers>
+               
+              <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   </td>
+   <td>
+   <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+       <ContentTemplate>
+          <asp:TextBox ID="TextBox4" runat="server"  Width="100px" AutoPostBack="true" ontextchanged="TextBox4_TextChanged"  
+           ></asp:TextBox>
+    </ContentTemplate>
+     <Triggers>
+                   <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                   <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+ </asp:UpdatePanel>
+   
+    </td>
+
+
+   <td>
+    <asp:Panel ID="Panel1" runat="server" DefaultButton="Button3">
+     <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+       <ContentTemplate>
+      
+   <asp:TextBox ID="TextBox5" runat="server" Width="50px" AutoPostBack="true" ontextchanged="TextBox5_TextChanged"  
+           ></asp:TextBox>
+         
+   </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                   <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+ </asp:UpdatePanel>
+   </asp:Panel>
+   </td>
+   <td>
+     <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+       <ContentTemplate>
+   <asp:TextBox ID="TextBox15" runat="server" Width="50px" AutoPostBack="true"
+               ontextchanged="TextBox15_TextChanged"></asp:TextBox>
+   </ContentTemplate>
+      <Triggers>
+              
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                   <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   </td>
+   
+   
+   
+   <td>
+   <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+       <ContentTemplate>
+   <asp:TextBox ID="TextBox16" runat="server" width="100px"></asp:TextBox>
+    </ContentTemplate>
+      <Triggers>
+              <asp:AsyncPostBackTrigger ControlID="TextBox15" EventName="TextChanged"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                    <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   
+   </td>
+
+    <td>
+   <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+       <ContentTemplate>
+   <asp:TextBox ID="TextBox18" runat="server" width="100px"></asp:TextBox>
+    </ContentTemplate>
+      <Triggers>
+       <asp:AsyncPostBackTrigger ControlID="TextBox15" EventName="TextChanged"  />
+              <asp:AsyncPostBackTrigger ControlID="TextBox5" EventName="TextChanged"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                    <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   
+   </td>
+    </tr>
+    
+    </table>
+  
+   
      
-       </ContentTemplate>
-                           </asp:UpdatePanel>
+     
+       <br />
+       
+         <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+       <ContentTemplate>
+     <asp:Button ID="Button3" runat="server" Text="Add Product" CssClass="btn-primary" 
+             onclick="Button3_Click2"  ></asp:Button>
+  
+     
+  
+      <asp:Button ID="Button5" runat="server" Text="Clear" CssClass="btn-primary"  ></asp:Button>
+      
+  </ContentTemplate>
+    
+      
+
+  </asp:UpdatePanel>
+
+     <br />
+     
+     </div>
+   <div>
+     <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+       <ContentTemplate>
+     <asp:GridView ID="GridView1" AutoGenerateColumns="False" runat="server" 
+               width="1120px" onrowdatabound="GridView1_RowDataBound" CellPadding="4" 
+               ForeColor="#333333" GridLines="None"  >
+         <AlternatingRowStyle BackColor="White" />
+     <Columns>
+     
+     
+         <asp:BoundField HeaderText="S.No" DataField="s_no" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+          <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+          <asp:BoundField HeaderText="Barcode" DataField="barcode" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+           <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+           <asp:BoundField HeaderText="Product Name" DataField="product_name" ItemStyle-CssClass="red"  
+             HeaderStyle-CssClass="red" >
+            <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+            <asp:BoundField HeaderText="Mrp" DataField="mrp" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+             <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+             <asp:BoundField HeaderText="Size" DataField="size" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+              <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+              <asp:BoundField HeaderText="Color" DataField="color" ItemStyle-CssClass="red"
+             HeaderStyle-CssClass="red"  > 
+              <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField><asp:BoundField HeaderText="Qty" DataField="qty" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+              <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+              <asp:BoundField HeaderText="Dis %" DataField="dis_per" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+              <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+              <asp:BoundField HeaderText="Dis Amount" DataField="dis_amount" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+              <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+              <asp:BoundField HeaderText="Total Amount" DataField="total_amount" ItemStyle-CssClass="red" 
+             HeaderStyle-CssClass="red"  >
+         <HeaderStyle CssClass="red" />
+         <ItemStyle CssClass="red" />
+         </asp:BoundField>
+     <asp:TemplateField HeaderText="Edit">
+     <ItemTemplate>
+     <asp:ImageButton ID="ImageButton1" ImageUrl="~/edit4.jpg" runat="server" 
+             Width="20px" Height="20px" onclick="ImageButton1_Click" ></asp:ImageButton>
+     </ItemTemplate>
+     
+     </asp:TemplateField>
+     <asp:TemplateField>
+   <ItemTemplate>
+   
+   <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/delete3.png" 
+           Width="20px" Height="20px" onclick="ImageButton2_Click" ></asp:ImageButton>
+   </ItemTemplate>
+     
+     </asp:TemplateField>
+     
+     </Columns>
+     
+     
+         <EditRowStyle BackColor="#2461BF" />
+         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+         <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+         <RowStyle BackColor="#EFF3FB" />
+         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+         <SortedAscendingCellStyle BackColor="#F5F7FB" />
+         <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+         <SortedDescendingCellStyle BackColor="#E9EBEF" />
+         <SortedDescendingHeaderStyle BackColor="#4870BE" />
+     
+     
+     </asp:GridView>
+      </ContentTemplate>
+      <Triggers>
+                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 
+                 <asp:AsyncPostBackTrigger ControlID="Button3" EventName="Click"  />
+                   
+                </Triggers>
+
+  </asp:UpdatePanel>
+
                         
              
                           
@@ -716,8 +957,8 @@
                                           ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
-             
+              
+                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                 </Triggers>
               
                            </asp:UpdatePanel>
@@ -736,7 +977,7 @@
                                           ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
+                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                 
                 </Triggers>
               
@@ -756,7 +997,7 @@
                                         ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="GridView2" EventName="RowDataBound"  />
+                 <asp:AsyncPostBackTrigger ControlID="GridView1"  />
                 
                 </Triggers>
               
@@ -839,25 +1080,7 @@
 
 
 
- <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-   <ContentTemplate>
-                       <asp:TextBox ID="TextBox20" runat="server" width="100%" 
-                                    ontextchanged="TextBox1_TextChanged" AutoPostBack="true"></asp:TextBox>
-
-                           <asp:TextBoxWatermarkExtender ID="TextBox20_TextBoxWatermarkExtender" 
-                           runat="server" TargetControlID="TextBox20" WatermarkText="Search Product Name"></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="TextBox20_AutoCompleteExtender" 
-                           runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" 
-                           FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" 
-                           CompletionSetCount="10" TargetControlID="TextBox20"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>
-       </ContentTemplate>
-                           </asp:UpdatePanel>
-                        
-                        
-
+ 
 
 
                         </div>
