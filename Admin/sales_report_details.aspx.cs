@@ -392,7 +392,7 @@ public partial class Admin_sales_report_details : System.Web.UI.Page
         GridViewRow row = (GridViewRow)img.NamingContainer;
         int purchase_no = Convert.ToInt32(ROW.Cells[0].Text);
         Session["purchase_invoice"] = purchase_no;
-        Response.Redirect("~/Admin/Sales_entry.aspx");
+        Response.Redirect("~/Admin/Sales_entry_edit.aspx");
 
     }
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)

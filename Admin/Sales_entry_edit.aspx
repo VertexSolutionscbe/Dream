@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sales_entry.aspx.cs" Inherits="Admin_Sales_entry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sales_entry_edit.aspx.cs" Inherits="Admin_Sales_entry_edit" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -482,9 +482,6 @@
                 </Triggers>
                            </asp:UpdatePanel>
                                     </div>
-                                    <div class="col-lg-3">
-                                  
-                                    </div>
                                 </div>
 
 
@@ -533,15 +530,11 @@
 
                                 <div class="form-group"><label class="col-lg-3 control-label">Customer Name</label>
                               
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel24" runat="server">
    <ContentTemplate>
                                     <asp:TextBox ID="TextBox13" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
-                                  <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="TextBox13" WatermarkText="Enter Customer name" ></asp:TextBoxWatermarkExtender>
-                           <asp:AutoCompleteExtender ID="AutoCompleteExtender3" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomersdetails" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox13"  CompletionListCssClass="completionList"
-     CompletionListItemCssClass="listItem"
-     CompletionListHighlightedItemCssClass="itemHighlighted">
-      </asp:AutoCompleteExtender>
+                                  
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
@@ -550,138 +543,9 @@
                            </asp:UpdatePanel>
                                     
                                     </div>
-                                <div class="col-lg-3">
-                                <asp:Button ID="Button6" runat="server" Text="New" CssClass="btn-primary"  
-                                        Width="100px" onclick="Button6_Click"></asp:Button>
-                                </div>
+                                
                                 
                                 </div>
-
-
-                                <asp:UpdatePanel ID="UpdatePanel26" runat="server">
-   <ContentTemplate>
-<asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
-  
-  
-    <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
-                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="500px" >
-    
-       
-       <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
-                     <h3 style="font-size:20px; float:left; " class="control-label"> </h3>Add Customer  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" />
-  
-  
-         
-        </div>
-        <div class="tablestyles">
-        <table>
-       
-        <tr>
-        <td>
-            <asp:Label ID="Label28" runat="server" Text="Dream Id" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:Label ID="Label29" runat="server" Text="" ></asp:Label></td>
-        </tr>
-        <tr>
-        <td>
-            <asp:Label ID="Label3" runat="server" Text="Customer Name" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox19" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-        <tr>
-        <td>
-            <asp:Label ID="Label30" runat="server" Text="Customer Address" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox20" runat="server"   class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-     <tr>
-        <td>
-            <asp:Label ID="Label4" runat="server" Text="Mobile Number" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox21" runat="server"   class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-         <tr>
-        <td>
-            <asp:Label ID="Label9" runat="server" Text="Profession" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox22" runat="server"   class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-         <tr>
-        <td>
-            <asp:Label ID="Label6" runat="server" Text="Customer Type" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-           <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList></td>
-        </tr>
-         <tr>
-        <td>
-            <asp:Label ID="Label7" runat="server" Text="Friends or referal name" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox24" runat="server"   class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-         <tr>
-        <td>
-            <asp:Label ID="Label8" runat="server" Text="Mobile No" Width="200px" class="col-lg-3 control-label"></asp:Label></td>
-        <td>
-            <asp:TextBox ID="TextBox25" runat="server"   class="form-control input-x2 dropbox"></asp:TextBox></td>
-        </tr>
-       
-        
-                    
-       
-        </tr>
-            <tr>
-            <td></td>
-                <td>
-                    <asp:UpdatePanel ID="UpdatePanel23" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <asp:Button ID="Button16" runat="server"  CssClass="btn-primary" onclick="Button16_Click" 
-                                style="height: 26px" Text="Add Customer" />
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </td>
-                <td>
-
-                   <asp:UpdatePanel ID="UpdatePanel27" runat="server">
-                        <ContentTemplate>
-                            <asp:Button ID="Button17" runat="server"  Visible="false" 
-                                Text="Delete" />
-                            &nbsp;&nbsp;&nbsp;
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    <asp:Label ID="Label31" runat="server" Text=""></asp:Label>
-                </td>
-            </tr>
-        </table>
-       </div>
-
-        </asp:Panel>
-       <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">
-        </asp:ModalPopupExtender>
-
-
-        </ContentTemplate>
-    <Triggers>
-                 <asp:AsyncPostBackTrigger ControlID="Button6" EventName="Click"  />
-                </Triggers>
-    </asp:UpdatePanel>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                 <div class="form-group"><label class="col-lg-3 control-label">Customer Address</label>
@@ -1261,7 +1125,7 @@
 
                   
                   
-    </div>
+                        </div>
                    
                    
                         </div>

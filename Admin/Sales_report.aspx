@@ -18,7 +18,7 @@
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" 
-            Font-Size="8pt" Height="480px" InteractiveDeviceInfos="(Collection)" 
+            Font-Size="8pt" Height="740px" InteractiveDeviceInfos="(Collection)" 
             WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Width="402px">
             <LocalReport ReportPath="Admin\Report2.rdlc">
                 <DataSources>

@@ -1,5 +1,4 @@
-﻿
-#region " Using "
+﻿#region " Using "
 using System;
 using System.Collections;
 using System.Configuration;
@@ -32,12 +31,7 @@ using System.Net.Mail;
 using System.Net;
 #endregion
 
-
-
-
-
-
-public partial class Admin_Sales_entry : System.Web.UI.Page
+public partial class Admin_Sales_entry_wholesales : System.Web.UI.Page
 {
     float tot = 0;
     float tot1 = 0;
@@ -79,19 +73,11 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
             }
 
 
-           
+
 
         }
-       
     }
-   
-    
-   
-
-   
-    
-
-    //A method that returns a string which calls the connection string from the web.config
+     //A method that returns a string which calls the connection string from the web.config
     private string GetConnectionString()
     {
         //"DBConnection" is the name of the Connection String
@@ -927,4 +913,5 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
             }
         }
     }
+
 }

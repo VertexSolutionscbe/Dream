@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sales_entry.aspx.cs" Inherits="Admin_Sales_entry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Sales_entry_wholesales.aspx.cs" Inherits="Admin_Sales_entry_wholesales" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -1354,6 +1354,7 @@
         </form>
     </body>
 </html>
+
 
 
 

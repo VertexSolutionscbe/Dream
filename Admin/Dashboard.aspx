@@ -330,7 +330,8 @@
                              <li>
                                 <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Sales_entry.aspx">Entry</a></li>
+                                    <li><a href="Sales_entry.aspx">Retail Entry</a></li>
+                                     <li><a href="Sales_entry_wholesales.aspx"> Wholesales Entry</a></li>
                                       <li><a href="sales_report_details.aspx">Report</a></li>
                            </ul>
                           
